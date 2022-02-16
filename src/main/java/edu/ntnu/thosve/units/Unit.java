@@ -1,5 +1,8 @@
 package edu.ntnu.thosve.units;
 
+/**
+ * Abstract class for a given war Unit.
+ */
 public abstract class Unit {
     private final String name;
     private int health;
@@ -7,17 +10,38 @@ public abstract class Unit {
     private int armor;
 
     public Unit(String name, int health, int attack, int armor) {
+        if (name.isBlank()) {
+           throw new IllegalArgumentException("Name can not be blank");
+        }
+        if (health <= 0 ) {
+            throw new IllegalArgumentException("Health can not be less then or equal to zero");
+        }
+        if (attack < 0) {
+            throw new IllegalArgumentException("Attack can not be negative");
+        }
+        if (armor < 0) {
+            throw new IllegalArgumentException("Armor can not be negative");
+        }
+
         this.name = name;
         this.health = health;
         this.attack = attack;
         this.armor = armor;
     }
 
+    /**
+     * Method for attacking another given Unit. It is calculated in the following way:
+     * health_opponent - (attack + attackBonus)_this + (armor + resistBonus)_opponent
+     * @param opponent which is being attacked.
+     */
     public void attack(Unit opponent) {
-        int attack_damage = this.getAttack() + this.getAttackBonus();
+        int attackDamage = this.getAttack() + this.getAttackBonus();
         int resistance = opponent.getArmor() + opponent.getResistBonus();
-        opponent.health -= attack_damage - resistance;
+        int opponentsNewHealth = opponent.getHealth() - attackDamage + resistance;
+        opponent.setHealth(opponentsNewHealth);
     }
+
+
 
     public String getName() {
         return name;
