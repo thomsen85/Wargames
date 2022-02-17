@@ -4,6 +4,12 @@ package edu.ntnu.thosve.units;
  * Basic unit with no special abilities, good at meele
  */
 public class InfantryUnit extends Unit {
+    public static final int ATTACK_BONUS = 2;
+    public static final int RESIST_BONUS = 1;
+
+    public static final int MAX_SPEED = 10;
+    public static final int LOOK_RADIUS = 1;
+    public static final int ATTACK_RADIUS = 1;
 
     /**
      * Constructor for creating an instance of the InfantryUnit class.
@@ -34,5 +40,19 @@ public class InfantryUnit extends Unit {
     @Override
     public int getResistBonus() {
         return 1;
+    }
+    @Override
+    public int getMaxSpeed() {
+        return MAX_SPEED;
+    }
+
+    @Override
+    public int getLookRadius() {
+        return LOOK_RADIUS;
+    }
+
+    @Override
+    public int getAttackRadius() {
+        return ATTACK_RADIUS;
     }
 }

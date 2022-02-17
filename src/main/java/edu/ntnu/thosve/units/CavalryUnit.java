@@ -7,7 +7,15 @@ package edu.ntnu.thosve.units;
  * This unit has a tiny advantage with +1 resist bonus on when getting attacked
  */
 public class CavalryUnit extends Unit{
-    boolean charge = true;
+    public static final int BASE_ATTACK_BONUS = 2;
+    public static final int CHARGE_ATTACK_BONUS = 6;
+    public static final int RESIST_BONUS = 1;
+
+    public static final int MAX_SPEED = 10;
+    public static final int LOOK_RADIUS = 1;
+    public static final int ATTACK_RADIUS = 1;
+
+    private boolean charge = true;
 
     /**
      * Constructor for creating an instance of the CavalryUnit.
@@ -38,15 +46,30 @@ public class CavalryUnit extends Unit{
     @Override
     public int getAttackBonus() {
         if (charge) {
-            return 6;
+            return CHARGE_ATTACK_BONUS;
         } else {
-            return 2;
+            return BASE_ATTACK_BONUS;
         }
     }
 
     @Override
     public int getResistBonus() {
-        return 1;
+        return RESIST_BONUS;
+    }
+
+    @Override
+    public int getMaxSpeed() {
+        return MAX_SPEED;
+    }
+
+    @Override
+    public int getLookRadius() {
+        return LOOK_RADIUS;
+    }
+
+    @Override
+    public int getAttackRadius() {
+        return ATTACK_RADIUS;
     }
 
     @Override

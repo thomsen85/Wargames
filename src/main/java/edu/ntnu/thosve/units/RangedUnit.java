@@ -4,7 +4,12 @@ package edu.ntnu.thosve.units;
  * Unit that has the ability to attack at range.
  */
 public class RangedUnit extends Unit{
-    private int attackedCounter = 0;
+    public static final int ATTACK_BONUS = 3;
+    public static final int RESIST_BONUS = 2;
+
+    public static final int MAX_SPEED = 10;
+    public static final int LOOK_RADIUS = 1;
+    public static final int ATTACK_RADIUS = 1;
 
     /**
      * Constructor for creating an instance of the RangedUnit class.
@@ -39,21 +44,21 @@ public class RangedUnit extends Unit{
      */
     @Override
     public int getResistBonus() {
-        switch (attackedCounter) {
-            case 0:
-                return 6;
-
-            case 1:
-                return 4;
-
-            default:
-                return 2;
-        }
+        return RESIST_BONUS;
     }
 
     @Override
-    public void setHealth(int health) {
-        super.setHealth(health);
-        attackedCounter += 1;
+    public int getMaxSpeed() {
+        return MAX_SPEED;
+    }
+
+    @Override
+    public int getLookRadius() {
+        return LOOK_RADIUS;
+    }
+
+    @Override
+    public int getAttackRadius() {
+        return ATTACK_RADIUS;
     }
 }

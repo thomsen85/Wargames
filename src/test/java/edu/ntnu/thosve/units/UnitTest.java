@@ -2,6 +2,10 @@ package edu.ntnu.thosve.units;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UnitTest {
@@ -37,6 +41,22 @@ public class UnitTest {
             new InfantryUnit("Bob", 100, 20, -50);
         });
 
+    }
+
+    @Test
+    public void testUnitFindsClosestOpponent() {
+        InfantryUnit unit = new InfantryUnit("Unit", 100);
+        InfantryUnit opponent1 = new InfantryUnit("Opponent 1 (Closest)", 100);
+        InfantryUnit opponent2 = new InfantryUnit("Opponent 1 (Farthest)", 100);
+        List<Unit> opponents = new ArrayList<Unit>();
+
+        opponent1.setPos(10,12);
+        opponent2.setPos(20, 32);
+
+        opponents.add(opponent1);
+        opponents.add(opponent2);
+
+        assertEquals(opponent1, unit.findClosestOpponent(opponents));
     }
 
     @Nested
@@ -122,20 +142,11 @@ public class UnitTest {
         }
 
         @Test
-        public void testDecrementalResistBonus() {
+        public void testResistBonus() {
             RangedUnit unit = new RangedUnit("Ranged Unit", 100);
-            RangedUnit opponent = new RangedUnit("Opponent Unit", 100);
 
-            assertEquals(6, unit.getResistBonus());
-
-            opponent.attack(unit);
-            assertEquals(4, unit.getResistBonus());
-
-            opponent.attack(unit);
             assertEquals(2, unit.getResistBonus());
 
-            opponent.attack(unit);
-            assertEquals(2, unit.getResistBonus());
         }
     }
 

@@ -1,13 +1,21 @@
 package edu.ntnu.thosve.units;
 
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * Abstract class for a given war Unit.
  */
 public abstract class Unit {
     private final String name;
     private int health;
-    private int attack;
-    private int armor;
+    private final int attack;
+    private final int armor;
+
+    private double x;
+    private double y;
+    private double xSpeed;
+    private double ySpeed;
 
     public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException{
         if (name.isBlank()) {
@@ -27,6 +35,11 @@ public abstract class Unit {
         this.health = health;
         this.attack = attack;
         this.armor = armor;
+
+        this.x = 0;
+        this.y = 0;
+        this.xSpeed = 0;
+        this.ySpeed = 0;
     }
 
     /**
@@ -42,6 +55,101 @@ public abstract class Unit {
             int opponentsNewHealth = opponent.getHealth() - attackDamage + resistance;
             opponent.setHealth(opponentsNewHealth);
         }
+    }
+
+    /**
+     * Method for getting the distance to a spesified Unit
+     * @param unit
+     * @return distance to Unit
+     */
+    private double getDistanceTo(Unit unit) {
+        return Math.sqrt(Math.pow(unit.x - this.x, 2) + Math.pow(unit.x - this.x, 2));
+    }
+
+    /**
+     * Finds the closes Unit by distance given an list of opponents
+     * @param opponents
+     * @return closest Unit
+     */
+    public Unit findClosestOpponent(List<Unit> opponents) {
+        return opponents.stream().min(Comparator.comparingDouble(this::getDistanceTo)).get();
+    }
+
+    /**
+     * Method for setting x and y speed to point to given unit.
+     * @param unit
+     */
+    public void moveToUnit(Unit unit) {
+        double xVec = unit.getX() - this.getX();
+        double yVec = unit.getY() - this.getY();
+
+        double length = Math.sqrt(Math.pow(xVec, 2) + Math.pow(yVec, 2));
+
+        double xVecNormalized = xVec / length;
+        double yVecNormalized = yVec / length;
+
+
+        this.setXSpeed(xVecNormalized * this.getMaxSpeed());
+        this.setYSpeed(yVecNormalized * this.getMaxSpeed());
+    }
+
+    /**
+     * Method for updating the position of the unit based on the current speed.
+     */
+    public void update() {
+        x += xSpeed;
+        y += ySpeed;
+    }
+
+    /**
+     * Method for updating the position of the unit based on the current speed and delta time of the program.
+     * @param delta_time time between frames.
+     */
+    public void update(double delta_time) {
+        x += xSpeed * delta_time;
+        y += ySpeed * delta_time;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    /**
+     * Short form for setting the position of the Unit.
+     * @param x
+     * @param y
+     */
+    public void setPos(double x, double y) {
+        setX(x);
+        setY(y);
+    }
+
+    public double getXSpeed() {
+        return xSpeed;
+    }
+
+    public void setXSpeed(double xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public double getYSpeed() {
+        return ySpeed;
+    }
+
+    public void setYSpeed(double ySpeed) {
+        this.ySpeed = ySpeed;
     }
 
     /**
@@ -107,5 +215,23 @@ public abstract class Unit {
      * @return ResistBonus
      */
     public abstract int getResistBonus();
+
+    /**
+     * Gets the max speed of the unit
+     * @return
+     */
+    public abstract int getMaxSpeed();
+
+    /**
+     * Gets the radius of which a unit can spot another unit, and then begin targeting it.
+     * @return
+     */
+    public abstract int getLookRadius();
+
+    /**
+     * Gets the radius of which a unit can conflict damage to another unit.
+     * @return
+     */
+    public abstract int getAttackRadius();
 }
 
