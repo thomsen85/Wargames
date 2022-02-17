@@ -9,7 +9,7 @@ public abstract class Unit {
     private int attack;
     private int armor;
 
-    public Unit(String name, int health, int attack, int armor) {
+    public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException{
         if (name.isBlank()) {
            throw new IllegalArgumentException("Name can not be blank");
         }
@@ -37,32 +37,57 @@ public abstract class Unit {
     public void attack(Unit opponent) {
         int attackDamage = this.getAttack() + this.getAttackBonus();
         int resistance = opponent.getArmor() + opponent.getResistBonus();
-        int opponentsNewHealth = opponent.getHealth() - attackDamage + resistance;
-        opponent.setHealth(opponentsNewHealth);
+
+        if (resistance < attackDamage) {
+            int opponentsNewHealth = opponent.getHealth() - attackDamage + resistance;
+            opponent.setHealth(opponentsNewHealth);
+        }
     }
 
-
-
+    /**
+     * Gets the name of the Unit.
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gives the <b>current</b> health of the Unit.
+     * @return health
+     */
     public int getHealth() {
         return health;
     }
 
+    /**
+     * Gets the attack attribute of the Unit.
+     * @return attack
+     */
     public int getAttack() {
         return attack;
     }
 
+    /**
+     * Get the armor attribute of the Unit.
+     * @return armor
+     */
     public int getArmor() {
         return armor;
     }
 
+    /**
+     * Sets the health of the Unit.
+     * @param health
+     */
     public void setHealth(int health) {
         this.health = health;
     }
 
+    /**
+     * Gets a String representation of the Unit.
+     * @return a string
+     */
     @Override
     public String toString() {
         return "Unit: " + name +
@@ -71,7 +96,16 @@ public abstract class Unit {
                 "\n\t- Armor: " + armor;
     }
 
+    /**
+     * Gets the <b>current</b> attack bonus of the Unit
+     * @return AttackBouns
+     */
     public abstract int getAttackBonus();
+
+    /**
+     * Gets the <b>current</b> resist bonus of the Unit
+     * @return ResistBonus
+     */
     public abstract int getResistBonus();
 }
 
