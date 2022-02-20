@@ -17,6 +17,8 @@ public abstract class Unit {
     private double xSpeed;
     private double ySpeed;
 
+    private Unit currentOpponent;
+
     public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException{
         if (name.isBlank()) {
            throw new IllegalArgumentException("Name can not be blank");
@@ -71,7 +73,7 @@ public abstract class Unit {
      * @param opponents
      * @return closest Unit
      */
-    public Unit findClosestOpponent(List<Unit> opponents) {
+    private Unit findClosestOpponent(List<Unit> opponents) {
         return opponents.stream().min(Comparator.comparingDouble(this::getDistanceTo)).get();
     }
 
@@ -79,7 +81,7 @@ public abstract class Unit {
      * Method for setting x and y speed to point to given unit.
      * @param unit
      */
-    public void moveToUnit(Unit unit) {
+    private void moveToUnit(Unit unit) {
         double xVec = unit.getX() - this.getX();
         double yVec = unit.getY() - this.getY();
 
@@ -94,20 +96,27 @@ public abstract class Unit {
     }
 
     /**
-     * Method for updating the position of the unit based on the current speed.
+     * Method that will make the unit target the closest opponent. This will change it movement direction to move to
+     * the closest opponent
+     * @param opponents list of all the opponents.
      */
-    public void update() {
-        x += xSpeed;
-        y += ySpeed;
+    public void targetClosestOpponent(List<Unit> opponents) {
+        Unit closestOpponent = findClosestOpponent(opponents);
+        this.currentOpponent = closestOpponent;
+        moveToUnit(closestOpponent);
     }
 
     /**
-     * Method for updating the position of the unit based on the current speed and delta time of the program.
-     * @param delta_time time between frames.
+     * Method for updating the unit. If a opponent is within attacking range it will attack, if not it will
+     * update the position of the unit based on the current speed.
      */
-    public void update(double delta_time) {
-        x += xSpeed * delta_time;
-        y += ySpeed * delta_time;
+    public void update() {
+        if (getDistanceTo(currentOpponent) <= getAttackRadius()) {
+            attack(currentOpponent);
+        } else {
+            x += xSpeed;
+            y += ySpeed;
+        }
     }
 
     public double getX() {
@@ -185,6 +194,14 @@ public abstract class Unit {
     }
 
     /**
+     * Returns the closest opponent that the unit has, given it has been updated with targetClosestOpponent()
+     * @return currentOpponent
+     */
+    public Unit getCurrentOpponent() {
+        return currentOpponent;
+    }
+
+    /**
      * Sets the health of the Unit.
      * @param health
      */
@@ -221,12 +238,6 @@ public abstract class Unit {
      * @return
      */
     public abstract int getMaxSpeed();
-
-    /**
-     * Gets the radius of which a unit can spot another unit, and then begin targeting it.
-     * @return
-     */
-    public abstract int getLookRadius();
 
     /**
      * Gets the radius of which a unit can conflict damage to another unit.

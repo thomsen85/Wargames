@@ -12,7 +12,6 @@ public class CavalryUnit extends Unit{
     public static final int RESIST_BONUS = 1;
 
     public static final int MAX_SPEED = 10;
-    public static final int LOOK_RADIUS = 1;
     public static final int ATTACK_RADIUS = 1;
 
     private boolean charge = true;
@@ -60,11 +59,6 @@ public class CavalryUnit extends Unit{
     @Override
     public int getMaxSpeed() {
         return MAX_SPEED;
-    }
-
-    @Override
-    public int getLookRadius() {
-        return LOOK_RADIUS;
     }
 
     @Override

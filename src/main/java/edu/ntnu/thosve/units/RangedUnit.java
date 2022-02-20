@@ -8,7 +8,6 @@ public class RangedUnit extends Unit{
     public static final int RESIST_BONUS = 2;
 
     public static final int MAX_SPEED = 10;
-    public static final int LOOK_RADIUS = 200;
     public static final int ATTACK_RADIUS = 100;
 
     /**
@@ -50,11 +49,6 @@ public class RangedUnit extends Unit{
     @Override
     public int getMaxSpeed() {
         return MAX_SPEED;
-    }
-
-    @Override
-    public int getLookRadius() {
-        return LOOK_RADIUS;
     }
 
     @Override
