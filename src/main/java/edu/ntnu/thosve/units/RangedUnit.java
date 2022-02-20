@@ -8,7 +8,7 @@ public class RangedUnit extends Unit{
     public static final int RESIST_BONUS = 2;
 
     public static final int MAX_SPEED = 10;
-    public static final int ATTACK_RADIUS = 100;
+    public static final int ATTACK_RADIUS = 40;
 
     /**
      * Constructor for creating an instance of the RangedUnit class.

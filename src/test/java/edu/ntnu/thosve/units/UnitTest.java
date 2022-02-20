@@ -79,8 +79,9 @@ public class UnitTest {
         unit.targetClosestOpponent(opponents);
 
         double speed = Math.sqrt(Math.pow(unit.getXSpeed(), 2) + Math.pow(unit.getYSpeed(), 2));
+        double error = Math.abs((speed - unit.getMaxSpeed()) / unit.getMaxSpeed());
 
-        assertEquals(unit.getMaxSpeed(), speed);
+        assertTrue(error <= 0.05);
     }
 
     @Nested

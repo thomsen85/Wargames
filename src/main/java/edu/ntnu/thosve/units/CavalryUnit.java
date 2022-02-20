@@ -11,8 +11,8 @@ public class CavalryUnit extends Unit{
     public static final int CHARGE_ATTACK_BONUS = 6;
     public static final int RESIST_BONUS = 1;
 
-    public static final int MAX_SPEED = 10;
-    public static final int ATTACK_RADIUS = 1;
+    public static final int MAX_SPEED = 8;
+    public static final int ATTACK_RADIUS = 10;
 
     private boolean charge = true;
 

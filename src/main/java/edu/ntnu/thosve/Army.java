@@ -88,7 +88,7 @@ public class Army {
         int width = xTopRight - xBottomLeft;
 
 
-        while (columns * rows < units.size()) {
+        while (columns * rows < units.size() && columns * rows < units.size() ) {
             if (width / (columns + 1) > height / (rows + 1)) {
                 columns += 1;
             } else {
@@ -101,9 +101,25 @@ public class Army {
                 double x = column * ( (double) width / (columns-1));
                 double y =  row * ( (double) height / (rows-1));
                 int index = column + (row*columns);
-                units.get(index).setPos(x, y);
+                if (index < units.size()) {
+                    units.get(index).setPos(x, y);
+                }
             }
         }
+    }
+
+
+    public void update(Army opponent) {
+        List<Unit> dead = new ArrayList<Unit>();
+        for(Unit unit: units) {
+            if (unit.getHealth() <= 0) {
+                dead.add(unit); // To avoid ConcurrentModificationException
+            } else {
+                unit.targetClosestOpponent(opponent.getAllUnits());
+                unit.update();
+            }
+        }
+        units.removeAll(dead);
     }
 
     @Override
