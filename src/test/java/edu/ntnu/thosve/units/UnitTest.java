@@ -59,6 +59,36 @@ public class UnitTest {
         assertEquals(opponent1, unit.findClosestOpponent(opponents));
     }
 
+    @Test
+    public void testUnitMovesToOpponent() {
+        InfantryUnit unit = new InfantryUnit("Unit", 100);
+        InfantryUnit opponent1 = new InfantryUnit("Opponent 1 (Closest)", 100);
+        InfantryUnit opponent2 = new InfantryUnit("Opponent 1 (Farthest)", 100);
+        opponent2.setPos(20, 20);
+
+        opponent1.moveToUnit(opponent2);
+
+
+        System.out.println(opponent1.getXSpeed());
+        System.out.println(opponent1.getYSpeed());
+
+        assertEquals(opponent1.getXSpeed(), opponent1.getYSpeed());
+    }
+
+    @Test
+    public void testUnitMovesAtMaxSpeed() {
+        InfantryUnit unit = new InfantryUnit("Unit", 100);
+        InfantryUnit opponent1 = new InfantryUnit("Opponent 1 (Closest)", 100);
+        InfantryUnit opponent2 = new InfantryUnit("Opponent 1 (Farthest)", 100);
+        opponent2.setPos(20, 10);
+
+        opponent1.moveToUnit(opponent2);
+
+        double speed = Math.sqrt(Math.pow(opponent1.getXSpeed(), 2) + Math.pow(opponent1.getYSpeed(), 2));
+
+        assertEquals(opponent1.getMaxSpeed(), speed);
+    }
+
     @Nested
     class InfantryUnitTest {
 
