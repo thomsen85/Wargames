@@ -98,8 +98,8 @@ public class Army {
 
         for(int row = 0; row < rows; row++ ) {
             for(int column = 0; column < columns; column++) {
-                double x = column * ( (double) width / (columns-1));
-                double y =  row * ( (double) height / (rows-1));
+                double x = column * ( (double) width / (columns-1)) + xBottomLeft;
+                double y =  row * ( (double) height / (rows-1)) + yBottomLeft;
                 int index = column + (row*columns);
                 if (index < units.size()) {
                     units.get(index).setPos(x, y);
