@@ -23,6 +23,12 @@ public class Battle {
         return armyOne.hasUnits() ? armyOne : armyTwo;
     }
 
+    public boolean manualSimulate() {
+        armyOne.update(armyTwo);
+        armyTwo.update(armyOne);
+        return armyOne.hasUnits() && armyTwo.hasUnits();
+    }
+
     @Override
     public String toString() {
         return "Battle{" +

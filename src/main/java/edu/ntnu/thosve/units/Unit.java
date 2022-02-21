@@ -65,7 +65,7 @@ public abstract class Unit {
      * @return distance to Unit
      */
     private double getDistanceTo(Unit unit) {
-        return Math.sqrt(Math.pow(unit.x - this.x, 2) + Math.pow(unit.x - this.x, 2));
+        return Math.sqrt(Math.pow(unit.x - this.x, 2) + Math.pow(unit.y - this.y, 2));
     }
 
     /**
@@ -216,9 +216,10 @@ public abstract class Unit {
     @Override
     public String toString() {
         return "Unit: " + name +
-                "\n\t- HP" + health +
+                "\n\t- HP: " + health +
                 "\n\t- Attack: " + attack +
-                "\n\t- Armor: " + armor;
+                "\n\t- Armor: " + armor +
+                "\n\t- Pos: (" + x + ", " + y + ")";
     }
 
     /**

@@ -47,7 +47,7 @@ public class UnitTest {
     public void testUnitTargetsClosestOpponent() {
         InfantryUnit unit = new InfantryUnit("Unit", 100);
         InfantryUnit opponent1 = new InfantryUnit("Opponent 1 (Closest)", 100);
-        InfantryUnit opponent2 = new InfantryUnit("Opponent 1 (Farthest)", 100);
+        InfantryUnit opponent2 = new InfantryUnit("Opponent 2 (Farthest)", 100);
         List<Unit> opponents = new ArrayList<Unit>();
 
         opponent1.setPos(10,10);
@@ -60,6 +60,31 @@ public class UnitTest {
 
 
         // Checking if he is moving diagonally
+        assertEquals(unit.getXSpeed(), unit.getYSpeed());
+
+        //Checking if he is moving the correct diagonal
+        assertTrue(unit.getXSpeed() > 0);
+        assertTrue(unit.getYSpeed() > 0);
+    }
+
+    @Test
+    public void testUnitTargetsClosestOpponentTwo() {
+        InfantryUnit unit = new InfantryUnit("Unit", 100);
+        InfantryUnit opponent1 = new InfantryUnit("Opponent 1 (Closest)", 100);
+        InfantryUnit opponent2 = new InfantryUnit("Opponent 2 (Farthest)", 100);
+        List<Unit> opponents = new ArrayList<Unit>();
+
+        unit.setPos(500,500);
+        opponent1.setPos(100 ,100);
+        opponent2.setPos(600, 600);
+
+        opponents.add(opponent1);
+        opponents.add(opponent2);
+
+        unit.targetClosestOpponent(opponents);
+
+        assertEquals(unit.getCurrentOpponent(), opponent2);
+
         assertEquals(unit.getXSpeed(), unit.getYSpeed());
 
         //Checking if he is moving the correct diagonal
