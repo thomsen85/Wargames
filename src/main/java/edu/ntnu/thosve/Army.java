@@ -5,7 +5,7 @@ import edu.ntnu.thosve.units.Unit;
 import java.util.*;
 
 /**
- * Class for holding an Army of different types of Units
+ * Class for holding an Army of different types of Units.
  */
 public class Army {
     private final String name;

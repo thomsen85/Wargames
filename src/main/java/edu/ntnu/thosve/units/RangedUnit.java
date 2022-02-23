@@ -6,6 +6,8 @@ package edu.ntnu.thosve.units;
 public class RangedUnit extends Unit{
     private static final int DEFAULT_ATTACK = 15;
     private static final int DEFAULT_ARMOR = 5;
+    public static final int DEFAULT_HEALTH = 50;
+
 
     private static final int ATTACK_BONUS = 2;
     private static final int RESIST_BONUS = 1;
@@ -25,13 +27,22 @@ public class RangedUnit extends Unit{
     }
 
     /**
-     * A simpler constructor for creating an instance of the CommanderUnit class
-     * Note: The attack with be defaulted to 25 and the armor wil be default to 15. Use the full constructor to change this.
+     * A simpler constructor for creating an instance of the RangedUnit class
+     * Note: The attack and armor with be set to its default values. Use the full constructor to change this.
      * @param name
      * @param health
      */
     public RangedUnit(String name, int health) {
         super(name, health, DEFAULT_ATTACK, DEFAULT_ARMOR);
+    }
+
+    /**
+     * The simplest constructor for creating an instance of the RangedUnit class
+     * Note: The health, attack and armor with be set to its default values. Use the full constructor to change this.
+     * @param name
+     */
+    public RangedUnit(String name) {
+        super(name, DEFAULT_HEALTH, DEFAULT_ATTACK, DEFAULT_ARMOR);
     }
 
     @Override

@@ -1,11 +1,12 @@
 package edu.ntnu.thosve.units;
 
 /**
- * Basic unit with no special abilities, good at meele
+ * Close ranged unit with no special abilities.
  */
 public class InfantryUnit extends Unit {
     public static final int DEFAULT_ATTACK = 15;
     public static final int DEFAULT_ARMOR = 10;
+    public static final int DEFAULT_HEALTH = 100;
 
     public static final int ATTACK_BONUS = 2;
     public static final int RESIST_BONUS = 5;
@@ -26,12 +27,21 @@ public class InfantryUnit extends Unit {
 
     /**
      * A simpler constructor for creating an instance of the InfantryUnit class
-     * Note: The attack with be defaulted to 25 and the armor wil be default to 15. Use the full constructor to change this.
+     * Note: The attack and armor with be set to its default values. Use the full constructor to change this.
      * @param name
      * @param health
      */
     public InfantryUnit(String name, int health) {
         super(name, health, DEFAULT_ATTACK, DEFAULT_ARMOR);
+    }
+
+    /**
+     * The simplest constructor for creating an instance of the InfantryUnit class
+     * Note: The health, attack and armor with be set to its default values. Use the full constructor to change this.
+     * @param name
+     */
+    public InfantryUnit(String name) {
+        super(name, DEFAULT_HEALTH, DEFAULT_ATTACK, DEFAULT_ARMOR);
     }
 
     @Override

@@ -9,10 +9,11 @@ package edu.ntnu.thosve.units;
 public class CavalryUnit extends Unit{
     public static final int DEFAULT_ATTACK = 20;
     public static final int DEFAULT_ARMOR = 20;
+    public static final int DEFAULT_HEALTH = 150;
 
     public static final int BASE_ATTACK_BONUS = 2;
-    public static final int CHARGE_ATTACK_BONUS = 10;
     public static final int RESIST_BONUS = 3;
+    public static final int CHARGE_ATTACK_BONUS = 10;
 
     public static final int MAX_SPEED = 30;
     public static final int ATTACK_RADIUS = 10;
@@ -31,13 +32,22 @@ public class CavalryUnit extends Unit{
     }
 
     /**
-     * A simpler version of the constructor for creating an istance of the Cavalry unit.
-     * Note: Attack will be default to 20 and armor will be default to 12. Use the full constructor to change this
+     * A simpler constructor for creating an instance of the CavalryUnit class
+     * Note: The attack and armor with be set to its default values. Use the full constructor to change this.
      * @param name
      * @param health
      */
     public CavalryUnit(String name, int health) {
         super(name, health, DEFAULT_ATTACK, DEFAULT_ARMOR);
+    }
+
+    /**
+     * The simplest constructor for creating an instance of the CavalryUnit class
+     * Note: The health, attack and armor with be set to its default values. Use the full constructor to change this.
+     * @param name
+     */
+    public CavalryUnit(String name) {
+        super(name, DEFAULT_HEALTH, DEFAULT_ATTACK, DEFAULT_ARMOR);
     }
 
     /**

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Abstract class for a given war Unit.
+ * Abstract class for a Unit.
  */
 public abstract class Unit {
     private final String name;
@@ -19,6 +19,14 @@ public abstract class Unit {
 
     private Unit currentOpponent;
 
+    /**
+     * Constructor.
+     * @param name
+     * @param health
+     * @param attack
+     * @param armor
+     * @throws IllegalArgumentException
+     */
     public Unit(String name, double health, int attack, int armor) throws IllegalArgumentException{
         if (name.isBlank()) {
            throw new IllegalArgumentException("Name can not be blank");
@@ -104,7 +112,6 @@ public abstract class Unit {
 
         double xVecNormalized = xVec / length;
         double yVecNormalized = yVec / length;
-
 
         this.setXSpeed(xVecNormalized * this.getMaxSpeed());
         this.setYSpeed(yVecNormalized * this.getMaxSpeed());
@@ -276,4 +283,3 @@ public abstract class Unit {
      */
     public abstract int getAttackRadius();
 }
-
