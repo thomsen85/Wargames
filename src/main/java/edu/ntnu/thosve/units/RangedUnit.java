@@ -4,8 +4,8 @@ package edu.ntnu.thosve.units;
  * Unit that has the ability to attack at range.
  */
 public class RangedUnit extends Unit{
-    private static final int DEFAULT_ATTACK = 15;
-    private static final int DEFAULT_ARMOR = 5;
+    public static final int DEFAULT_ATTACK = 15;
+    public static final int DEFAULT_ARMOR = 5;
     public static final int DEFAULT_HEALTH = 50;
 
 

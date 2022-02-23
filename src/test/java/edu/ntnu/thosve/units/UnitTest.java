@@ -9,7 +9,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UnitTest {
-
     @Test
     public void testAttackWontGiveHealthIfResistantIsGreaterThanAttackDamage() {
         Unit unit = new InfantryUnit("Base Unit", 100, 10, 10);
@@ -129,29 +128,10 @@ public class UnitTest {
             String name = "Infantry Unit";
             int health = 100;
             InfantryUnit unit = new InfantryUnit(name, health);
-            assertEquals(name,  unit.getName());
-            assertEquals(health,  unit.getHealth());
-            assertEquals(InfantryUnit.DEFAULT_ARMOR,  unit.getAttack());
-            assertEquals(10,  unit.getArmor());
-
-        }
-
-        @Test
-        public void testAttackBonus() {
-            String name = "Infantry Unit";
-            int health = 100;
-            InfantryUnit unit = new InfantryUnit(name, health);
-
-            assertEquals(2,  unit.getAttackBonus());
-        }
-
-        @Test
-        public void testResistBonus() {
-            String name = "Infantry Unit";
-            int health = 100;
-            InfantryUnit unit = new InfantryUnit(name, health);
-
-            assertEquals(1,  unit.getResistBonus());
+            assertEquals(name, unit.getName());
+            assertEquals(health, unit.getHealth());
+            assertEquals(InfantryUnit.DEFAULT_ATTACK, unit.getAttack());
+            assertEquals(InfantryUnit.DEFAULT_ARMOR, unit.getArmor());
         }
     }
 
@@ -178,24 +158,8 @@ public class UnitTest {
             RangedUnit unit = new RangedUnit(name, health);
             assertEquals(name, unit.getName());
             assertEquals(health,  unit.getHealth());
-            assertEquals(15,  unit.getAttack());
-            assertEquals(8,  unit.getArmor());
-        }
-        
-        @Test
-        public void testAttackBonus() {
-            String name = "Ranged Unit";
-            int health = 100;
-            RangedUnit unit = new RangedUnit(name, health);
-            assertEquals(3, unit.getAttackBonus());
-        }
-
-        @Test
-        public void testResistBonus() {
-            RangedUnit unit = new RangedUnit("Ranged Unit", 100);
-
-            assertEquals(2, unit.getResistBonus());
-
+            assertEquals(RangedUnit.DEFAULT_ATTACK,  unit.getAttack());
+            assertEquals(RangedUnit.DEFAULT_ARMOR,  unit.getArmor());
         }
     }
 
@@ -222,8 +186,8 @@ public class UnitTest {
             CavalryUnit unit = new CavalryUnit(name, health);
             assertEquals(name,  unit.getName());
             assertEquals(health,  unit.getHealth());
-            assertEquals(20,  unit.getAttack());
-            assertEquals(12,  unit.getArmor());
+            assertEquals(CavalryUnit.DEFAULT_ATTACK,  unit.getAttack());
+            assertEquals(CavalryUnit.DEFAULT_ARMOR,  unit.getArmor());
         }
 
         @Test
@@ -231,17 +195,11 @@ public class UnitTest {
             CavalryUnit unit = new CavalryUnit("Cavalry unit", 100);
             CavalryUnit opponent = new CavalryUnit("Opponent unit", 100);
 
-            assertEquals(6, unit.getAttackBonus());
+            assertEquals(CavalryUnit.CHARGE_ATTACK_BONUS, unit.getAttackBonus());
             unit.attack(opponent);
-            assertEquals(2, unit.getAttackBonus());
+            assertEquals(CavalryUnit.BASE_ATTACK_BONUS, unit.getAttackBonus());
             unit.attack(opponent);
-            assertEquals(2, unit.getAttackBonus());
-        }
-
-        @Test
-        public void testResistBonus() {
-            CavalryUnit unit = new CavalryUnit("Cavalry unit", 100);
-            assertEquals(1, unit.getResistBonus());
+            assertEquals(CavalryUnit.BASE_ATTACK_BONUS, unit.getAttackBonus());
         }
     }
 
@@ -267,8 +225,8 @@ public class UnitTest {
             CommanderUnit unit = new CommanderUnit(name, health);
             assertEquals(name,  unit.getName());
             assertEquals(health,  unit.getHealth());
-            assertEquals(25,  unit.getAttack());
-            assertEquals(15,  unit.getArmor());
+            assertEquals(CommanderUnit.DEFAULT_ATTACK,  unit.getAttack());
+            assertEquals(CommanderUnit.DEFAULT_ARMOR,  unit.getArmor());
         }
 
         @Test
@@ -276,18 +234,13 @@ public class UnitTest {
             CommanderUnit unit = new CommanderUnit("Commander unit", 100);
             CommanderUnit opponent = new CommanderUnit("Opponent unit", 100);
 
-            assertEquals(6, unit.getAttackBonus());
+            assertEquals(CommanderUnit.CHARGE_ATTACK_BONUS, unit.getAttackBonus());
             unit.attack(opponent);
-            assertEquals(2, unit.getAttackBonus());
+            assertEquals(CommanderUnit.BASE_ATTACK_BONUS, unit.getAttackBonus());
             unit.attack(opponent);
-            assertEquals(2, unit.getAttackBonus());
+            assertEquals(CommanderUnit.BASE_ATTACK_BONUS, unit.getAttackBonus());
         }
 
-        @Test
-        public void testResistBonus() {
-            CommanderUnit unit = new CommanderUnit("Commander unit", 100);
-            assertEquals(1, unit.getResistBonus());
-        }
     }
 
 
