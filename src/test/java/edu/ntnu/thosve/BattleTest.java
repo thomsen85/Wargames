@@ -1,5 +1,6 @@
 package edu.ntnu.thosve;
 
+import edu.ntnu.thosve.formations.RectangleFormation;
 import edu.ntnu.thosve.units.InfantryUnit;
 import edu.ntnu.thosve.units.Unit;
 import org.junit.jupiter.api.Test;
@@ -32,13 +33,13 @@ class BattleTest {
             army1.add(new InfantryUnit("Infantry 1", 100));
         }
 
-        army1.spreadUnitsEvenly(0,0,300, 600);
+        army1.applyFormation(new RectangleFormation(0,0,300, 600));
 
         for(int i = 0; i < 600; i++) {
             army2.add(new InfantryUnit("Infantry 2", 100));
         }
 
-        army2.spreadUnitsEvenly(500,0,700, 600);
+        army2.applyFormation(new RectangleFormation(500,0,700, 600));
 
         Battle battle = new Battle(army1, army2);
 

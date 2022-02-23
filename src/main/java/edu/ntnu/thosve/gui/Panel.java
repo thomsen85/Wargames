@@ -2,6 +2,7 @@ package edu.ntnu.thosve.gui;
 
 import edu.ntnu.thosve.Army;
 import edu.ntnu.thosve.Battle;
+import edu.ntnu.thosve.formations.RectangleFormation;
 import edu.ntnu.thosve.units.InfantryUnit;
 import edu.ntnu.thosve.units.RangedUnit;
 import edu.ntnu.thosve.units.Unit;
@@ -53,13 +54,13 @@ public class Panel extends JPanel implements ActionListener {
             armyOne.add(new InfantryUnit("Infantry", 100));
         }
 
-        armyOne.spreadUnitsEvenly(100,100,400, 900);
+        armyOne.applyFormation(new RectangleFormation(100,100,200, 900));
 
         for(int i = 0; i < 1000; i++) {
             armyTwo.add(new RangedUnit("Ranged", 30));
         }
 
-        armyTwo.spreadUnitsEvenly(600,100,900, 800);
+        armyTwo.applyFormation(new RectangleFormation(600,100,900, 900));
 
         try {
             background = ImageIO.read(new File("src/main/resources/Field.png"));

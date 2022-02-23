@@ -49,36 +49,4 @@ class ArmyTest {
 
     }
 
-
-    @Test
-    void testSpreadUnitsEvenly() {
-        Army army = new Army("Test army");
-        for(int i = 0; i < 6; i++) {
-            army.add(new InfantryUnit("Test Unit", 100));
-        }
-
-        army.spreadUnitsEvenly(0,0, 200, 100);
-
-        List<Unit> units = army.getAllUnits();
-
-        assertEquals(0, units.get(0).getX());
-        assertEquals(0, units.get(0).getY());
-
-        assertEquals(100, units.get(1).getX());
-        assertEquals(0, units.get(1).getY());
-
-        assertEquals(200, units.get(2).getX());
-        assertEquals(0, units.get(2).getY());
-
-        assertEquals(0, units.get(3).getX());
-        assertEquals(100, units.get(3).getY());
-
-        assertEquals(100, units.get(4).getX());
-        assertEquals(100, units.get(4).getY());
-
-        assertEquals(200, units.get(5).getX());
-        assertEquals(100, units.get(5).getY());
-
-
-    }
 }

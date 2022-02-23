@@ -1,5 +1,6 @@
 package edu.ntnu.thosve;
 
+import edu.ntnu.thosve.formations.Formation;
 import edu.ntnu.thosve.units.Unit;
 
 import java.util.*;
@@ -82,39 +83,8 @@ public class Army {
 
     }
 
-    /**
-     * Method for spreading units evenly across a given square.
-     * @param xBottomLeft X coordinate of bottom left of square
-     * @param yBottomLeft Y coordinate of bottom left of square
-     * @param xTopRight X coordinate of top right of square
-     * @param yTopRight Y coordinate of top right of square
-     */
-    public void spreadUnitsEvenly(int xBottomLeft, int yBottomLeft, int xTopRight, int yTopRight) {
-        int columns = 1;
-        int rows = 1;
-
-        int height = yTopRight - yBottomLeft;
-        int width = xTopRight - xBottomLeft;
-
-
-        while (columns * rows < units.size() && columns * rows < units.size() ) {
-            if (width / (columns + 1) > height / (rows + 1)) {
-                columns += 1;
-            } else {
-                rows += 1;
-            }
-        }
-
-        for(int row = 0; row < rows; row++ ) {
-            for(int column = 0; column < columns; column++) {
-                double x = column * ( (double) width / (columns-1)) + xBottomLeft;
-                double y =  row * ( (double) height / (rows-1)) + yBottomLeft;
-                int index = column + (row*columns);
-                if (index < units.size()) {
-                    units.get(index).setPos(x, y);
-                }
-            }
-        }
+    public void applyFormation(Formation formation) {
+        formation.spreadUnits(units);
     }
 
     /**
