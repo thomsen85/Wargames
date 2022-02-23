@@ -20,7 +20,7 @@ public abstract class Unit {
     private Unit currentOpponent;
 
     /**
-     * Constructor.
+     * Constructor
      * @param name
      * @param health
      * @param attack
@@ -156,6 +156,16 @@ public abstract class Unit {
         }
     }
 
+    /**
+     * Short form for setting the position of the Unit.
+     * @param x
+     * @param y
+     */
+    public void setPos(double x, double y) {
+        setX(x);
+        setY(y);
+    }
+
     public double getX() {
         return x;
     }
@@ -172,15 +182,6 @@ public abstract class Unit {
         this.y = y;
     }
 
-    /**
-     * Short form for setting the position of the Unit.
-     * @param x
-     * @param y
-     */
-    public void setPos(double x, double y) {
-        setX(x);
-        setY(y);
-    }
 
     public double getXSpeed() {
         return xSpeed;

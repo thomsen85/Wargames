@@ -11,11 +11,20 @@ public class Army {
     private final String name;
     private List<Unit> units;
 
+    /**
+     * Constructor which creates an instance of the Army class
+     * @param name of the army
+     */
     public Army(String name) {
         this.name = name;
         units = new ArrayList<Unit>();
     }
 
+    /**
+     * Constructor which creates an instance of the Army class, with prefilled list of units.
+     * @param name of the army.
+     * @param units filled list of units.
+     */
     public Army(String name, List<Unit> units) {
         this.name = name;
         this.units = units;
@@ -108,7 +117,11 @@ public class Army {
         }
     }
 
-
+    /**
+     * Method for updating all the units in the army. If a unit has health <= 0 it will get removed.
+     * If not it will attack if close enough or move closer to opponent.
+     * @param opponent to attack
+     */
     public void update(Army opponent) {
         List<Unit> dead = new ArrayList<Unit>();
         for(Unit unit: units) {
@@ -122,6 +135,12 @@ public class Army {
         units.removeAll(dead);
     }
 
+    /**
+     * Method for updating all the units in the army given delta time. If a unit has health <= 0 it will get removed.
+     * If not it will attack if close enough or move closer to opponent.
+     * @param opponent to attack
+     * @param deltaTime is time between frames.
+     */
     public void update(Army opponent, double deltaTime) {
         List<Unit> dead = new ArrayList<Unit>();
         for(Unit unit: units) {
@@ -137,10 +156,8 @@ public class Army {
 
     @Override
     public String toString() {
-        return "Army{" +
-                "name='" + name + '\'' +
-                ", units=" + units +
-                '}';
+        return "Army: " + name +
+                "\n\t-Units left:" + units.size();
     }
 
     @Override
