@@ -7,11 +7,14 @@ package edu.ntnu.thosve.units;
  * This unit has a tiny advantage with +1 resist bonus on when getting attacked
  */
 public class CavalryUnit extends Unit{
-    public static final int BASE_ATTACK_BONUS = 2;
-    public static final int CHARGE_ATTACK_BONUS = 6;
-    public static final int RESIST_BONUS = 1;
+    public static final int DEFAULT_ATTACK = 20;
+    public static final int DEFAULT_ARMOR = 20;
 
-    public static final int MAX_SPEED = 8;
+    public static final int BASE_ATTACK_BONUS = 2;
+    public static final int CHARGE_ATTACK_BONUS = 10;
+    public static final int RESIST_BONUS = 3;
+
+    public static final int MAX_SPEED = 30;
     public static final int ATTACK_RADIUS = 10;
 
     private boolean charge = true;
@@ -34,7 +37,7 @@ public class CavalryUnit extends Unit{
      * @param health
      */
     public CavalryUnit(String name, int health) {
-        super(name, health, 20, 12);
+        super(name, health, DEFAULT_ATTACK, DEFAULT_ARMOR);
     }
 
     /**

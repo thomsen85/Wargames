@@ -23,9 +23,12 @@ public class Battle {
         return armyOne.hasUnits() ? armyOne : armyTwo;
     }
 
-    public boolean manualSimulate() {
-        armyOne.update(armyTwo);
-        armyTwo.update(armyOne);
+    public boolean manualSimulate(double deltaTime) {
+        armyOne.update(armyTwo, deltaTime);
+        if (!armyOne.hasUnits()) {
+            return false;
+        }
+        armyTwo.update(armyOne, deltaTime);
         return armyOne.hasUnits() && armyTwo.hasUnits();
     }
 
