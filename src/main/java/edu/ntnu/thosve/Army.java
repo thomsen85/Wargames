@@ -122,6 +122,19 @@ public class Army {
         units.removeAll(dead);
     }
 
+    public void update(Army opponent, double deltaTime) {
+        List<Unit> dead = new ArrayList<Unit>();
+        for(Unit unit: units) {
+            if (unit.getHealth() <= 0) {
+                dead.add(unit); // To avoid ConcurrentModificationException
+            } else {
+                unit.targetClosestOpponent(opponent.getAllUnits());
+                unit.update(deltaTime);
+            }
+        }
+        units.removeAll(dead);
+    }
+
     @Override
     public String toString() {
         return "Army{" +

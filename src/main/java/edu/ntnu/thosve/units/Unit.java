@@ -8,7 +8,7 @@ import java.util.List;
  */
 public abstract class Unit {
     private final String name;
-    private int health;
+    private double health;
     private final int attack;
     private final int armor;
 
@@ -19,7 +19,7 @@ public abstract class Unit {
 
     private Unit currentOpponent;
 
-    public Unit(String name, int health, int attack, int armor) throws IllegalArgumentException{
+    public Unit(String name, double health, int attack, int armor) throws IllegalArgumentException{
         if (name.isBlank()) {
            throw new IllegalArgumentException("Name can not be blank");
         }
@@ -54,7 +54,22 @@ public abstract class Unit {
         int resistance = opponent.getArmor() + opponent.getResistBonus();
 
         if (resistance < attackDamage) {
-            int opponentsNewHealth = opponent.getHealth() - attackDamage + resistance;
+            double opponentsNewHealth = opponent.getHealth() - attackDamage + resistance;
+            opponent.setHealth(opponentsNewHealth);
+        }
+    }
+
+    /**
+     * Method for attacking another given Unit. It is calculated in the following way:
+     * health_opponent - (attack + attackBonus)_this + (armor + resistBonus)_opponent
+     * @param opponent which is being attacked.
+     */
+    public void attack(Unit opponent, double deltaTime) {
+        int attackDamage = this.getAttack() + this.getAttackBonus();
+        int resistance = opponent.getArmor() + opponent.getResistBonus();
+
+        if (resistance < attackDamage) {
+            double opponentsNewHealth = opponent.getHealth() - (attackDamage + resistance) * deltaTime;
             opponent.setHealth(opponentsNewHealth);
         }
     }
@@ -119,6 +134,21 @@ public abstract class Unit {
         }
     }
 
+    /**
+     * Method for updating the unit. If a opponent is within attacking range it will attack, if not it will
+     * update the position of the unit based on the current speed.
+     */
+    public void update(double deltaTime) {
+        if (currentOpponent != null) {
+            if (getDistanceTo(currentOpponent) <= getAttackRadius()) {
+                attack(currentOpponent, deltaTime);
+            } else {
+                x += xSpeed * deltaTime;
+                y += ySpeed * deltaTime;
+            }
+        }
+    }
+
     public double getX() {
         return x;
     }
@@ -173,7 +203,7 @@ public abstract class Unit {
      * Gives the <b>current</b> health of the Unit.
      * @return health
      */
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
 
@@ -205,7 +235,7 @@ public abstract class Unit {
      * Sets the health of the Unit.
      * @param health
      */
-    public void setHealth(int health) {
+    public void setHealth(double health) {
         this.health = health;
     }
 

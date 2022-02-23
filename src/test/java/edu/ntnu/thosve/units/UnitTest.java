@@ -92,8 +92,6 @@ public class UnitTest {
         assertTrue(unit.getYSpeed() > 0);
     }
 
-
-
     @Test
     public void testUnitMovesAtMaxSpeed() {
         InfantryUnit unit = new InfantryUnit("Unit", 100);
@@ -133,7 +131,7 @@ public class UnitTest {
             InfantryUnit unit = new InfantryUnit(name, health);
             assertEquals(name,  unit.getName());
             assertEquals(health,  unit.getHealth());
-            assertEquals(15,  unit.getAttack());
+            assertEquals(InfantryUnit.DEFAULT_ARMOR,  unit.getAttack());
             assertEquals(10,  unit.getArmor());
 
         }
