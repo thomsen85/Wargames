@@ -2,24 +2,27 @@ package edu.ntnu.thosve.gui;
 
 import edu.ntnu.thosve.Army;
 import edu.ntnu.thosve.Battle;
+import edu.ntnu.thosve.formations.Formation;
 import edu.ntnu.thosve.formations.RectangleFormation;
-import edu.ntnu.thosve.units.InfantryUnit;
-import edu.ntnu.thosve.units.RangedUnit;
-import edu.ntnu.thosve.units.Unit;
+import edu.ntnu.thosve.units.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Random;
 
 
 
-public class Panel extends JPanel implements ActionListener {
+public class Panel extends JPanel implements ActionListener, MouseListener {
     private Timer timer;
     private Battle battle;
     private Army armyOne;
@@ -28,7 +31,6 @@ public class Panel extends JPanel implements ActionListener {
     private int unitRadius = 4;
 
     private int zoomFactor;
-    private int[] zoomOrigin;
 
     private boolean simulating = false;
     private boolean done = false;
@@ -50,46 +52,60 @@ public class Panel extends JPanel implements ActionListener {
         armyOne = new Army("Army One");
         armyTwo = new Army("Army Two");
 
-        for(int i = 0; i < 1000; i++) {
-            armyOne.add(new InfantryUnit("Infantry", 100));
-        }
+        zoomFactor = 2;
 
-        armyOne.applyFormation(new RectangleFormation(100,100,200, 900));
+        setBackground();
+        startGUI();
+        addComponents();
+        addMouseListener(this);
+    }
 
-        for(int i = 0; i < 1000; i++) {
-            armyTwo.add(new RangedUnit("Ranged", 30));
-        }
-
-        armyTwo.applyFormation(new RectangleFormation(600,100,900, 900));
-
+    private void setBackground() {
         try {
             background = ImageIO.read(new File("src/main/resources/Field.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        zoomOrigin = new int[]{500,500};
-        zoomFactor = 2;
-
-
-        startGUI();
-        addComponents();
     }
 
     private void addComponents() {
         JButton startButton = new JButton("Start");
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                battle = new Battle(armyOne, armyTwo);
-                simulating = true;
-            }
+        startButton.addActionListener(e -> {
+            battle = new Battle(armyOne, armyTwo);
+            simulating = true;
         });
         add(startButton);
 
+        JButton addUnitsButton = new JButton("Add Units");
+        addUnitsButton.addActionListener(e -> {
+            HashMap<String, Army> armies = new HashMap<>();
+            armies.put("Army One", armyOne);
+            armies.put("Army Two", armyTwo);
+
+            HashMap<String, Class> units = new HashMap<>();
+            units.put("Cavalry Unit", CavalryUnit.class);
+            units.put("Infantry Unit", InfantryUnit.class);
+            units.put("Ranged Unit", RangedUnit.class);
+            units.put("Commander Unit", CommanderUnit.class);
+
+            AddUnitsForm form = new AddUnitsForm(this, armies, units);
+        });
+        add(addUnitsButton);
+
     }
 
-    public void startGUI() {
+    public void addUnits(Army army, Class unit, String name, int numberOfUnits, Formation formation) {
+        for(int i = 0; i < numberOfUnits; i++) {
+            try {
+                army.add((Unit) unit.getDeclaredConstructor(String.class).newInstance(name));
+            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        army.applyFormation(formation);
+    }
+
+    private void startGUI() {
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -118,15 +134,13 @@ public class Panel extends JPanel implements ActionListener {
 
         if (done) {
             g.setColor(Color.BLACK);
-            g.setFont(new Font("Blackadder ITC", Font.BOLD, 50));
+            g.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
             if (armyOne.hasUnits()) {
                 g.drawString("Army One won!", 50, 500);
             } else {
                 g.drawString("Army Two won", 500, 500);
             }
-
         }
-
     }
 
 
@@ -138,4 +152,21 @@ public class Panel extends JPanel implements ActionListener {
         }
         repaint();
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println(e.getX() + ", " + e.getY());
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
 }

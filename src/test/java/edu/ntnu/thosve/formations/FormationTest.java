@@ -40,6 +40,17 @@ class FormationTest {
         assertEquals(200, units.get(5).getX());
         assertEquals(100, units.get(5).getY());
 
+    }
+
+    @Test
+    void testTriangleFormation() {
+        Army army = new Army("Test army");
+        for(int i = 0; i < 100; i++) {
+            army.add(new InfantryUnit("Test Unit", 100));
+        }
+
+        Formation formation = new TriangleFormation(100, 100, 900, 900);
+        formation.spreadUnits(army.getAllUnits());
 
     }
 

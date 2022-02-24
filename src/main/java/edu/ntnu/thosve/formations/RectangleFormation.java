@@ -5,16 +5,8 @@ import edu.ntnu.thosve.units.Unit;
 import java.util.List;
 
 public class RectangleFormation extends Formation{
-    int xBottomLeft;
-    int yBottomLeft;
-    int xTopRight;
-    int yTopRight;
-
     public RectangleFormation(int xBottomLeft, int yBottomLeft, int xTopRight, int yTopRight) {
-        this.xBottomLeft = xBottomLeft;
-        this.yBottomLeft = yBottomLeft;
-        this.xTopRight = xTopRight;
-        this.yTopRight = yTopRight;
+        super(xBottomLeft, yBottomLeft, xTopRight, yTopRight);
     }
 
     @Override
