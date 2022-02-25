@@ -1,7 +1,9 @@
 package edu.ntnu.thosve.gui;
 
 import edu.ntnu.thosve.Army;
+import edu.ntnu.thosve.formations.Formation;
 import edu.ntnu.thosve.formations.RectangleFormation;
+import edu.ntnu.thosve.units.UnitTypes;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,13 +21,13 @@ public class AddUnitsForm extends JFrame {
     private JButton addButton;
 
     private HashMap<String, Army> armies;
-    private HashMap<String, Class> units;
+    private HashMap<String, UnitTypes> units;
 
     private Panel parent;
 
     private JPanel panel;
 
-    public AddUnitsForm(Panel parent, HashMap<String, Army> armies, HashMap<String, Class> units) {
+    public AddUnitsForm(Panel parent, HashMap<String, Army> armies, HashMap<String, UnitTypes> units) {
         super("Add Units");
 
         this.parent = parent;
@@ -73,14 +75,20 @@ public class AddUnitsForm extends JFrame {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Army army = armies.get((String) armyChoice.getSelectedItem());
+                UnitTypes unit = units.get((String) unitChoice.getSelectedItem());
+                String name = "Unit";
+                int number = Integer.parseInt(numberChoice.getText());
+
                 int x = Integer.parseInt(coordinatesChoice.getText().split(",")[0]);
                 int y = Integer.parseInt(coordinatesChoice.getText().split(",")[1]);
 
                 int width = Integer.parseInt(sizeChoice.getText().split(",")[0]);
                 int height = Integer.parseInt(sizeChoice.getText().split(",")[1]);
 
-                parent.addUnits(armies.get(armyChoice.getSelectedItem()), units.get(unitChoice.getSelectedItem()), "U",
-                        Integer.parseInt(numberChoice.getText()), new RectangleFormation( x, y, x+width, y+height));
+                Formation formation = new RectangleFormation( x, y, x+width, y+height);
+
+                parent.addUnits(army, unit, name, number, formation);
 
             }});
 

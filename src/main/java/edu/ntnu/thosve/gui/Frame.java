@@ -1,15 +1,15 @@
 package edu.ntnu.thosve.gui;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 public class Frame extends JFrame {
-
-    public Frame(String title) {
+    public Frame(String title, int width, int height) {
         setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        add(new Panel(1000, 1000));
-        pack();
-        setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
+
+        add(new Panel(width, height));
+        pack();
     }
 }
