@@ -31,14 +31,28 @@ public class Army {
         this.units = units;
     }
 
+    /**
+     * Gets the name of the army
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Adds a single unit to the army
+     * @param unit to be added
+     * @return true if this collection changed as a result of the call
+     */
     public boolean add(Unit unit) {
         return this.units.add(unit);
     }
 
+    /**
+     * Adds multiple units to the army
+     * @param units to be added
+     * @return true if this collection changed as a result of the call
+     */
     public boolean addAll(List<Unit> units) {
         return this.units.addAll(units);
     }
@@ -83,6 +97,10 @@ public class Army {
 
     }
 
+    /**
+     * Applies a formation to the units.
+     * @param formation
+     */
     public void applyFormation(Formation formation) {
         formation.spreadUnits(units);
     }

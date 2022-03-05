@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
+/**
+ * Small window for adding units. This is for testing purposes only and wil be changed.
+ */
 public class AddUnitsForm extends JFrame {
     private JLabel formHeader;
     private JComboBox armyChoice;
@@ -27,23 +30,39 @@ public class AddUnitsForm extends JFrame {
 
     private JPanel panel;
 
-    public AddUnitsForm(Panel parent, HashMap<String, Army> armies, HashMap<String, UnitTypes> units) {
+    public AddUnitsForm(Panel parent, HashMap<String, Army> armies) {
         super("Add Units");
 
         this.parent = parent;
         this.armies = armies;
-        this.units = units;
+        this.units = getUnits();
 
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        addFields();
+        addComponents();
         add(panel);
         pack();
         setVisible(true);
     }
 
-    private void addFields() {
+    /**
+     * Method that returns all unit types.
+     * @return
+     */
+    private HashMap<String, UnitTypes> getUnits() {
+        HashMap<String, UnitTypes> units = new HashMap<>();
+        units.put(UnitTypes.INFANTRY_UNIT.toString(), UnitTypes.INFANTRY_UNIT);
+        units.put(UnitTypes.RANGED_UNIT.toString(), UnitTypes.RANGED_UNIT);
+        units.put(UnitTypes.CAVALRY_UNIT.toString(), UnitTypes.CAVALRY_UNIT);
+        units.put(UnitTypes.COMMANDER_UNIT.toString(), UnitTypes.COMMANDER_UNIT);
+        return units;
+    }
+
+    /**
+     * Method for adding the necessary components.
+     */
+    private void addComponents() {
         formHeader = new JLabel("Add Units", SwingConstants.LEFT);
         formHeader.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
         panel.add(formHeader);
@@ -75,20 +94,29 @@ public class AddUnitsForm extends JFrame {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Army army = armies.get((String) armyChoice.getSelectedItem());
-                UnitTypes unit = units.get((String) unitChoice.getSelectedItem());
-                String name = "Unit";
-                int number = Integer.parseInt(numberChoice.getText());
+                try {
+                    Army army = armies.get((String) armyChoice.getSelectedItem());
+                    UnitTypes unit = units.get((String) unitChoice.getSelectedItem());
+                    String name = "Unit";
 
-                int x = Integer.parseInt(coordinatesChoice.getText().split(",")[0]);
-                int y = Integer.parseInt(coordinatesChoice.getText().split(",")[1]);
+                    if (army == null || unit == null) {
+                        throw new IllegalStateException("Make sure to have selected a unit and army.");
+                    }
+                    int number = Integer.parseInt(numberChoice.getText());
 
-                int width = Integer.parseInt(sizeChoice.getText().split(",")[0]);
-                int height = Integer.parseInt(sizeChoice.getText().split(",")[1]);
+                    int x = Integer.parseInt(coordinatesChoice.getText().split(",")[0]);
+                    int y = Integer.parseInt(coordinatesChoice.getText().split(",")[1]);
 
-                Formation formation = new RectangleFormation( x, y, x+width, y+height);
+                    int width = Integer.parseInt(sizeChoice.getText().split(",")[0]);
+                    int height = Integer.parseInt(sizeChoice.getText().split(",")[1]);
 
-                parent.addUnits(army, unit, name, number, formation);
+                    Formation formation = new RectangleFormation(x, y, x + width, y + height);
+
+                    parent.addUnits(army, unit, name, number, formation);
+                } catch (IllegalArgumentException err) {
+                    JOptionPane.showMessageDialog(null, "Error on input:\n" + err.getMessage(),
+                            "Input Error", JOptionPane.ERROR_MESSAGE);
+                }
 
             }});
 

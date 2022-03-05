@@ -3,13 +3,14 @@ package edu.ntnu.thosve.units;
 /**
  * A CommanderUnit is one of the strongest units. It shares a lot of attributes with the Cavalry unit.
  */
-public class CommanderUnit extends CavalryUnit{
+public class CommanderUnit extends CavalryUnit {
     public static final int DEFAULT_ATTACK = 30;
     public static final int DEFAULT_ARMOR = 40;
     public static final int DEFAULT_HEALTH = 250;
 
     /**
      * Constructor for creating an instance of the CommanderUnit class.
+     *
      * @param name
      * @param health
      * @param attack

@@ -15,9 +15,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * WIP class for the GUI panel. This was for testing purposes only and wil be changed.
+ */
 public class Panel extends JPanel implements ActionListener {
     private Timer timer;
-    private final int DELAY = 20;
+    private static final int DELAY = 20;
+
+    private long previousTime;
+    private double deltaTime;
 
     private Battle battle;
     private final Army armyOne;
@@ -28,64 +34,61 @@ public class Panel extends JPanel implements ActionListener {
     private boolean done = false;
 
     private BufferedImage background;
-    private BufferedImage armyOneIcon;
-    private BufferedImage armyTwoIcon;
 
-
+    /**
+     * Constructor method for creating a new panel which holds the graphics for a battle.
+     * @param width  preferred width
+     * @param height preferred height
+     */
     public Panel(int width, int height) {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
 
-        armyOne = new Army("Ukraine");
-        armyTwo = new Army("Russia");
+        armyOne = new Army("Army One");
+        armyTwo = new Army("Army Two");
         battle = new Battle(armyOne, armyTwo);
 
         setBackground();
-        loadImages();
         addButtons();
         startGUI();
     }
 
+    /**
+     * Method for starting the game loop
+     */
     private void startGUI() {
         timer = new Timer(DELAY, this);
         timer.start();
+        previousTime = System.nanoTime();
+
     }
 
-    private void loadImages() {
-        try {
-            armyOneIcon = ImageIO.read(new File("src/main/resources/ukrain.png"));
-            armyTwoIcon = ImageIO.read(new File("src/main/resources/russia.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Tries to load the background image file.
+     */
     private void setBackground() {
         try {
-            //background = ImageIO.read(new File("src/main/resources/Field.png"));
-            background = ImageIO.read(new File("src/main/resources/kart.jpg"));
+            background = ImageIO.read(new File("src/main/resources/Field.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private HashMap<String, UnitTypes> getUnits() {
-        HashMap<String, UnitTypes> units = new HashMap<>();
-        units.put(UnitTypes.INFANTRY_UNIT.toString(), UnitTypes.INFANTRY_UNIT);
-        units.put(UnitTypes.RANGED_UNIT.toString(), UnitTypes.RANGED_UNIT);
-        units.put(UnitTypes.CAVALRY_UNIT.toString(), UnitTypes.CAVALRY_UNIT);
-        units.put(UnitTypes.COMMANDER_UNIT.toString(), UnitTypes.COMMANDER_UNIT);
-        return units;
-    }
-
+    /**
+     * Method for getting the armies currently on the panel.
+     * @return hashMap with names of armies and the army object
+     */
     private HashMap<String, Army> getArmies() {
         HashMap<String, Army> armies = new HashMap<>();
-        armies.put("Ukraine", armyOne);
-        armies.put("Russia", armyTwo);
+        armies.put(armyOne.getName(), armyOne);
+        armies.put(armyTwo.getName(), armyTwo);
         return armies;
     }
 
+    /**
+     * Loads the buttons for the panel.
+     */
     private void addButtons() {
         JButton startButton = new JButton("Start");
         startButton.addActionListener(e -> {
@@ -95,16 +98,23 @@ public class Panel extends JPanel implements ActionListener {
 
         JButton addUnitsButton = new JButton("Add Units");
         addUnitsButton.addActionListener(e -> {
-            HashMap<String,UnitTypes> units = getUnits();
             HashMap<String, Army> armies = getArmies();
-            AddUnitsForm form = new AddUnitsForm(this, armies, units);
+            AddUnitsForm form = new AddUnitsForm(this, armies);
         });
         add(addUnitsButton);
     }
 
-    public void addUnits(Army army, UnitTypes unit, String name, int numberOfUnits, Formation formation) {
+    /**
+     * Method to be called for adding units
+     * @param army to add to
+     * @param unitType of the units to be added
+     * @param name of the units to be added
+     * @param numberOfUnits to add
+     * @param formation for the units.
+     */
+    public void addUnits(Army army, UnitTypes unitType, String name, int numberOfUnits, Formation formation) {
         for(int i = 0; i < numberOfUnits; i++) {
-            switch (unit){
+            switch (unitType){
                 case RANGED_UNIT    -> army.add(new RangedUnit(name));
                 case CAVALRY_UNIT   -> army.add(new CavalryUnit(name));
                 case INFANTRY_UNIT  -> army.add(new InfantryUnit(name));
@@ -120,6 +130,10 @@ public class Panel extends JPanel implements ActionListener {
         draw(g);
     }
 
+    /**
+     * Method to draw components to the panel.
+     * @param g
+     */
     public void draw(Graphics g) {
         // --- Background --- //
         g.drawImage(background,0,0,null);
@@ -128,8 +142,7 @@ public class Panel extends JPanel implements ActionListener {
         if (armyOne.hasUnits()) {
             g.setColor(Color.GREEN);
             for(Unit unit : armyOne.getAllUnits()) {
-                //g.fillOval((int) unit.getX(), (int) unit.getY(), unitRadius, unitRadius);
-                g.drawImage(armyOneIcon, (int) unit.getX(), (int) unit.getY(), null);
+                g.fillOval((int) unit.getX(), (int) unit.getY(), unitRadius, unitRadius);
             }
         }
 
@@ -137,8 +150,7 @@ public class Panel extends JPanel implements ActionListener {
         if (armyTwo.hasUnits()) {
             g.setColor(Color.RED);
             for(Unit unit : armyTwo.getAllUnits()) {
-                //g.fillOval((int) unit.getX(), (int) unit.getY(), unitRadius, unitRadius);
-                g.drawImage(armyTwoIcon, (int) unit.getX(), (int) unit.getY(), null);
+                g.fillOval((int) unit.getX(), (int) unit.getY(), unitRadius, unitRadius);
             }
         }
 
@@ -157,8 +169,11 @@ public class Panel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        deltaTime = (double) (System.nanoTime() - previousTime) / 1_000_000_000;
+        previousTime = System.nanoTime();
+
         if (simulating) {
-            simulating = battle.manualSimulate((double) DELAY / 1000);
+            simulating = battle.manualSimulate(deltaTime);
             done = !simulating;
         }
         repaint();

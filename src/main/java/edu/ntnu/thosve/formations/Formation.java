@@ -10,11 +10,17 @@ public abstract class Formation {
     int xTopRight;
     int yTopRight;
 
+    double width;
+    double height;
+
     public Formation(int xBottomLeft, int yBottomLeft, int xTopRight, int yTopRight) {
         this.xBottomLeft = xBottomLeft;
         this.yBottomLeft = yBottomLeft;
         this.xTopRight = xTopRight;
         this.yTopRight = yTopRight;
+
+        this.width = xTopRight - xBottomLeft;
+        this.height = yTopRight - yBottomLeft;
     }
 
     public abstract void spreadUnits(List<Unit> units);
