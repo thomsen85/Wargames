@@ -67,6 +67,14 @@ public class Army {
     }
 
     /**
+     * Removes the specified elements from this army if it is present.
+     * @param units to be removed.
+     * @return true if this list changed as a result of the call
+     */
+    public boolean removeAll(List<Unit> units) {
+        return this.units.removeAll(units);
+    }
+    /**
      * Checks if the army contains Units
      * @return true if army contains 1 or more Units.
      */

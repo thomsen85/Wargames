@@ -99,17 +99,19 @@ public class AddUnitsForm extends JFrame {
                     UnitTypes unit = units.get((String) unitChoice.getSelectedItem());
                     String name = "Unit";
 
-                    if (army == null || unit == null) {
-                        throw new IllegalStateException("Make sure to have selected a unit and army.");
-                    }
                     int number = Integer.parseInt(numberChoice.getText());
 
-                    int x = Integer.parseInt(coordinatesChoice.getText().split(",")[0]);
-                    int y = Integer.parseInt(coordinatesChoice.getText().split(",")[1]);
+                    int x = Integer.parseInt(coordinatesChoice.getText().replaceAll("\\s+","").split(",")[0]);
+                    int y = Integer.parseInt(coordinatesChoice.getText().replaceAll("\\s+","").split(",")[1]);
 
-                    int width = Integer.parseInt(sizeChoice.getText().split(",")[0]);
-                    int height = Integer.parseInt(sizeChoice.getText().split(",")[1]);
+                    int width = Integer.parseInt(sizeChoice.getText().replaceAll("\\s+","").split(",")[0]);
+                    int height = Integer.parseInt(sizeChoice.getText().replaceAll("\\s+","").split(",")[1]);
 
+                    if (army == null || unit == null) {
+                        throw new IllegalStateException("Make sure to have selected a unit and army.");
+                    } else if (number < 1) {
+                        throw new IllegalArgumentException("Number of Units can not be less than one");
+                    }
                     Formation formation = new RectangleFormation(x, y, x + width, y + height);
 
                     parent.addUnits(army, unit, name, number, formation);

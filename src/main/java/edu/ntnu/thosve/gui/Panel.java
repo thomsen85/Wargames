@@ -92,7 +92,9 @@ public class Panel extends JPanel implements ActionListener {
     private void addButtons() {
         JButton startButton = new JButton("Start");
         startButton.addActionListener(e -> {
-            simulating = true;
+            if (armyOne.hasUnits() && armyTwo.hasUnits()) {
+                simulating = true;
+            }
         });
         add(startButton);
 
@@ -102,6 +104,22 @@ public class Panel extends JPanel implements ActionListener {
             AddUnitsForm form = new AddUnitsForm(this, armies);
         });
         add(addUnitsButton);
+
+        JButton restartSimulationButton = new JButton("Restart simulation");
+        restartSimulationButton.addActionListener(e -> {
+            restart();
+        });
+        add(restartSimulationButton);
+    }
+
+    /**
+     * Method for restarting the simulation.
+     */
+    private void restart() {
+        done = false;
+        simulating = false;
+        armyOne.removeAll(armyOne.getAllUnits());
+        armyTwo.removeAll(armyTwo.getAllUnits());
     }
 
     /**

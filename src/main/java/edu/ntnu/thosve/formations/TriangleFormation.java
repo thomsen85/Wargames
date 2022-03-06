@@ -31,11 +31,7 @@ public class TriangleFormation extends Formation {
             } else {
                 units.get(i).setPos(1,1);
             }
-
-
         }
-
-
     }
 
 }
