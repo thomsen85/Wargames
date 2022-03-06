@@ -14,6 +14,14 @@ public abstract class Formation {
     double height;
 
     public Formation(int xBottomLeft, int yBottomLeft, int xTopRight, int yTopRight) {
+        if (xBottomLeft >= xTopRight) {
+            throw new IllegalArgumentException("Arguments must form valid rectangle, x-axis of top right corner must be a " +
+                    "larger value than the x-axis of the bottom left corner");
+        }
+        if (yBottomLeft >= yTopRight) {
+            throw new IllegalArgumentException("Arguments must form valid rectangle, y-axis of top right corner must be a " +
+                    "larger value than the y-axis of the bottom left corner");
+        }
         this.xBottomLeft = xBottomLeft;
         this.yBottomLeft = yBottomLeft;
         this.xTopRight = xTopRight;

@@ -5,7 +5,7 @@ import edu.ntnu.thosve.units.Unit;
 import java.util.List;
 
 /**
- * WIP
+ * WIP class, not yet implemented.
  */
 public class TriangleFormation extends Formation {
     public TriangleFormation(int xBottomLeft, int yBottomLeft, int xTopRight, int yTopRight) {
