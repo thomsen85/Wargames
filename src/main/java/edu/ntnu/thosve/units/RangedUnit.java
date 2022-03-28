@@ -51,8 +51,7 @@ public class RangedUnit extends Unit{
     }
 
     /**
-     * Gets the resist bonus. If the Ranged Unit has not been attacked it will have +6 in resist bonus but loses two
-     * points for every damage it takes. It wil stop loosing resist bonus when it hits +2.
+     * Gets the resist bonus.
      * @return
      */
     @Override

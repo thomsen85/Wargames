@@ -1,7 +1,7 @@
 package edu.ntnu.thosve;
 
 import edu.ntnu.thosve.formations.Formation;
-import edu.ntnu.thosve.units.Unit;
+import edu.ntnu.thosve.units.*;
 
 import java.util.*;
 
@@ -10,13 +10,19 @@ import java.util.*;
  */
 public class Army {
     private final String name;
-    private List<Unit> units;
+    private final List<Unit> units;
 
     /**
      * Constructor which creates an instance of the Army class
      * @param name of the army
      */
+
     public Army(String name) {
+        Objects.requireNonNull(name, "Name cannot be null");
+        if (name.isBlank()) {
+            throw new IllegalArgumentException("Name cannot be blank");
+        }
+
         this.name = name;
         units = new ArrayList<Unit>();
     }
@@ -148,6 +154,39 @@ public class Army {
             }
         }
         units.removeAll(dead);
+    }
+
+    /**
+     * Method for return all the infantry units in the army. Will return empty list if none is found
+     * @return list of all infantry units
+     */
+    public List<Unit> getInfantryUnits() {
+        return units.stream().filter(o -> o.getClass() == InfantryUnit.class).toList();
+    }
+
+    /**
+     * Method for return all the cavalry units in the army. Will return empty list if none is found
+     * @return list of all cavalry units
+     */
+    public List<Unit> getCavalryUnits() {
+        return units.stream().filter(o -> o.getClass() == CavalryUnit.class).toList();
+    }
+
+    /**
+     * Method for return all the ranged units in the army. Will return empty list if none is found
+     * @return list of all ranged units
+     */
+    public List<Unit> getRangedUnits() {
+        return units.stream().filter(o -> o.getClass() == RangedUnit.class).toList();
+    }
+
+    /**
+     * Method for return all the commander units in the army. Will return empty list if none is found
+     * @return list of all commander
+     units
+     */
+    public List<Unit> getCommanderUnits() {
+        return units.stream().filter(o -> o.getClass() == CommanderUnit.class).toList();
     }
 
     @Override
