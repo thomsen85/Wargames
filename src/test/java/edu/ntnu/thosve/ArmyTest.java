@@ -3,8 +3,10 @@ package edu.ntnu.thosve;
 import edu.ntnu.thosve.units.*;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -112,5 +114,43 @@ class ArmyTest {
 
         commanderUnits.forEach(unit -> assertEquals(unit.getClass(), CommanderUnit.class));
         assertEquals(numberOfEachUnit, commanderUnits.size());
+    }
+
+    @Test
+    void testCSVWritingAndReading() {
+        Army writeArmy = getTestArmy(10);
+        writeArmy.add(new CommanderUnit("SuperTest", 1));
+
+        String path = "testCSVWritingAndReading.csv";
+        try {
+            writeArmy.writeCSV(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Army readArmy = null;
+        try {
+            readArmy = Army.readCSV(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assertNotNull(readArmy);
+
+        Object[] writeArmyClasses = writeArmy.getAllUnits().stream()
+                .map(unit -> unit.getClass().getSimpleName()).toArray();
+        Object[] writeArmyNames = writeArmy.getAllUnits().stream().map(Unit::getName).toArray();
+        double[] writeArmyHealths = writeArmy.getAllUnits().stream().mapToDouble(Unit::getHealth).toArray();
+
+        Object[] readArmyClasses = readArmy.getAllUnits().stream()
+                .map(unit -> unit.getClass().getSimpleName()).toArray();
+        Object[] readArmyNames = readArmy.getAllUnits().stream().map(Unit::getName).toArray();
+        double[] readArmyHealths = readArmy.getAllUnits().stream().mapToDouble(Unit::getHealth).toArray();
+
+
+        assertEquals(writeArmy.getName(), readArmy.getName());
+        assertArrayEquals(writeArmyHealths, readArmyHealths);
+        assertArrayEquals(writeArmyNames, readArmyNames);
+        assertArrayEquals(writeArmyClasses, readArmyClasses);
+
     }
 }

@@ -2,7 +2,11 @@ package edu.ntnu.thosve;
 
 import edu.ntnu.thosve.formations.Formation;
 import edu.ntnu.thosve.units.*;
+import javafx.application.Platform;
 
+import java.io.*;
+import java.lang.reflect.Executable;
+import java.text.ParseException;
 import java.util.*;
 
 /**
@@ -16,7 +20,6 @@ public class Army {
      * Constructor which creates an instance of the Army class
      * @param name of the army
      */
-
     public Army(String name) {
         Objects.requireNonNull(name, "Name cannot be null");
         if (name.isBlank()) {
@@ -113,7 +116,7 @@ public class Army {
 
     /**
      * Applies a formation to the units.
-     * @param formation
+     * @param formation to apply
      */
     public void applyFormation(Formation formation) {
         formation.spreadUnits(units);
@@ -212,4 +215,70 @@ public class Army {
         result = 31 * result + (units != null ? units.hashCode() : 0);
         return result;
     }
+
+    /**
+     * Method for writing the current instance to an CSV.
+     * @param path to be written to, must end in .csv
+     * @throws IOException
+     */
+    public void writeCSV(String path) throws IOException {
+        if (!path.endsWith(".csv")) {
+            throw new IllegalArgumentException("Path must end with .csv");
+        }
+
+        FileWriter fileWriter = new FileWriter(path);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        PrintWriter printWriter = new PrintWriter(bufferedWriter);
+
+        printWriter.println(getName());
+
+        for (Unit unit : units) {
+            StringBuilder str = new StringBuilder();
+
+            str.append(unit.getClass().getSimpleName());
+            str.append(",");
+            str.append(unit.getName());
+            str.append(",");
+            str.append((int) unit.getHealth());
+
+            printWriter.println(str.toString());
+        }
+        printWriter.flush();
+        printWriter.close();
+    }
+
+    /**
+     * Static method for getting an instance of an army from a csv file.
+     * @param path to read from, must end in .csv
+     * @return
+     */
+    public static Army readCSV(String path) throws IOException{
+        if (!path.endsWith(".csv")) {
+            throw new IllegalArgumentException("Path must end with .csv");
+        }
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
+            Army army = new Army(bufferedReader.readLine());
+
+            String unitData;
+            while((unitData = bufferedReader.readLine()) != null) {
+
+                String[] data = unitData.split(",");
+
+                switch (data[0]) {
+                    case "InfantryUnit" -> army.add(new InfantryUnit(data[1], Integer.parseInt(data[2])));
+                    case "RangedUnit" -> army.add(new RangedUnit(data[1], Integer.parseInt(data[2])));
+                    case "CavalryUnit" -> army.add(new CavalryUnit(data[1], Integer.parseInt(data[2])));
+                    case "CommanderUnit" -> army.add(new CommanderUnit(data[1], Integer.parseInt(data[2])));
+                }
+            }
+            return army;
+
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Invalid String");
+        } catch (NumberFormatException e) {
+            throw new IOException("Format of csv is wrong.");
+        }
+    }
 }
+

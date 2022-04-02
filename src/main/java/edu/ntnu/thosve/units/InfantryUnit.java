@@ -14,6 +14,8 @@ public class InfantryUnit extends Unit {
     public static final int MAX_SPEED = 25;
     public static final int ATTACK_RADIUS = 10;
 
+
+
     /**
      * Constructor for creating an instance of the InfantryUnit class.
      * @param name

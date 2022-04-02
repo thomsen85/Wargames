@@ -4,7 +4,18 @@ import edu.ntnu.thosve.units.Unit;
 
 import java.util.List;
 
+/**
+ * Class for creating a rectangle formation.
+ */
 public class RectangleFormation extends Formation{
+
+    /**
+     * Constructor for creating an instance of the RectangleFormation class.
+     * @param xBottomLeft x-coordinate of bottom left corner.
+     * @param yBottomLeft y-coordinate of bottom left corner.
+     * @param xTopRight x-coordinate of top right corner.
+     * @param yTopRight y-coordinate of top right corner.
+     */
     public RectangleFormation(int xBottomLeft, int yBottomLeft, int xTopRight, int yTopRight) {
         super(xBottomLeft, yBottomLeft, xTopRight, yTopRight);
     }

@@ -20,6 +20,5 @@ public class App extends Application {
 
     private void setAppearance(Stage stage) {
         stage.setTitle("Wargames");
-        stage.setResizable(false);
     }
 }

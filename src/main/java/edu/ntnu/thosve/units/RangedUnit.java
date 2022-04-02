@@ -8,7 +8,6 @@ public class RangedUnit extends Unit{
     public static final int DEFAULT_ARMOR = 5;
     public static final int DEFAULT_HEALTH = 50;
 
-
     private static final int ATTACK_BONUS = 2;
     private static final int RESIST_BONUS = 1;
 
