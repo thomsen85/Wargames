@@ -1,6 +1,6 @@
 package edu.ntnu.thosve.units;
 
-public enum UnitTypes {
+public enum UnitType {
     CAVALRY_UNIT("Cavalry Unit"),
     COMMANDER_UNIT("Commander Unit"),
     INFANTRY_UNIT("Infantry Unit"),
@@ -8,7 +8,7 @@ public enum UnitTypes {
 
     private String name;
 
-    UnitTypes(String name) {
+    UnitType(String name) {
         this.name = name;
     }
 

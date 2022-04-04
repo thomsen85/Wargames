@@ -21,10 +21,10 @@ public abstract class Unit {
 
     /**
      * Constructor
-     * @param name
-     * @param health
-     * @param attack
-     * @param armor
+     * @param name of the unit
+     * @param health of the unit
+     * @param attack damage for the unit
+     * @param armor amount for the unit.
      * @throws IllegalArgumentException
      */
     public Unit(String name, double health, int attack, int armor) throws IllegalArgumentException{

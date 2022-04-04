@@ -21,7 +21,7 @@ public class RangedUnit extends Unit{
      * @param attack
      * @param armor
      */
-    public RangedUnit(String name, int health, int attack, int armor) {
+    public RangedUnit(String name, double health, int attack, int armor) {
         super(name, health, attack, armor);
     }
 
@@ -31,7 +31,7 @@ public class RangedUnit extends Unit{
      * @param name
      * @param health
      */
-    public RangedUnit(String name, int health) {
+    public RangedUnit(String name, double health) {
         super(name, health, DEFAULT_ATTACK, DEFAULT_ARMOR);
     }
 

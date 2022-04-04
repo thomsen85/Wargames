@@ -23,7 +23,7 @@ public class InfantryUnit extends Unit {
      * @param attack
      * @param armor
      */
-    public InfantryUnit(String name, int health, int attack, int armor) {
+    public InfantryUnit(String name, double health, int attack, int armor) {
         super(name, health, attack, armor);
     }
 
@@ -33,7 +33,7 @@ public class InfantryUnit extends Unit {
      * @param name
      * @param health
      */
-    public InfantryUnit(String name, int health) {
+    public InfantryUnit(String name, double health) {
         super(name, health, DEFAULT_ATTACK, DEFAULT_ARMOR);
     }
 
