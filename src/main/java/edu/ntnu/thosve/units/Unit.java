@@ -158,8 +158,8 @@ public abstract class Unit {
 
     /**
      * Short form for setting the position of the Unit.
-     * @param x
-     * @param y
+     * @param x coordinate
+     * @param y coordinate
      */
     public void setPos(double x, double y) {
         setX(x);

@@ -1,5 +1,7 @@
 package edu.ntnu.thosve.gui.controllers;
 
+import edu.ntnu.thosve.map.Tile;
+import edu.ntnu.thosve.map.TileMap;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -39,13 +41,18 @@ public class GameController {
             public void handle(KeyEvent keyEvent) {
                 System.out.println(keyEvent.getCode());
                 if (keyEvent.getCode().equals(KeyCode.G)) {
-                    System.out.println("Cube");
-                    gc.setFill(Color.BLUE);
-                    gc.fillRect(0,0,400,400);
+                    System.out.println("Drawing Map....");
+                    TileMap map = new TileMap(10,180,80);
+                    map.generateRandomMap(5);
+                    drawMap(gc, map);
 
                 }
             }
         });
+    }
+
+    private void drawMap(GraphicsContext gc, TileMap map) {
+        gc.drawImage(map.getMapAsImage(), 0,0);
     }
 
 
