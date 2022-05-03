@@ -1,6 +1,9 @@
 package edu.ntnu.thosve.formations;
 
 import edu.ntnu.thosve.Army;
+import edu.ntnu.thosve.map.Terrain;
+import edu.ntnu.thosve.map.TileMap;
+import edu.ntnu.thosve.map.TileMapFactory;
 import edu.ntnu.thosve.units.InfantryUnit;
 import edu.ntnu.thosve.units.Unit;
 import org.junit.jupiter.api.Test;
@@ -10,15 +13,16 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FormationTest {
+    private final TileMap testMap = TileMapFactory.getUniformTileMap(Terrain.FOREST, 10, 10, 10);
 
     @Test
     void testRectangleFormationSpreadsUnitsEvenly() {
-        Army army = new Army("Test army");
-        for(int i = 0; i < 6; i++) {
+        Army army = new Army("Test army", testMap);
+        for (int i = 0; i < 6; i++) {
             army.add(new InfantryUnit("Test Unit", 100));
         }
 
-        army.applyFormation(new RectangleFormation(0,0, 200, 100));
+        army.applyFormation(new RectangleFormation(0, 0, 200, 100));
 
         List<Unit> units = army.getAllUnits();
 
@@ -44,8 +48,8 @@ class FormationTest {
 
     @Test
     void testTriangleFormation() {
-        Army army = new Army("Test army");
-        for(int i = 0; i < 100; i++) {
+        Army army = new Army("Test army", testMap);
+        for (int i = 0; i < 100; i++) {
             army.add(new InfantryUnit("Test Unit", 100));
         }
 

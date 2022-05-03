@@ -19,7 +19,7 @@ public class UnitTest {
     @Test
     public void testToStringMethodOfUnit() {
         Unit unit = new InfantryUnit("Unit", 100);
-        assertTrue(!unit.toString().isBlank());
+        assertFalse(unit.toString().isBlank());
     }
 
     @Test
@@ -42,71 +42,6 @@ public class UnitTest {
 
     }
 
-    @Test
-    public void testUnitTargetsClosestOpponent() {
-        InfantryUnit unit = new InfantryUnit("Unit", 100);
-        InfantryUnit opponent1 = new InfantryUnit("Opponent 1 (Closest)", 100);
-        InfantryUnit opponent2 = new InfantryUnit("Opponent 2 (Farthest)", 100);
-        List<Unit> opponents = new ArrayList<Unit>();
-
-        opponent1.setPos(10,10);
-        opponent2.setPos(20, 32);
-
-        opponents.add(opponent1);
-        opponents.add(opponent2);
-
-        unit.targetClosestOpponent(opponents);
-
-
-        // Checking if he is moving diagonally
-        assertEquals(unit.getXSpeed(), unit.getYSpeed());
-
-        //Checking if he is moving the correct diagonal
-        assertTrue(unit.getXSpeed() > 0);
-        assertTrue(unit.getYSpeed() > 0);
-    }
-
-    @Test
-    public void testUnitTargetsClosestOpponentTwo() {
-        InfantryUnit unit = new InfantryUnit("Unit", 100);
-        InfantryUnit opponent1 = new InfantryUnit("Opponent 1 (Closest)", 100);
-        InfantryUnit opponent2 = new InfantryUnit("Opponent 2 (Farthest)", 100);
-        List<Unit> opponents = new ArrayList<Unit>();
-
-        unit.setPos(500,500);
-        opponent1.setPos(100 ,100);
-        opponent2.setPos(600, 600);
-
-        opponents.add(opponent1);
-        opponents.add(opponent2);
-
-        unit.targetClosestOpponent(opponents);
-
-        assertEquals(unit.getCurrentOpponent(), opponent2);
-
-        assertEquals(unit.getXSpeed(), unit.getYSpeed());
-
-        //Checking if he is moving the correct diagonal
-        assertTrue(unit.getXSpeed() > 0);
-        assertTrue(unit.getYSpeed() > 0);
-    }
-
-    @Test
-    public void testUnitMovesAtMaxSpeed() {
-        InfantryUnit unit = new InfantryUnit("Unit", 100);
-        InfantryUnit opponent = new InfantryUnit("Opponent", 100);
-        opponent.setPos(20, 10);
-        List<Unit> opponents = new ArrayList<>();
-        opponents.add(opponent);
-
-        unit.targetClosestOpponent(opponents);
-
-        double speed = Math.sqrt(Math.pow(unit.getXSpeed(), 2) + Math.pow(unit.getYSpeed(), 2));
-        double error = Math.abs((speed - unit.getMaxSpeed()) / unit.getMaxSpeed());
-
-        assertTrue(error <= 0.05);
-    }
-
     @Nested
     class InfantryUnitTest {
 
@@ -118,9 +53,9 @@ public class UnitTest {
             int armor = 8;
             InfantryUnit unit = new InfantryUnit(name, health, attack, armor);
             assertEquals(name, unit.getName());
-            assertEquals(health,  unit.getHealth());
-            assertEquals(attack,  unit.getAttack());
-            assertEquals(armor,  unit.getArmor());
+            assertEquals(health, unit.getHealth());
+            assertEquals(attack, unit.getAttack());
+            assertEquals(armor, unit.getArmor());
         }
 
         @Test
@@ -145,21 +80,21 @@ public class UnitTest {
             int attack = 5;
             int armor = 8;
             RangedUnit unit = new RangedUnit(name, health, attack, armor);
-            assertEquals(name,  unit.getName());
-            assertEquals(health,  unit.getHealth());
-            assertEquals(attack,  unit.getAttack());
-            assertEquals(armor,  unit.getArmor());
+            assertEquals(name, unit.getName());
+            assertEquals(health, unit.getHealth());
+            assertEquals(attack, unit.getAttack());
+            assertEquals(armor, unit.getArmor());
         }
-        
+
         @Test
         public void testSimplifiedCreationOfRangedUnit() {
             String name = "Ranged Unit";
             int health = 100;
             RangedUnit unit = new RangedUnit(name, health);
             assertEquals(name, unit.getName());
-            assertEquals(health,  unit.getHealth());
-            assertEquals(RangedUnit.DEFAULT_ATTACK,  unit.getAttack());
-            assertEquals(RangedUnit.DEFAULT_ARMOR,  unit.getArmor());
+            assertEquals(health, unit.getHealth());
+            assertEquals(RangedUnit.DEFAULT_ATTACK, unit.getAttack());
+            assertEquals(RangedUnit.DEFAULT_ARMOR, unit.getArmor());
         }
     }
 
@@ -173,10 +108,10 @@ public class UnitTest {
             int attack = 5;
             int armor = 8;
             CavalryUnit unit = new CavalryUnit(name, health, attack, armor);
-            assertEquals(name,  unit.getName());
-            assertEquals(health,  unit.getHealth());
-            assertEquals(attack,  unit.getAttack());
-            assertEquals(armor,  unit.getArmor());
+            assertEquals(name, unit.getName());
+            assertEquals(health, unit.getHealth());
+            assertEquals(attack, unit.getAttack());
+            assertEquals(armor, unit.getArmor());
         }
 
         @Test
@@ -184,10 +119,10 @@ public class UnitTest {
             String name = "Cavalry Unit";
             int health = 100;
             CavalryUnit unit = new CavalryUnit(name, health);
-            assertEquals(name,  unit.getName());
-            assertEquals(health,  unit.getHealth());
-            assertEquals(CavalryUnit.DEFAULT_ATTACK,  unit.getAttack());
-            assertEquals(CavalryUnit.DEFAULT_ARMOR,  unit.getArmor());
+            assertEquals(name, unit.getName());
+            assertEquals(health, unit.getHealth());
+            assertEquals(CavalryUnit.DEFAULT_ATTACK, unit.getAttack());
+            assertEquals(CavalryUnit.DEFAULT_ARMOR, unit.getArmor());
         }
 
         @Test
@@ -212,10 +147,10 @@ public class UnitTest {
             int attack = 5;
             int armor = 8;
             CommanderUnit unit = new CommanderUnit(name, health, attack, armor);
-            assertEquals(name,  unit.getName());
-            assertEquals(health,  unit.getHealth());
-            assertEquals(attack,  unit.getAttack());
-            assertEquals(armor,  unit.getArmor());
+            assertEquals(name, unit.getName());
+            assertEquals(health, unit.getHealth());
+            assertEquals(attack, unit.getAttack());
+            assertEquals(armor, unit.getArmor());
         }
 
         @Test
@@ -223,10 +158,10 @@ public class UnitTest {
             String name = "Commander Unit";
             int health = 100;
             CommanderUnit unit = new CommanderUnit(name, health);
-            assertEquals(name,  unit.getName());
-            assertEquals(health,  unit.getHealth());
-            assertEquals(CommanderUnit.DEFAULT_ATTACK,  unit.getAttack());
-            assertEquals(CommanderUnit.DEFAULT_ARMOR,  unit.getArmor());
+            assertEquals(name, unit.getName());
+            assertEquals(health, unit.getHealth());
+            assertEquals(CommanderUnit.DEFAULT_ATTACK, unit.getAttack());
+            assertEquals(CommanderUnit.DEFAULT_ARMOR, unit.getArmor());
         }
 
         @Test
@@ -243,6 +178,4 @@ public class UnitTest {
 
     }
 
-
 }
-

@@ -1,7 +1,7 @@
 package edu.ntnu.thosve.gui;
 
 import javafx.application.Application;
-import javafx.scene.image.Image;
+
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -10,7 +10,7 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         View view = View.getInstance();
         view.setStage(stage);
         view.setCurrentScene(View.OPENING_VIEW);
@@ -19,6 +19,6 @@ public class App extends Application {
     }
 
     private void setAppearance(Stage stage) {
-        stage.setTitle("Wargames");
+        stage.setTitle("War-games");
     }
 }

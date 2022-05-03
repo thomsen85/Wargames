@@ -3,7 +3,7 @@ package edu.ntnu.thosve.units;
 /**
  * Unit that has the ability to attack at range.
  */
-public class RangedUnit extends Unit{
+public class RangedUnit extends Unit {
     public static final int DEFAULT_ATTACK = 15;
     public static final int DEFAULT_ARMOR = 5;
     public static final int DEFAULT_HEALTH = 50;
@@ -16,6 +16,7 @@ public class RangedUnit extends Unit{
 
     /**
      * Constructor for creating an instance of the RangedUnit class.
+     * 
      * @param name
      * @param health
      * @param attack
@@ -26,8 +27,9 @@ public class RangedUnit extends Unit{
     }
 
     /**
-     * A simpler constructor for creating an instance of the RangedUnit class
-     * Note: The attack and armor with be set to its default values. Use the full constructor to change this.
+     * A simpler constructor for creating an instance of the RangedUnit class Note: The attack and armor with be set to
+     * its default values. Use the full constructor to change this.
+     * 
      * @param name
      * @param health
      */
@@ -36,8 +38,9 @@ public class RangedUnit extends Unit{
     }
 
     /**
-     * The simplest constructor for creating an instance of the RangedUnit class
-     * Note: The health, attack and armor with be set to its default values. Use the full constructor to change this.
+     * The simplest constructor for creating an instance of the RangedUnit class Note: The health, attack and armor with
+     * be set to its default values. Use the full constructor to change this.
+     * 
      * @param name
      */
     public RangedUnit(String name) {
@@ -51,6 +54,7 @@ public class RangedUnit extends Unit{
 
     /**
      * Gets the resist bonus.
+     * 
      * @return
      */
     @Override

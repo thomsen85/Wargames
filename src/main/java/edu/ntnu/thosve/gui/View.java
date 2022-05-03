@@ -18,14 +18,16 @@ public class View {
 
     public final static String OPENING_VIEW = "views/game.fxml";
 
-    private View() {}
+    private View() {
+    }
 
     /**
      * Method for getting the instance of the View class.
+     * 
      * @return the instance
      */
     public static synchronized View getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new View();
         }
         return instance;
@@ -33,6 +35,7 @@ public class View {
 
     /**
      * Method for getting the current stage. The stage is the whole window.
+     * 
      * @return the stage.
      */
     public Stage getStage() {
@@ -41,8 +44,11 @@ public class View {
 
     /**
      * Method for setting the stage.
-     * @throws NullPointerException if the stage give is null.
-     * @param stage to be set, cannot be null
+     * 
+     * @throws NullPointerException
+     *             if the stage give is null.
+     * @param stage
+     *            to be set, cannot be null
      */
     public void setStage(Stage stage) {
         Objects.requireNonNull(stage);
@@ -51,6 +57,7 @@ public class View {
 
     /**
      * Method for getting the current set scene.
+     * 
      * @return the scene
      */
     public Scene getCurrentScene() {
@@ -59,8 +66,11 @@ public class View {
 
     /**
      * Method for setting the current scene.
-     * @throws NullPointerException if the scene is null.
-     * @param currentScene to be set, scene can not be {@code null}
+     * 
+     * @throws NullPointerException
+     *             if the scene is null.
+     * @param currentScene
+     *            to be set, scene can not be {@code null}
      */
     public void setCurrentScene(Scene currentScene) {
         this.currentScene = currentScene;
@@ -69,7 +79,9 @@ public class View {
 
     /**
      * Sets the current scene, it is preferred to use the static constants in this class.
-     * @param path to FXML file
+     * 
+     * @param path
+     *            to FXML file
      */
     public void setCurrentScene(String path) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));

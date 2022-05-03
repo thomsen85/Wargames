@@ -21,8 +21,9 @@ public class CommanderUnit extends CavalryUnit {
     }
 
     /**
-     * A simpler constructor for creating an instance of the CommanderUnit class
-     * Note: The attack and armor with be set to its default values. Use the full constructor to change this.
+     * A simpler constructor for creating an instance of the CommanderUnit class Note: The attack and armor with be set
+     * to its default values. Use the full constructor to change this.
+     * 
      * @param name
      * @param health
      */
@@ -31,8 +32,9 @@ public class CommanderUnit extends CavalryUnit {
     }
 
     /**
-     * The simplest constructor for creating an instance of the CommanderUnit class
-     * Note: The health, attack and armor with be set to its default values. Use the full constructor to change this.
+     * The simplest constructor for creating an instance of the CommanderUnit class Note: The health, attack and armor
+     * with be set to its default values. Use the full constructor to change this.
+     * 
      * @param name
      */
     public CommanderUnit(String name) {

@@ -1,13 +1,11 @@
 package edu.ntnu.thosve.gui;
 
-
 import edu.ntnu.thosve.Battle;
 
 import java.util.Objects;
 
 /**
- * Singleton class which holds the model data.
- * To get the object use
+ * Singleton class which holds the model data. To get the object use
  */
 public class Models {
     private static Models instance;
@@ -17,14 +15,16 @@ public class Models {
     /**
      * Private constructor for maintaining a singleton design pattern.
      */
-    private Models() {}
+    private Models() {
+    }
 
     /**
      * Method for getting the instance of the Models class. Only one of the
+     * 
      * @return the instance
      */
     public static synchronized Models getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new Models();
         }
         return instance;
@@ -32,6 +32,7 @@ public class Models {
 
     /**
      * Method for getting the current battle.
+     * 
      * @return the battle
      */
     public Battle getCurrentBattle() {
@@ -40,8 +41,11 @@ public class Models {
 
     /**
      * Method for setting the current battle.
-     * @throws NullPointerException if null is given.
-     * @param currentBattle battle to be set. Can not be null.
+     * 
+     * @throws NullPointerException
+     *             if null is given.
+     * @param currentBattle
+     *            battle to be set. Can not be null.
      *
      */
     public void setCurrentBattle(Battle currentBattle) {

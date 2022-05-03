@@ -6,7 +6,7 @@ package edu.ntnu.thosve.units;
  *
  * This unit has a tiny advantage with +1 resist bonus on when getting attacked
  */
-public class CavalryUnit extends Unit{
+public class CavalryUnit extends Unit {
     public static final int DEFAULT_ATTACK = 20;
     public static final int DEFAULT_ARMOR = 20;
     public static final int DEFAULT_HEALTH = 150;
@@ -22,6 +22,7 @@ public class CavalryUnit extends Unit{
 
     /**
      * Constructor for creating an instance of the CavalryUnit.
+     * 
      * @param name
      * @param health
      * @param attack
@@ -32,8 +33,9 @@ public class CavalryUnit extends Unit{
     }
 
     /**
-     * A simpler constructor for creating an instance of the CavalryUnit class
-     * Note: The attack and armor with be set to its default values. Use the full constructor to change this.
+     * A simpler constructor for creating an instance of the CavalryUnit class Note: The attack and armor with be set to
+     * its default values. Use the full constructor to change this.
+     * 
      * @param name
      * @param health
      */
@@ -42,8 +44,9 @@ public class CavalryUnit extends Unit{
     }
 
     /**
-     * The simplest constructor for creating an instance of the CavalryUnit class
-     * Note: The health, attack and armor with be set to its default values. Use the full constructor to change this.
+     * The simplest constructor for creating an instance of the CavalryUnit class Note: The health, attack and armor
+     * with be set to its default values. Use the full constructor to change this.
+     * 
      * @param name
      */
     public CavalryUnit(String name) {
@@ -51,8 +54,9 @@ public class CavalryUnit extends Unit{
     }
 
     /**
-     * Gets the attackBouns of the Unit. The Unit will have a first strike which will deal an extra 4 damage.
-     * After it has attacked it will go back to dealing 2 bonus damage.
+     * Gets the attackBouns of the Unit. The Unit will have a first strike which will deal an extra 4 damage. After it
+     * has attacked it will go back to dealing 2 bonus damage.
+     * 
      * @return
      */
     @Override

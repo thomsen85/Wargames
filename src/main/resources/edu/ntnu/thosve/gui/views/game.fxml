@@ -11,12 +11,12 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.thosve.gui.controllers.GameController">
+<BorderPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.thosve.gui.controllers.GameController">
    <center>
       <Canvas fx:id="canvas" height="881.0" width="1920.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <GridPane prefHeight="200.0" style="-fx-background-color: #ddd;" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="200.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="10.0" />
@@ -32,7 +32,6 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -41,23 +40,22 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <FontIcon iconLiteral="cil-caret-top" iconSize="32" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <FontIcon iconLiteral="cil-caret-top" iconSize="32" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Label fx:id="army1Label" text="ARMY 1 NAME" GridPane.columnSpan="4" GridPane.halignment="CENTER">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
                   <ProgressBar fx:id="army1HealthBar" prefHeight="35.0" prefWidth="524.0" progress="0.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#army1AddUnits" text="Add units" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onAction="#army1RemoveUnit" text="Remove unit" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onAction="#army1ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onAction="#army1SaveArmy" text="Save army" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" onAction="#army1LoadArmy" text="Load army" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#army1AddUnits" text="Add units" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#army1RemoveUnit" text="Remove unit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#army1ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#army1SaveArmy" text="Save army" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#army1LoadArmy" text="Load army" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
             <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -70,21 +68,21 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <FontIcon iconLiteral="cil-caret-top" iconSize="32" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <FontIcon iconLiteral="cil-caret-top" iconSize="32" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Label fx:id="army2Label" text="ARMY 2 NAME" GridPane.columnSpan="4" GridPane.halignment="CENTER">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Label>
                   <ProgressBar fx:id="army2HealthBar" prefHeight="35.0" prefWidth="524.0" progress="0.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#army2AddUnits" text="Add units" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onAction="#army2RemoveUnit" text="Remove unit" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onAction="#army2ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onAction="#army2SaveArmy" text="Save army" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" onAction="#army2LoadArmy" text="Load army" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" onAction="#army2AddUnits" text="Add units" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#army2RemoveUnit" text="Remove unit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#army2ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#army2SaveArmy" text="Save army" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#army2LoadArmy" text="Load army" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
-            <GridPane style="-fx-background-color: #aaa;" GridPane.columnIndex="1">
+            <GridPane GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -1,5 +1,7 @@
 package edu.ntnu.thosve.units;
 
+import edu.ntnu.thosve.map.Terrain;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,20 +20,27 @@ public abstract class Unit {
     private double ySpeed;
 
     private Unit currentOpponent;
+    private Terrain currentTerrain;
 
     /**
      * Constructor
-     * @param name of the unit
-     * @param health of the unit
-     * @param attack damage for the unit
-     * @param armor amount for the unit.
+     * 
+     * @param name
+     *            of the unit
+     * @param health
+     *            of the unit
+     * @param attack
+     *            damage for the unit
+     * @param armor
+     *            amount for the unit.
      * @throws IllegalArgumentException
+     *             if arguments are wrong.
      */
-    public Unit(String name, double health, int attack, int armor) throws IllegalArgumentException{
+    public Unit(String name, double health, int attack, int armor) throws IllegalArgumentException {
         if (name.isBlank()) {
-           throw new IllegalArgumentException("Name can not be blank");
+            throw new IllegalArgumentException("Name can not be blank");
         }
-        if (health <= 0 ) {
+        if (health <= 0) {
             throw new IllegalArgumentException("Health can not be less then or equal to zero");
         }
         if (attack < 0) {
@@ -53,9 +62,11 @@ public abstract class Unit {
     }
 
     /**
-     * Method for attacking another given Unit. It is calculated in the following way:
-     * health_opponent - (attack + attackBonus)_this + (armor + resistBonus)_opponent
-     * @param opponent which is being attacked.
+     * Method for attacking another given Unit. It is calculated in the following way: health_opponent - (attack +
+     * attackBonus)_this + (armor + resistBonus)_opponent
+     * 
+     * @param opponent
+     *            which is being attacked.
      */
     public void attack(Unit opponent) {
         int attackDamage = this.getAttack() + this.getAttackBonus();
@@ -68,9 +79,11 @@ public abstract class Unit {
     }
 
     /**
-     * Method for attacking another given Unit. It is calculated in the following way:
-     * health_opponent - (attack + attackBonus)_this + (armor + resistBonus)_opponent
-     * @param opponent which is being attacked.
+     * Method for attacking another given Unit. It is calculated in the following way: health_opponent - (attack +
+     * attackBonus)_this + (armor + resistBonus)_opponent
+     * 
+     * @param opponent
+     *            which is being attacked.
      */
     public void attack(Unit opponent, double deltaTime) {
         int attackDamage = this.getAttack() + this.getAttackBonus();
@@ -83,83 +96,12 @@ public abstract class Unit {
     }
 
     /**
-     * Method for getting the distance to a spesified Unit
-     * @param unit
-     * @return distance to Unit
-     */
-    private double getDistanceTo(Unit unit) {
-        return Math.sqrt(Math.pow(unit.x - this.x, 2) + Math.pow(unit.y - this.y, 2));
-    }
-
-    /**
-     * Finds the closes Unit by distance given an list of opponents
-     * @param opponents
-     * @return closest Unit
-     */
-    private Unit findClosestOpponent(List<Unit> opponents) {
-        return opponents.stream().min(Comparator.comparingDouble(this::getDistanceTo)).get();
-    }
-
-    /**
-     * Method for setting x and y speed to point to given unit.
-     * @param unit
-     */
-    private void moveToUnit(Unit unit) {
-        double xVec = unit.getX() - this.getX();
-        double yVec = unit.getY() - this.getY();
-
-        double length = Math.sqrt(Math.pow(xVec, 2) + Math.pow(yVec, 2));
-
-        double xVecNormalized = xVec / length;
-        double yVecNormalized = yVec / length;
-
-        this.setXSpeed(xVecNormalized * this.getMaxSpeed());
-        this.setYSpeed(yVecNormalized * this.getMaxSpeed());
-    }
-
-    /**
-     * Method that will make the unit target the closest opponent. This will change it movement direction to move to
-     * the closest opponent
-     * @param opponents list of all the opponents.
-     */
-    public void targetClosestOpponent(List<Unit> opponents) {
-        Unit closestOpponent = findClosestOpponent(opponents);
-        this.currentOpponent = closestOpponent;
-        moveToUnit(closestOpponent);
-    }
-
-    /**
-     * Method for updating the unit. If a opponent is within attacking range it will attack, if not it will
-     * update the position of the unit based on the current speed.
-     */
-    public void update() {
-        if (getDistanceTo(currentOpponent) <= getAttackRadius()) {
-            attack(currentOpponent);
-        } else {
-            x += xSpeed;
-            y += ySpeed;
-        }
-    }
-
-    /**
-     * Method for updating the unit. If a opponent is within attacking range it will attack, if not it will
-     * update the position of the unit based on the current speed.
-     */
-    public void update(double deltaTime) {
-        if (currentOpponent != null) {
-            if (getDistanceTo(currentOpponent) <= getAttackRadius()) {
-                attack(currentOpponent, deltaTime);
-            } else {
-                x += xSpeed * deltaTime;
-                y += ySpeed * deltaTime;
-            }
-        }
-    }
-
-    /**
      * Short form for setting the position of the Unit.
-     * @param x coordinate
-     * @param y coordinate
+     * 
+     * @param x
+     *            coordinate
+     * @param y
+     *            coordinate
      */
     public void setPos(double x, double y) {
         setX(x);
@@ -182,7 +124,6 @@ public abstract class Unit {
         this.y = y;
     }
 
-
     public double getXSpeed() {
         return xSpeed;
     }
@@ -201,6 +142,7 @@ public abstract class Unit {
 
     /**
      * Gets the name of the Unit.
+     * 
      * @return name
      */
     public String getName() {
@@ -209,6 +151,7 @@ public abstract class Unit {
 
     /**
      * Gives the <b>current</b> health of the Unit.
+     * 
      * @return health
      */
     public double getHealth() {
@@ -217,6 +160,7 @@ public abstract class Unit {
 
     /**
      * Gets the attack attribute of the Unit.
+     * 
      * @return attack
      */
     public int getAttack() {
@@ -225,6 +169,7 @@ public abstract class Unit {
 
     /**
      * Get the armor attribute of the Unit.
+     * 
      * @return armor
      */
     public int getArmor() {
@@ -232,15 +177,8 @@ public abstract class Unit {
     }
 
     /**
-     * Returns the closest opponent that the unit has, given it has been updated with targetClosestOpponent()
-     * @return currentOpponent
-     */
-    public Unit getCurrentOpponent() {
-        return currentOpponent;
-    }
-
-    /**
      * Sets the health of the Unit.
+     * 
      * @param health
      */
     public void setHealth(double health) {
@@ -248,41 +186,69 @@ public abstract class Unit {
     }
 
     /**
+     * Method for getting the current terrain of the player, given that the terrain is set.
+     * 
+     * @return the terrain
+     */
+    public Terrain getCurrentTerrain() {
+        return currentTerrain;
+    }
+
+    /**
+     * Method for setting the current terrain that the player is on, this is needed for bonus calculations.
+     * 
+     * @param currentTerrain
+     *            to be set.
+     */
+    public void setCurrentTerrain(Terrain currentTerrain) {
+        this.currentTerrain = currentTerrain;
+    }
+
+    public Unit getCurrentOpponent() {
+        return currentOpponent;
+    }
+
+    public void setCurrentOpponent(Unit currentOpponent) {
+        this.currentOpponent = currentOpponent;
+    }
+
+    /**
      * Gets a String representation of the Unit.
+     * 
      * @return a string
      */
     @Override
     public String toString() {
-        return "Unit: " + name +
-                "\n\t- HP: " + health +
-                "\n\t- Attack: " + attack +
-                "\n\t- Armor: " + armor +
-                "\n\t- Pos: (" + x + ", " + y + ")";
+        return "Unit: " + name + "\n\t- HP: " + health + "\n\t- Attack: " + attack + "\n\t- Armor: " + armor
+                + "\n\t- Pos: (" + x + ", " + y + ")";
     }
 
     /**
      * Gets the <b>current</b> attack bonus of the Unit
+     * 
      * @return AttackBouns
      */
     public abstract int getAttackBonus();
 
     /**
      * Gets the <b>current</b> resist bonus of the Unit
+     * 
      * @return ResistBonus
      */
     public abstract int getResistBonus();
 
     /**
      * Gets the max speed of the unit
+     * 
      * @return
      */
     public abstract int getMaxSpeed();
 
     /**
      * Gets the radius of which a unit can conflict damage to another unit.
+     * 
      * @return
      */
     public abstract int getAttackRadius();
-
 
 }

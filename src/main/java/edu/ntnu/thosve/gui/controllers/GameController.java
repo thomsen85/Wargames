@@ -1,7 +1,10 @@
 package edu.ntnu.thosve.gui.controllers;
 
+import edu.ntnu.thosve.gui.Models;
 import edu.ntnu.thosve.map.Tile;
 import edu.ntnu.thosve.map.TileMap;
+import edu.ntnu.thosve.map.TileMapFactory;
+import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -18,6 +21,8 @@ import javafx.scene.paint.Paint;
  * WIP class. Not Yet implemented.
  */
 public class GameController {
+    Models models = Models.getInstance();
+
     @FXML
     private Label army1Label;
     @FXML
@@ -36,28 +41,24 @@ public class GameController {
      */
     public void initialize() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        window.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                System.out.println(keyEvent.getCode());
-                if (keyEvent.getCode().equals(KeyCode.G)) {
-                    System.out.println("Drawing Map....");
-                    TileMap map = new TileMap(10,180,80);
-                    map.generateRandomMap(5);
-                    drawMap(gc, map);
-
-                }
+        window.setOnKeyPressed(keyEvent -> {
+            System.out.println(keyEvent.getCode());
+            if (keyEvent.getCode().equals(KeyCode.G)) {
+                System.out.println("Drawing Map...");
+                TileMap map = TileMapFactory.getRandomTerrainMap(25, 3, 180 * 4, 80 * 4);
+                drawMap(gc, map);
             }
         });
     }
 
     private void drawMap(GraphicsContext gc, TileMap map) {
-        gc.drawImage(map.getMapAsImage(), 0,0);
+        gc.drawImage(map.getMapAsImage(), 0, 0);
     }
-
 
     @FXML
     private void simulate() {
+        // TODO: Checks
+
 
     }
 
@@ -70,7 +71,6 @@ public class GameController {
     private void army2AddUnits() {
 
     }
-
 
     @FXML
     private void army1RemoveUnit() {
@@ -111,7 +111,4 @@ public class GameController {
     private void army2LoadArmy() {
 
     }
-
-
-
 }

@@ -1,22 +1,26 @@
 package edu.ntnu.thosve;
 
-import edu.ntnu.thosve.units.Unit;
+import edu.ntnu.thosve.map.TileMap;
 
 /**
  * Class for managing Two armies.
  */
 public class Battle {
-    private Army armyOne;
-    private Army armyTwo;
+    private final Army armyOne;
+    private final Army armyTwo;
 
     /**
      * Constructor for creating an instance of the Battle.
+     * 
      * @param armyOne
      * @param armyTwo
      */
-    public Battle(Army armyOne, Army armyTwo) {
+    public Battle(Army armyOne, Army armyTwo, TileMap tileMap) {
         this.armyOne = armyOne;
         this.armyTwo = armyTwo;
+
+        this.armyOne.setTileMap(tileMap);
+        this.armyTwo.setTileMap(tileMap);
     }
 
     public Army simulate() {
@@ -31,7 +35,7 @@ public class Battle {
         return armyOne.hasUnits() ? armyOne : armyTwo;
     }
 
-    public boolean manualSimulate(double deltaTime) {
+    public boolean simulateStep(double deltaTime) {
         armyOne.update(armyTwo, deltaTime);
         if (!armyOne.hasUnits()) {
             return false;
@@ -42,9 +46,6 @@ public class Battle {
 
     @Override
     public String toString() {
-        return "Battle{" +
-                "armyOne=" + armyOne +
-                ", armyTwo=" + armyTwo +
-                '}';
+        return "Battle{" + "armyOne=" + armyOne + ", armyTwo=" + armyTwo + '}';
     }
 }

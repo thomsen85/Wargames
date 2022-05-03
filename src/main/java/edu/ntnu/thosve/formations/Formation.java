@@ -18,19 +18,26 @@ public abstract class Formation {
 
     /**
      * Constructor for creating an instance of The Formation Class.
-     * @param xBottomLeft x-coordinate of bottom left corner.
-     * @param yBottomLeft y-coordinate of bottom left corner.
-     * @param xTopRight x-coordinate of top right corner.
-     * @param yTopRight y-coordinate of top right corner.
+     * 
+     * @param xBottomLeft
+     *            x-coordinate of bottom left corner.
+     * @param yBottomLeft
+     *            y-coordinate of bottom left corner.
+     * @param xTopRight
+     *            x-coordinate of top right corner.
+     * @param yTopRight
+     *            y-coordinate of top right corner.
      */
     public Formation(int xBottomLeft, int yBottomLeft, int xTopRight, int yTopRight) {
         if (xBottomLeft >= xTopRight) {
-            throw new IllegalArgumentException("Arguments must form valid rectangle, x-axis of top right corner must be a " +
-                    "larger value than the x-axis of the bottom left corner");
+            throw new IllegalArgumentException(
+                    "Arguments must form valid rectangle, x-axis of top right corner must be a "
+                            + "larger value than the x-axis of the bottom left corner");
         }
         if (yBottomLeft >= yTopRight) {
-            throw new IllegalArgumentException("Arguments must form valid rectangle, y-axis of top right corner must be a " +
-                    "larger value than the y-axis of the bottom left corner");
+            throw new IllegalArgumentException(
+                    "Arguments must form valid rectangle, y-axis of top right corner must be a "
+                            + "larger value than the y-axis of the bottom left corner");
         }
         this.xBottomLeft = xBottomLeft;
         this.yBottomLeft = yBottomLeft;
@@ -43,7 +50,9 @@ public abstract class Formation {
 
     /**
      * Method for spreading the units evenly across the given area.
-     * @param units to be spread
+     * 
+     * @param units
+     *            to be spread
      */
     public abstract void spreadUnits(List<Unit> units);
 }

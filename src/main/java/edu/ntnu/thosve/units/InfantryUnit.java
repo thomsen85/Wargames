@@ -14,10 +14,9 @@ public class InfantryUnit extends Unit {
     public static final int MAX_SPEED = 25;
     public static final int ATTACK_RADIUS = 10;
 
-
-
     /**
      * Constructor for creating an instance of the InfantryUnit class.
+     * 
      * @param name
      * @param health
      * @param attack
@@ -28,8 +27,9 @@ public class InfantryUnit extends Unit {
     }
 
     /**
-     * A simpler constructor for creating an instance of the InfantryUnit class
-     * Note: The attack and armor with be set to its default values. Use the full constructor to change this.
+     * A simpler constructor for creating an instance of the InfantryUnit class Note: The attack and armor with be set
+     * to its default values. Use the full constructor to change this.
+     * 
      * @param name
      * @param health
      */
@@ -38,8 +38,9 @@ public class InfantryUnit extends Unit {
     }
 
     /**
-     * The simplest constructor for creating an instance of the InfantryUnit class
-     * Note: The health, attack and armor with be set to its default values. Use the full constructor to change this.
+     * The simplest constructor for creating an instance of the InfantryUnit class Note: The health, attack and armor
+     * with be set to its default values. Use the full constructor to change this.
+     * 
      * @param name
      */
     public InfantryUnit(String name) {
@@ -50,10 +51,12 @@ public class InfantryUnit extends Unit {
     public int getAttackBonus() {
         return ATTACK_BONUS;
     }
+
     @Override
     public int getResistBonus() {
         return RESIST_BONUS;
     }
+
     @Override
     public int getMaxSpeed() {
         return MAX_SPEED;

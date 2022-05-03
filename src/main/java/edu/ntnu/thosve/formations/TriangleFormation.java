@@ -18,18 +18,18 @@ public class TriangleFormation extends Formation {
             throw new IllegalStateException("List of units can not be empty");
         }
 
-        int columnsAndRows = (int) Math.ceil((-1 + Math.sqrt(1 + 8*units.size()))/2);
+        int columnsAndRows = (int) Math.ceil((-1 + Math.sqrt(1 + 8 * units.size())) / 2);
         double columnWidth = this.width / columnsAndRows;
         double rowWidth = this.height / columnsAndRows;
         int currentColumn = 1;
         int currentRow = 1;
 
-        for(int i = 0; i < units.size(); i++) {
+        for (int i = 0; i < units.size(); i++) {
             if (currentRow > currentColumn) {
                 currentRow = 1;
                 currentColumn += 1;
             } else {
-                units.get(i).setPos(1,1);
+                units.get(i).setPos(1, 1);
             }
         }
     }

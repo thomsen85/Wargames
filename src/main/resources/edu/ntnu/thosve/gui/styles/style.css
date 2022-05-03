@@ -1,0 +1,43 @@
+* {
+    -fx-color-button: #414141;
+    -fx-color-background: #565656;
+    -fx-color-text: #fff;
+    -fx-font-size: 1.1em;
+    -fx-font-family: "Roboto Mono for Powerline";
+}
+
+.label {
+    -fx-text-fill: -fx-color-text;
+    -fx-text-alignment: center;
+    -fx-font-size: 24px;
+}
+
+.button {
+    -fx-outline: none;
+    -fx-font-size: 1em;
+    -fx-line-height: 1;
+    -fx-pref-width: 8em;
+
+
+    -fx-background-color: -fx-color-button;
+    -fx-text-fill: -fx-color-text;
+    -fx-border-color: -fx-color-button;
+
+    -fx-padding: 10;
+}
+
+.button:hover{
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+
+
+.progress-bar > .track  {
+    -fx-background-color: -fx-color-button;
+}
+
+GridPane {
+    -fx-background-color: -fx-color-background;
+    -fx-border-color: black;
+}
