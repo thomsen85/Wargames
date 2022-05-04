@@ -1,4 +1,4 @@
-package edu.ntnu.thosve.units;
+package edu.ntnu.thosve.models.units;
 
 /**
  * Cavalry Units are slightly stronger units with a charge attack on their first attack, it will deal 4+2 bonus damage,

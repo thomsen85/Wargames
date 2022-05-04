@@ -84,7 +84,7 @@
             </GridPane>
             <GridPane GridPane.columnIndex="1">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
@@ -98,23 +98,31 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <GridPane GridPane.rowIndex="1">
+                  <GridPane prefWidth="250.0" style="-fx-border-color: transparent;" GridPane.rowIndex="1">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <FontIcon iconLiteral="cil-media-skip-forward" iconSize="32" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
-                        <Label text="1x" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#onDecreaseSpeed" style="-fx-background-radius: 50%; -fx-border-radius: 50%;">
+                           <graphic>
+                              <FontIcon iconLiteral="cil-media-skip-backward" iconSize="32" />
+                           </graphic>
+                        </Button>
+                        <Label fx:id="speedIndicator" text="1.00x" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <FontIcon iconLiteral="cil-media-step-backward" iconSize="32" layoutX="26.0" layoutY="60.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#onIncreaseSpeed" style="-fx-background-radius: 50%; -fx-border-radius: 50%;" GridPane.columnIndex="2">
+                           <graphic>
+                              <FontIcon iconLiteral="cil-media-skip-forward" iconSize="32" />
+                           </graphic>
+                        </Button>
                      </children>
                   </GridPane>
                   <FontIcon iconLiteral="cil-media-play" iconSize="32" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />

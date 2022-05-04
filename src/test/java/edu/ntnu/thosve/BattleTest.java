@@ -4,11 +4,10 @@ import edu.ntnu.thosve.formations.RectangleFormation;
 import edu.ntnu.thosve.map.Terrain;
 import edu.ntnu.thosve.map.TileMap;
 import edu.ntnu.thosve.map.TileMapFactory;
-import edu.ntnu.thosve.units.InfantryUnit;
-import edu.ntnu.thosve.units.Unit;
+import edu.ntnu.thosve.models.Army;
+import edu.ntnu.thosve.models.Battle;
+import edu.ntnu.thosve.models.units.InfantryUnit;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

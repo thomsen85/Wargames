@@ -1,4 +1,4 @@
-package edu.ntnu.thosve.units;
+package edu.ntnu.thosve.models.units;
 
 import java.util.ArrayList;
 import java.util.List;

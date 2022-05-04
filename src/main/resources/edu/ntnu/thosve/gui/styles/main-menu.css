@@ -1,0 +1,24 @@
+BorderPane {
+    -fx-background-image: url('../images/background.jpg');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+GridPane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+GridPane > .button {
+    -fx-font-size: 42px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 15, 0, 0, 5);
+}
+
+#menu {
+    -fx-background-image: url('../images/paper-background.jpg');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-radius: 25px;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 50, 0, 0, 10);
+}

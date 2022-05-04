@@ -1,21 +1,17 @@
-package edu.ntnu.thosve;
+package edu.ntnu.thosve.models;
 
 import edu.ntnu.thosve.formations.Formation;
 import edu.ntnu.thosve.map.Terrain;
-import edu.ntnu.thosve.map.Tile;
 import edu.ntnu.thosve.map.TileMap;
-import edu.ntnu.thosve.units.*;
-import javafx.application.Platform;
+import edu.ntnu.thosve.models.units.*;
 
 import java.io.*;
-import java.lang.reflect.Executable;
-import java.text.ParseException;
 import java.util.*;
 
 /**
  * Class for holding an Army of different types of Units.
  */
-public class Army {
+public class Army implements Serializable{
     private final String name;
     private final List<Unit> units;
 

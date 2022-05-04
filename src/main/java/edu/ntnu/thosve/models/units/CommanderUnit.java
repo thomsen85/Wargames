@@ -1,4 +1,4 @@
-package edu.ntnu.thosve.units;
+package edu.ntnu.thosve.models.units;
 
 /**
  * A CommanderUnit is one of the strongest units. It shares a lot of attributes with the Cavalry unit.

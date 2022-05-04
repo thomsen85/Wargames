@@ -3,7 +3,7 @@
     -fx-color-background: #565656;
     -fx-color-text: #fff;
     -fx-font-size: 1.1em;
-    -fx-font-family: "Roboto Mono for Powerline";
+    -fx-font-family: "Hoefler Text" ;
 }
 
 .label {
@@ -21,7 +21,8 @@
 
     -fx-background-color: -fx-color-button;
     -fx-text-fill: -fx-color-text;
-    -fx-border-color: -fx-color-button;
+    -fx-border-color: transparent;
+
 
     -fx-padding: 10;
 }

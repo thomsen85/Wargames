@@ -4,12 +4,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Class for holding multiple terrains in "tiles". The amount of tiles can be customized, but a tile must be square.
  */
-public class TileMap {
+public class TileMap implements Serializable {
     private final Tile[][] tiles;
 
     private final int tilePixelSize;

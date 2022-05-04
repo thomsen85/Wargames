@@ -1,11 +1,11 @@
 package edu.ntnu.thosve.formations;
 
-import edu.ntnu.thosve.Army;
+import edu.ntnu.thosve.models.units.Army;
 import edu.ntnu.thosve.map.Terrain;
 import edu.ntnu.thosve.map.TileMap;
 import edu.ntnu.thosve.map.TileMapFactory;
-import edu.ntnu.thosve.units.InfantryUnit;
-import edu.ntnu.thosve.units.Unit;
+import edu.ntnu.thosve.models.units.InfantryUnit;
+import edu.ntnu.thosve.models.units.Unit;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

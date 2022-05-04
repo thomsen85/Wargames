@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Objects;
 
 /**
@@ -16,7 +17,10 @@ public class View {
     private Stage stage;
     private Scene currentScene;
 
-    public final static String OPENING_VIEW = "views/game.fxml";
+    public final static String GAME_VIEW = "views/game.fxml";
+    public final static String MAIN_MENU_VIEW = "views/main-menu.fxml";
+    public final static String NEW_GAME_VIEW = "views/new-game.fxml";
+
 
     private View() {
     }
@@ -89,7 +93,7 @@ public class View {
         try {
             this.currentScene = new Scene(fxmlLoader.load());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
             // throw new IllegalArgumentException("Path must be valid path");
         }
         updateStage();
@@ -100,5 +104,10 @@ public class View {
      */
     private void updateStage() {
         this.stage.setScene(this.currentScene);
+    }
+
+    public void quit() {
+        stage.close();
+        System.exit(0);
     }
 }

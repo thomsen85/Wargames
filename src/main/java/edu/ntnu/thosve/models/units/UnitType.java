@@ -1,4 +1,4 @@
-package edu.ntnu.thosve.units;
+package edu.ntnu.thosve.models.units;
 
 public enum UnitType {
     CAVALRY_UNIT("Cavalry Unit"), COMMANDER_UNIT("Commander Unit"), INFANTRY_UNIT("Infantry Unit"), RANGED_UNIT(

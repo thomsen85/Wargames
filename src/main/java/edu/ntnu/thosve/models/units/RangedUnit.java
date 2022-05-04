@@ -1,4 +1,4 @@
-package edu.ntnu.thosve.units;
+package edu.ntnu.thosve.models.units;
 
 /**
  * Unit that has the ability to attack at range.

@@ -1,5 +1,6 @@
 package edu.ntnu.thosve.units;
 
+import edu.ntnu.thosve.models.units.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

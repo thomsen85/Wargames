@@ -1,6 +1,6 @@
 package edu.ntnu.thosve.formations;
 
-import edu.ntnu.thosve.units.Unit;
+import edu.ntnu.thosve.models.units.Unit;
 
 import java.util.List;
 

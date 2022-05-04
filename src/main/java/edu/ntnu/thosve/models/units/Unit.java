@@ -1,14 +1,13 @@
-package edu.ntnu.thosve.units;
+package edu.ntnu.thosve.models.units;
 
 import edu.ntnu.thosve.map.Terrain;
 
-import java.util.Comparator;
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * Abstract class for a Unit.
  */
-public abstract class Unit {
+public abstract class Unit implements Serializable {
     private final String name;
     private double health;
     private final int attack;

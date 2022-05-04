@@ -1,6 +1,6 @@
 package edu.ntnu.thosve.gui;
 
-import edu.ntnu.thosve.Battle;
+import edu.ntnu.thosve.models.Battle;
 
 import java.util.Objects;
 

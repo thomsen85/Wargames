@@ -13,12 +13,12 @@ public class App extends Application {
     public void start(Stage stage) {
         View view = View.getInstance();
         view.setStage(stage);
-        view.setCurrentScene(View.OPENING_VIEW);
+        view.setCurrentScene(View.MAIN_MENU_VIEW);
         setAppearance(stage);
         stage.show();
     }
 
     private void setAppearance(Stage stage) {
-        stage.setTitle("War-games");
+        stage.setTitle("Wargames");
     }
 }
