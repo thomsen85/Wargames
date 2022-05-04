@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * Class for holding an Army of different types of Units.
  */
-public class Army implements Serializable{
+public class Army implements Serializable {
     private final String name;
     private final List<Unit> units;
 

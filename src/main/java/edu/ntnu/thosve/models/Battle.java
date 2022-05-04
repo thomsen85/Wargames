@@ -16,9 +16,12 @@ public class Battle implements Serializable {
     /**
      * Constructor for creating an instance of the Battle.
      * 
-     * @param armyOne first army, does not need to contain tileMap
-     * @param armyTwo second army, does not need to contain tileMap
-     * @param tileMap map that battle is placed on.
+     * @param armyOne
+     *            first army, does not need to contain tileMap
+     * @param armyTwo
+     *            second army, does not need to contain tileMap
+     * @param tileMap
+     *            map that battle is placed on.
      */
     public Battle(Army armyOne, Army armyTwo, TileMap tileMap) {
         this.armyOne = armyOne;
@@ -42,7 +45,8 @@ public class Battle implements Serializable {
 
     /**
      *
-     * @param deltaTime in seconds
+     * @param deltaTime
+     *            in seconds
      * @return false if on army is empty of units.
      */
     public boolean simulateStep(double deltaTime) {
@@ -70,7 +74,7 @@ public class Battle implements Serializable {
      */
     public void reset() {
         File tempFile = new File(RESET_FILE);
-        if ( !tempFile.exists()) {
+        if (!tempFile.exists()) {
             throw new IllegalStateException("Reset point must be set first.");
         }
 

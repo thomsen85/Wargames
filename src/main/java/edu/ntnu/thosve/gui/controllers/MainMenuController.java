@@ -23,9 +23,8 @@ public class MainMenuController {
      */
     public void initialize() {
         logo.fitWidthProperty().bind(logoParent.widthProperty());
-        borderPane.widthProperty().addListener((observableValue, number, t1) ->
-                borderPane.setStyle("-fx-font: " + observableValue.getValue().intValue()/40 +  " \"Hoefler Text\"")
-        );
+        borderPane.widthProperty().addListener((observableValue, number, t1) -> borderPane
+                .setStyle("-fx-font: " + observableValue.getValue().intValue() / 40 + " \"Hoefler Text\""));
     }
 
     @FXML

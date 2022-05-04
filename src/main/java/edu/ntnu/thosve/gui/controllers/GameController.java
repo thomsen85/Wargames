@@ -40,14 +40,12 @@ public class GameController {
     @FXML
     private Label speedIndicator;
 
-
     private boolean simulationRunning = false;
     private final GameLoop gameLoop;
     private TileMap map;
     private Image mapImage;
     private double fps = 0;
     private double speedMultiplier = 1;
-
 
     private class GameLoop extends AnimationTimer {
 
@@ -74,7 +72,9 @@ public class GameController {
 
     /**
      * Gets called by the game controller before draw
-     * @param deltaTime in seconds
+     * 
+     * @param deltaTime
+     *            in seconds
      */
     private void update(double deltaTime) {
         fps = 1 / deltaTime;
@@ -98,7 +98,6 @@ public class GameController {
         updateHealthbars();
     }
 
-
     private void updateHealthbars() {
 
     }
@@ -117,7 +116,7 @@ public class GameController {
     }
 
     private void drawFPSCounter(GraphicsContext gc) {
-        gc.fillText("%.1f".formatted(fps), canvas.getWidth()/2, canvas.getHeight()/2);
+        gc.fillText("%.1f".formatted(fps), canvas.getWidth() / 2, canvas.getHeight() / 2);
     }
 
     /**
@@ -133,8 +132,8 @@ public class GameController {
         Army armyOne = new Army("Army 1");
         Army armyTwo = new Army("Army 2");
 
-        armyOne.addAll(UnitFactory.getUnits(UnitType.INFANTRY_UNIT,100, "Unit1", 100d));
-        armyTwo.addAll(UnitFactory.getUnits(UnitType.INFANTRY_UNIT,150, "Unit2", 80d));
+        armyOne.addAll(UnitFactory.getUnits(UnitType.INFANTRY_UNIT, 100, "Unit1", 100d));
+        armyTwo.addAll(UnitFactory.getUnits(UnitType.INFANTRY_UNIT, 150, "Unit2", 80d));
 
         armyOne.applyFormation(new RectangleFormation(200, 200, 400, 500));
         armyTwo.applyFormation(new RectangleFormation(600, 200, 800, 500));
@@ -148,7 +147,6 @@ public class GameController {
     private void drawMap(GraphicsContext gc) {
         gc.drawImage(mapImage, 0, 0);
     }
-
 
     private void simulationStep(double deltaTime) {
         if (!models.getCurrentBattle().simulateStep(deltaTime)) {
