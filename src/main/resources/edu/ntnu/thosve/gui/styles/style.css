@@ -32,10 +32,13 @@
     -fx-scale-y: 1.05;
 }
 
-
-
 .progress-bar > .track  {
     -fx-background-color: -fx-color-button;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: red;
+
 }
 
 GridPane {

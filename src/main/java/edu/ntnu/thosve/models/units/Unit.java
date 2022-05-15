@@ -225,7 +225,7 @@ public abstract class Unit implements Serializable {
     /**
      * Gets the <b>current</b> attack bonus of the Unit
      * 
-     * @return AttackBouns
+     * @return AttackBonus
      */
     public abstract int getAttackBonus();
 
@@ -239,14 +239,14 @@ public abstract class Unit implements Serializable {
     /**
      * Gets the max speed of the unit
      * 
-     * @return
+     * @return speed
      */
     public abstract int getMaxSpeed();
 
     /**
      * Gets the radius of which a unit can conflict damage to another unit.
      * 
-     * @return
+     * @return radius
      */
     public abstract int getAttackRadius();
 

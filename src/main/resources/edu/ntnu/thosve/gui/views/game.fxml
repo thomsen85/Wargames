@@ -8,10 +8,11 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.thosve.gui.controllers.GameController">
+<BorderPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" onKeyPressed="#onKeyPress" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.thosve.gui.controllers.GameController">
    <center>
       <Canvas fx:id="canvas" height="881.0" width="1920.0" BorderPane.alignment="CENTER" />
    </center>
@@ -46,7 +47,12 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <ProgressBar fx:id="army1HealthBar" prefHeight="35.0" prefWidth="524.0" progress="0.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <StackPane GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <children>
+                        <ProgressBar fx:id="army1HealthBar" prefHeight="35.0" prefWidth="524.0" progress="0.0" />
+                        <Label fx:id="army1HealthLabel" />
+                     </children>
+                  </StackPane>
                   <Button mnemonicParsing="false" onAction="#army1AddUnits" text="Add units" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#army1RemoveUnit" text="Remove unit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#army1ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
@@ -74,7 +80,12 @@
                         <Font size="32.0" />
                      </font>
                   </Label>
-                  <ProgressBar fx:id="army2HealthBar" prefHeight="35.0" prefWidth="524.0" progress="0.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <StackPane GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <children>
+                        <ProgressBar fx:id="army2HealthBar" prefHeight="35.0" prefWidth="524.0" progress="0.0" />
+                        <Label fx:id="army2HealthLabel" />
+                     </children>
+                  </StackPane>
                   <Button mnemonicParsing="false" onAction="#army2AddUnits" text="Add units" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#army2RemoveUnit" text="Remove unit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#army2ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
@@ -108,7 +119,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" onAction="#onDecreaseSpeed" style="-fx-background-radius: 50%; -fx-border-radius: 50%;">
+                        <Button disable="true" fx:id="decreaseSpeedButton" mnemonicParsing="false" onAction="#onDecreaseSpeed" style="-fx-background-radius: 50%; -fx-border-radius: 50%;">
                            <graphic>
                               <FontIcon iconLiteral="cil-media-skip-backward" iconSize="32" />
                            </graphic>
@@ -118,15 +129,19 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#onIncreaseSpeed" style="-fx-background-radius: 50%; -fx-border-radius: 50%;" GridPane.columnIndex="2">
+                        <Button disable="true" fx:id="increaseSpeedButton" mnemonicParsing="false" onAction="#onIncreaseSpeed" style="-fx-background-radius: 50%; -fx-border-radius: 50%;" GridPane.columnIndex="2">
                            <graphic>
                               <FontIcon iconLiteral="cil-media-skip-forward" iconSize="32" />
                            </graphic>
                         </Button>
                      </children>
                   </GridPane>
-                  <FontIcon iconLiteral="cil-media-play" iconSize="32" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#simulate" text="Simulate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button fx:id="simulateButton" mnemonicParsing="false" onAction="#onSimulateButtonPress" text="Simulate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button disable="true"  fx:id="pauseButton" onAction="#pausePlayButton" mnemonicParsing="false" style="-fx-background-radius: 50%; -fx-border-radius: 50%" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <graphic>
+                        <FontIcon fx:id="pauseButtonIcon" iconLiteral="cil-media-pause" iconSize="32" />
+                     </graphic>
+                  </Button>
                </children>
             </GridPane>
          </children>

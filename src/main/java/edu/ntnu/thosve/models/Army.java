@@ -1,6 +1,6 @@
 package edu.ntnu.thosve.models;
 
-import edu.ntnu.thosve.formations.Formation;
+import edu.ntnu.thosve.models.formations.Formation;
 import edu.ntnu.thosve.map.Terrain;
 import edu.ntnu.thosve.map.TileMap;
 import edu.ntnu.thosve.models.units.*;
@@ -28,7 +28,7 @@ public class Army implements Serializable {
      */
     public Army(String name, TileMap tileMap) {
         Objects.requireNonNull(name, "Name cannot be null");
-        Objects.requireNonNull(tileMap);
+        Objects.requireNonNull(tileMap, "Tile Map cannot be null");
         if (name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be blank");
         }
@@ -387,7 +387,7 @@ public class Army implements Serializable {
      * 
      * @param path
      *            to be written to, must end in .csv
-     * @throws IOException
+     * @throws IOException if something wrong happens
      */
     public void writeCSV(String path) throws IOException {
         if (!path.endsWith(".csv")) {

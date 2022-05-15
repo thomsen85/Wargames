@@ -10,6 +10,8 @@ import java.util.Objects;
 
 /**
  * Singleton class for holding the Scene
+ *
+ * This class was reused form out INGT1002 Project, it was originally written by me.
  */
 public class View {
     private static View instance;
@@ -76,6 +78,7 @@ public class View {
      *            to be set, scene can not be {@code null}
      */
     public void setCurrentScene(Scene currentScene) {
+        Objects.requireNonNull(currentScene);
         this.currentScene = currentScene;
         updateStage();
     }
@@ -87,6 +90,7 @@ public class View {
      *            to FXML file
      */
     public void setCurrentScene(String path) {
+        Objects.requireNonNull(path);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
 
         try {

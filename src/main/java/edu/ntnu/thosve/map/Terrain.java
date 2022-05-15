@@ -2,13 +2,11 @@ package edu.ntnu.thosve.map;
 
 import javafx.scene.paint.Color;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public enum Terrain {
-    HILL(Color.GRAY), PLANES(Color.ORANGE), FOREST(Color.GREEN);
+    HILL(Color.GRAY), PLAINS(Color.ORANGE), FOREST(Color.GREEN);
 
     private final Color color;
     private static final List<Terrain> VALUES = List.of(values());

@@ -62,7 +62,7 @@ public class Battle implements Serializable {
      * Method for setting a current reset point, if
      */
     public void setResetPoint() {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(RESET_FILE));) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(RESET_FILE))) {
             out.writeObject(this);
         } catch (IOException i) {
             throw new UncheckedIOException(i);
@@ -78,7 +78,6 @@ public class Battle implements Serializable {
             throw new IllegalStateException("Reset point must be set first.");
         }
 
-        // SPM: DIS BAD?
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(tempFile));) {
             Battle resetBattle = (Battle) in.readObject();
             armyOne = resetBattle.getArmyOne();

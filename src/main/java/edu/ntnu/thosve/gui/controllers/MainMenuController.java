@@ -40,5 +40,6 @@ public class MainMenuController {
     @FXML
     private void onNewGamePress() {
         view.setCurrentScene(View.NEW_GAME_VIEW);
+
     }
 }

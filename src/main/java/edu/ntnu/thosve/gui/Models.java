@@ -6,6 +6,8 @@ import java.util.Objects;
 
 /**
  * Singleton class which holds the model data. To get the object use
+ *
+ * This class was reused form out INGT1002 Project, it was originally written by me.
  */
 public class Models {
     private static Models instance;

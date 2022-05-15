@@ -1,15 +1,16 @@
 BorderPane {
     -fx-background-image: url('../images/background.jpg');
-    -fx-background-repeat: no-repeat;
+    -fx-background-repeat: stretch;
     -fx-background-position: center center;
 }
 
 GridPane {
     -fx-background-color: transparent;
+    -fx-background-image: none;
     -fx-border-color: transparent;
 }
 
-GridPane > .button {
+#menu > .button {
     -fx-font-size: 42px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 15, 0, 0, 5);
 }
