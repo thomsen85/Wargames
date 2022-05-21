@@ -7,6 +7,12 @@
     -fx-text-fill: black;
 }
 
-.button {
+#menu > .button {
     -fx-font-size: 18px;
+}
+
+.choice-box {
+    -fx-min-height: 100% ;
+    -fx-pref-width: 200px;
+    -fx-font-size: 12px;
 }

@@ -1,6 +1,7 @@
 package edu.ntnu.thosve.gui;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -18,10 +19,13 @@ public class View {
 
     private Stage stage;
     private Scene currentScene;
+    private int resolutionWidth;
+    private int resolutionHeight;
 
     public final static String GAME_VIEW = "views/game.fxml";
     public final static String MAIN_MENU_VIEW = "views/main-menu.fxml";
     public final static String NEW_GAME_VIEW = "views/new-game.fxml";
+
 
     private View() {
     }
@@ -36,6 +40,25 @@ public class View {
             instance = new View();
         }
         return instance;
+    }
+
+    public void setResolution(int resolutionWidth, int resolutionHeight) {
+        this.resolutionWidth = resolutionWidth;
+        this.resolutionHeight = resolutionHeight;
+    }
+
+
+    public void setResolution(Rectangle2D visualBounds) {
+        this.resolutionWidth = (int) visualBounds.getWidth();
+        this.resolutionHeight = (int) visualBounds.getHeight();
+    }
+
+    public int getResolutionWidth() {
+        return resolutionWidth;
+    }
+
+    public int getResolutionHeight() {
+        return resolutionHeight;
     }
 
     /**
@@ -107,6 +130,9 @@ public class View {
      */
     private void updateStage() {
         this.stage.setScene(this.currentScene);
+        this.stage.setWidth(getResolutionWidth());
+        this.stage.setHeight(getResolutionHeight());
+        this.stage.centerOnScreen();
     }
 
     public void quit() {

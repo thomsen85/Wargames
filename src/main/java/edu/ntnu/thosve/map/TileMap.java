@@ -91,11 +91,11 @@ public class TileMap implements Serializable {
         return tiles[y][x];
     }
 
-    public int getTileMapHeight() {
+    public int getTileHeight() {
         return tiles.length;
     }
 
-    public int getTileMapWidth() {
+    public int getTileWidth() {
         return tiles[0].length;
     }
 
@@ -103,11 +103,12 @@ public class TileMap implements Serializable {
         return tilePixelSize;
     }
 
-    public int getTileWidth() {
-        return tileWidth;
+    public int getPixelWidth() {
+        return getTileWidth() * getTilePixelSize();
     }
 
-    public int getTileHeight() {
-        return tileHeight;
+    public int getPixelHeight() {
+        return getTileHeight() * getTilePixelSize();
     }
+
 }

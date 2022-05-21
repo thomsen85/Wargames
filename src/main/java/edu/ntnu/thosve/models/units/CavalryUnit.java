@@ -18,20 +18,25 @@ public class CavalryUnit extends Unit {
     public static final int CHARGE_ATTACK_BONUS = 10;
 
     public static final int MAX_SPEED = 20;
-    public static final double PLAINS_SPEED_MULTIPLIER = 2;
+    public static final double PLAINS_SPEED_MULTIPLIER = 1.5;
     public static final int ATTACK_RADIUS = 10;
     public static final double CHARGE_SPEED_MULTIPLIER = 1.5;
     public static final double PLAINS_ATTACK_BONUS_MULTIPLIER = 1.5;
+    public static final int FOREST_RESIST_BONUS = 0;
 
     private boolean charge = true;
 
     /**
      * Constructor for creating an instance of the CavalryUnit.
      * 
-     * @param name of unit
-     * @param health of unit
-     * @param attack of unit
-     * @param armor of unit
+     * @param name
+     *            of unit
+     * @param health
+     *            of unit
+     * @param attack
+     *            of unit
+     * @param armor
+     *            of unit
      */
     public CavalryUnit(String name, double health, int attack, int armor) {
         super(name, health, attack, armor);
@@ -81,18 +86,21 @@ public class CavalryUnit extends Unit {
     /**
      * Method for returning the resist bonus of the unit. If cavalry unit is in the <b>Forest</b> terrain, it wil have 0
      * in resist bonus.
+     * 
      * @return the resist bonus
      */
     @Override
     public int getResistBonus() {
         if (getCurrentTerrain() == Terrain.FOREST) {
-            return 0;
+            return FOREST_RESIST_BONUS;
         }
         return RESIST_BONUS;
     }
 
     /**
-     * Method for getting the max speed for the unit, if the unit is in charge its speed will be multiplied with CHARGE_SPEED_MULTIPLIER
+     * Method for getting the max speed for the unit, if the unit is in charge its speed will be multiplied with
+     * CHARGE_SPEED_MULTIPLIER
+     * 
      * @return max speed.
      */
     @Override

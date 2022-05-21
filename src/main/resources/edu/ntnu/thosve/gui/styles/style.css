@@ -3,7 +3,7 @@
     -fx-color-background: #565656;
     -fx-color-text: #fff;
     -fx-font-size: 1.1em;
-    -fx-font-family: "Hoefler Text" ;
+    -fx-font-family: "Hoefler Text";
 }
 
 .label {
@@ -17,13 +17,9 @@
     -fx-font-size: 1em;
     -fx-line-height: 1;
     -fx-pref-width: 8em;
-
-
     -fx-background-color: -fx-color-button;
     -fx-text-fill: -fx-color-text;
     -fx-border-color: transparent;
-
-
     -fx-padding: 10;
 }
 
@@ -38,10 +34,44 @@
 
 .progress-bar > .bar {
     -fx-background-color: red;
-
 }
 
+
+.choice-box .context-menu {
+    -fx-background-color: -fx-color-button;
+}
+.choice-box .menu-item > .label {
+    -fx-text-fill: white;
+}
+.choice-box .menu-item:focused > .label {
+    -fx-text-fill: -fx-color-button;
+}
+
+.choice-box {
+   -fx-background-color: -fx-color-button;
+   -fx-mark-color: white;
+}
+
+.choice-box > .label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+
 GridPane {
-    -fx-background-color: -fx-color-background;
     -fx-border-color: black;
+}
+
+#hud {
+    -fx-background-image: url('../images/paper-background.jpg');
+    -fx-background-size: 100%;
+}
+
+#hud > .label {
+    -fx-text-fill: black;
+}
+
+#decreaseSpeedButton, #increaseSpeedButton, #pauseButton {
+    -fx-pref-height: 40px;
+    -fx-pref-width: 40px;
 }

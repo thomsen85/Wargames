@@ -1,13 +1,21 @@
 package edu.ntnu.thosve.gui.controllers;
 
-import edu.ntnu.thosve.map.Terrain;
+import edu.ntnu.thosve.gui.Models;
+import edu.ntnu.thosve.gui.View;
+import edu.ntnu.thosve.map.MapSize;
 import edu.ntnu.thosve.map.TileMap;
 import edu.ntnu.thosve.map.TileMapFactory;
+import edu.ntnu.thosve.models.Army;
+import edu.ntnu.thosve.models.Battle;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 public class NewGameController {
+    Models models = Models.getInstance();
+    View view = View.getInstance();
 
     @FXML
     private ImageView mapImage;
@@ -18,8 +26,23 @@ public class NewGameController {
     @FXML
     private Slider mapRandomness;
 
+    @FXML
+    private TextField armyOneNameField;
+
+    @FXML
+    private TextField armyTwoNameField;
+
+    @FXML
+    private ChoiceBox<MapSize> mapSizeChoice;
+
     public void initialize() {
+        loadMapSizeChoice();
         getNewMap();
+    }
+
+    private void loadMapSizeChoice() {
+        mapSizeChoice.getItems().addAll(MapSize.values());
+        mapSizeChoice.setValue(MapSize.MAP_2000x1000_5);
     }
 
     private void updateMapImage() {
@@ -28,8 +51,36 @@ public class NewGameController {
 
     @FXML
     private void getNewMap() {
-        map = TileMapFactory.getRandomTerrainMap((int) mapRandomness.getValue(), 5, 160, 90);
+        MapSize choice = mapSizeChoice.getValue();
+        int tilePixelSize = choice.getTilePixelSize();
+        int tileWidth = choice.getTileWidth();
+        int tileHeight = choice.getTileHeight();
+
+        map = TileMapFactory.getRandomTerrainMap((int) mapRandomness.getValue(), tilePixelSize, tileWidth, tileHeight);
         updateMapImage();
+    }
+
+    @FXML
+    private void onNextPress() {
+        if (validateInuput()) {
+            Army armyOne = new Army(armyOneNameField.getText());
+            Army armyTwo = new Army(armyTwoNameField.getText());
+            Battle battle = new Battle(armyOne, armyTwo, map);
+            models.setCurrentBattle(battle);
+
+            view.setCurrentScene(View.GAME_VIEW);
+        }
+
+    }
+
+    private boolean validateInuput() {
+        // TODO: CODE
+        return true;
+    }
+
+    @FXML
+    private void onBackPress() {
+        view.setCurrentScene(View.MAIN_MENU_VIEW);
     }
 
 }

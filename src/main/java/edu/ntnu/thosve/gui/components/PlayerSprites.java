@@ -2,7 +2,7 @@ package edu.ntnu.thosve.gui.components;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class PlayerSprite {
+public class PlayerSprites {
     private int walkingCycle = 0;
     private final int MAX_WALK_CYCLE = 4;
 
@@ -10,7 +10,7 @@ public class PlayerSprite {
     private int y;
     private PlayerStatus playerStatus = PlayerStatus.IDLE;
 
-    public PlayerSprite(int x, int y) {
+    public PlayerSprites(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -37,6 +37,5 @@ public class PlayerSprite {
 
     public void draw(GraphicsContext gc) {
     }
-
 
 }

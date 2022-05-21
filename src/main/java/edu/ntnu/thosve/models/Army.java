@@ -387,7 +387,8 @@ public class Army implements Serializable {
      * 
      * @param path
      *            to be written to, must end in .csv
-     * @throws IOException if something wrong happens
+     * @throws IOException
+     *             if something wrong happens
      */
     public void writeCSV(String path) throws IOException {
         if (!path.endsWith(".csv")) {
@@ -453,5 +454,9 @@ public class Army implements Serializable {
 
     public void setTileMap(TileMap tileMap) {
         this.tileMap = tileMap;
+    }
+
+    public void clearUnits() {
+        units.clear();
     }
 }

@@ -1,10 +1,5 @@
 package edu.ntnu.thosve.map;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,8 +28,8 @@ public class TileMapFactory {
      */
     public static TileMap getUniformTileMap(Terrain terrain, int tilePixelSize, int tileWidth, int tileHeight) {
         TileMap tileMap = new TileMap(tilePixelSize, tileWidth, tileHeight);
-        for (int x = 0; x < tileMap.getTileMapWidth(); x++) {
-            for (int y = 0; y < tileMap.getTileMapHeight(); y++) {
+        for (int x = 0; x < tileMap.getTileWidth(); x++) {
+            for (int y = 0; y < tileMap.getTileHeight(); y++) {
                 tileMap.setTile(x, y, new Tile(terrain, tilePixelSize));
             }
         }
@@ -77,8 +72,8 @@ public class TileMapFactory {
      */
     private static void placeRandomPoints(TileMap tileMap, int amountOfRandomPoints) {
         for (int point = 0; point < amountOfRandomPoints; point++) {
-            int x = random.nextInt(tileMap.getTileMapWidth());
-            int y = random.nextInt(tileMap.getTileMapHeight());
+            int x = random.nextInt(tileMap.getTileWidth());
+            int y = random.nextInt(tileMap.getTileHeight());
             Terrain terrain = Terrain.randomTerrain();
             tileMap.setTile(x, y, new Tile(terrain, tileMap.getTilePixelSize()));
         }
@@ -95,8 +90,8 @@ public class TileMapFactory {
         boolean full = false;
         while (!full) {
             full = true;
-            for (int x : getRandomUniqueList(tileMap.getTileMapWidth())) {
-                for (int y : getRandomUniqueList(tileMap.getTileMapHeight())) {
+            for (int x : getRandomUniqueList(tileMap.getTileWidth())) {
+                for (int y : getRandomUniqueList(tileMap.getTileHeight())) {
                     if (tileMap.getTile(x, y) == null) {
                         full = false;
                         if (getMostPopularSurrounding(tileMap, x, y) != null) {
@@ -144,8 +139,8 @@ public class TileMapFactory {
 
         for (int yDiff = -1; yDiff <= 1; yDiff++) {
             for (int xDiff = -1; xDiff <= 1; xDiff++) {
-                if (!(y + yDiff < 0 || y + yDiff >= tileMap.getTileMapHeight() || x + xDiff < 0
-                        || x + xDiff >= tileMap.getTileMapWidth()))
+                if (!(y + yDiff < 0 || y + yDiff >= tileMap.getTileHeight() || x + xDiff < 0
+                        || x + xDiff >= tileMap.getTileWidth()))
                     if (tileMap.getTile(x + xDiff, y + yDiff) != null) {
                         terrains.add(tileMap.getTile(x + xDiff, y + yDiff).terrain());
                     }

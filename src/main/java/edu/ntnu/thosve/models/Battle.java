@@ -12,6 +12,7 @@ public class Battle implements Serializable {
 
     private Army armyOne;
     private Army armyTwo;
+    private final TileMap tileMap;
 
     /**
      * Constructor for creating an instance of the Battle.
@@ -26,9 +27,11 @@ public class Battle implements Serializable {
     public Battle(Army armyOne, Army armyTwo, TileMap tileMap) {
         this.armyOne = armyOne;
         this.armyTwo = armyTwo;
+        this.tileMap = tileMap;
 
         this.armyOne.setTileMap(tileMap);
         this.armyTwo.setTileMap(tileMap);
+
     }
 
     public Army simulate() {
@@ -94,12 +97,24 @@ public class Battle implements Serializable {
         }
     }
 
+    public void setArmyOne(Army armyOne) {
+        this.armyOne = armyOne;
+    }
+
+    public void setArmyTwo(Army armyTwo) {
+        this.armyTwo = armyTwo;
+    }
+
     public Army getArmyOne() {
         return armyOne;
     }
 
     public Army getArmyTwo() {
         return armyTwo;
+    }
+
+    public TileMap getTileMap() {
+        return tileMap;
     }
 
     @Override

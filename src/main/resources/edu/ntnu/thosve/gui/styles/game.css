@@ -1,0 +1,3 @@
+GridPane > .label {
+    -fx-text-fill: -fx-color-button;
+}

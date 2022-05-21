@@ -1,0 +1,13 @@
+* {
+    -fx-font-size: 2em;
+    -fx-font-family: "Hoefler Text";
+}
+
+.root {
+    -fx-background-image: url(../images/paper-background.jpg);
+}
+
+.label {
+    -fx-text-fill: black;
+    -fx-padding: 2em;
+}

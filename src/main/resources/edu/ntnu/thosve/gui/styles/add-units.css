@@ -1,0 +1,7 @@
+#title {
+    -fx-text-fill: black;
+}
+
+.root {
+    -fx-background-image: url('../images/paper-background.jpg');
+}
