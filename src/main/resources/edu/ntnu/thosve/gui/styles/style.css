@@ -62,6 +62,20 @@ GridPane {
     -fx-border-color: black;
 }
 
+.text-field {
+    -fx-text-fill: white;
+    -fx-background-color: -fx-color-button;
+    -fx-border-color: -fx-color-background;
+}
+
+.slider  {
+    -fx-background-color: transparent;
+}
+
+.slider .track {
+    -fx-background-color: -fx-color-button;
+}
+
 #hud {
     -fx-background-image: url('../images/paper-background.jpg');
     -fx-background-size: 100%;
@@ -69,9 +83,4 @@ GridPane {
 
 #hud > .label {
     -fx-text-fill: black;
-}
-
-#decreaseSpeedButton, #increaseSpeedButton, #pauseButton {
-    -fx-pref-height: 40px;
-    -fx-pref-width: 40px;
 }

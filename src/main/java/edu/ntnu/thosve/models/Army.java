@@ -1,6 +1,6 @@
 package edu.ntnu.thosve.models;
 
-import edu.ntnu.thosve.models.formations.Formation;
+import edu.ntnu.thosve.models.formation.Formation;
 import edu.ntnu.thosve.models.map.Terrain;
 import edu.ntnu.thosve.models.map.TileMap;
 import edu.ntnu.thosve.models.units.*;
@@ -319,8 +319,21 @@ public class Army implements Serializable {
         return Math.sqrt(Math.pow(unit2.getX() - unit1.getX(), 2) + Math.pow(unit2.getY() - unit1.getY(), 2));
     }
 
+    /**
+     * If unit is outside of map, the terrain wil be set to FOREST by default.
+     * 
+     * @param unit
+     *            to check
+     * @return terrain that unit is standing on.
+     */
     private Terrain getTerrainFromUnit(Unit unit) {
-        return tileMap.getTerrainFromCoordinates((int) unit.getX(), (int) unit.getY());
+        Terrain terrainFromCoordinates;
+        try {
+            terrainFromCoordinates = tileMap.getTerrainFromCoordinates((int) unit.getX(), (int) unit.getY());
+        } catch (IllegalArgumentException e) {
+            terrainFromCoordinates = Terrain.FOREST;
+        }
+        return terrainFromCoordinates;
     }
 
     /**

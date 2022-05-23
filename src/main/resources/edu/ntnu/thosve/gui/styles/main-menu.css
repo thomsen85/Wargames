@@ -23,3 +23,9 @@ GridPane {
     -fx-border-radius: 20px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 50, 0, 0, 10);
 }
+
+
+#decreaseSpeedButton, #increaseSpeedButton, #pauseButton {
+    -fx-pref-height: 40px;
+    -fx-pref-width: 40px;
+}

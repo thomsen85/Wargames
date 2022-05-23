@@ -2,16 +2,9 @@ package edu.ntnu.thosve.gui.modals;
 
 import edu.ntnu.thosve.models.units.Unit;
 import edu.ntnu.thosve.models.units.UnitType;
-import javafx.beans.value.ObservableValue;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class UnitInformationModal extends Modal {
@@ -26,7 +19,7 @@ public class UnitInformationModal extends Modal {
 
     private void populateScene() {
         addStylesheet("edu/ntnu/thosve/gui/styles/style.css");
-        addStylesheet("edu/ntnu/thosve/gui/styles/add-units.css");
+        addStylesheet("edu/ntnu/thosve/gui/styles/modal.css");
 
         GridPane root = getGridPaneRoot();
 

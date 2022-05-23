@@ -37,7 +37,7 @@
               </rowConstraints>
                <children>
                   <Button mnemonicParsing="false" onAction="#onNewGamePress" text="New Game" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#onSettingsPress" text="Settings" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button disable="true" mnemonicParsing="false" onAction="#onSettingsPress" text="Settings" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#onQuitPress" text="Quit" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />

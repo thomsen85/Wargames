@@ -1,24 +1,20 @@
 package edu.ntnu.thosve.gui.modals;
 
 import edu.ntnu.thosve.models.Army;
-import edu.ntnu.thosve.models.formations.FormationType;
 import edu.ntnu.thosve.models.units.UnitType;
 import javafx.geometry.HPos;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
-import org.controlsfx.control.spreadsheet.Grid;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
+/**
+ * Modal for adding units to a given army.
+ */
 public class AddUnitModal extends Modal {
     private final Army army;
     private BiConsumer<UnitType, Integer> handler;
@@ -33,7 +29,7 @@ public class AddUnitModal extends Modal {
     private void populateScene() {
         setPrefSize(600, 400);
         addStylesheet("edu/ntnu/thosve/gui/styles/style.css");
-        addStylesheet("edu/ntnu/thosve/gui/styles/add-units.css");
+        addStylesheet("edu/ntnu/thosve/gui/styles/modal.css");
 
         GridPane root = getGridPaneRoot();
 
@@ -48,10 +44,19 @@ public class AddUnitModal extends Modal {
         title.setId("title");
         unitChoice.getItems().addAll(UnitType.values());
         unitChoice.setValue(UnitType.INFANTRY_UNIT);
-        place.setOnAction(actionEvent -> handler.accept(unitChoice.getValue(), Integer.parseInt(amount.getText())));
+        place.setOnAction(actionEvent -> {
+            try {
+                int amountOfUnits = Integer.parseInt(amount.getText());
+                handler.accept(unitChoice.getValue(), amountOfUnits);
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        });
         exit.setOnAction(actionEvent -> close());
 
-        GridPane.setConstraints(title,0 ,0 ,2, 1);
+        GridPane.setConstraints(title, 0, 0, 2, 1);
         GridPane.setHgrow(title, Priority.ALWAYS);
         GridPane.setHalignment(title, HPos.CENTER);
         GridPane.setHalignment(exit, HPos.RIGHT);
@@ -79,7 +84,5 @@ public class AddUnitModal extends Modal {
         second.setHgrow(Priority.ALWAYS);
 
         root.getColumnConstraints().addAll(first, second);
-
-
     }
 }

@@ -1,5 +1,6 @@
 package edu.ntnu.thosve.models.map;
 
+import edu.ntnu.thosve.models.units.Unit;
 import javafx.scene.paint.Color;
 
 import java.util.List;

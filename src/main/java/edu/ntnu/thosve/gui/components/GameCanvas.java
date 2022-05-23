@@ -1,5 +1,6 @@
 package edu.ntnu.thosve.gui.components;
 
+import edu.ntnu.thosve.gui.utils.CameraMove;
 import edu.ntnu.thosve.models.map.TileMap;
 import edu.ntnu.thosve.models.Battle;
 import edu.ntnu.thosve.models.units.Unit;
@@ -88,20 +89,20 @@ public class GameCanvas {
         for (File file : Objects.requireNonNull(playerSprites.listFiles())) {
             switch (file.getName().split("-")[0]) {
             case "walk" -> walkingSprites.add(new Image(file.toURI().toString()));
-            case "idle" -> walkingSprites.add(new Image(file.toURI().toString())); // TODO: CODE
-            case "attack" -> walkingSprites.add(new Image(file.toURI().toString()));// TODO: CODE
+            // Possibility to add more types of sprites
 
             }
         }
     }
 
     private void drawPlayers(GraphicsContext gc) {
+        Image sprite = walkingSprites.get(walkingCycle);
         for (Unit unit : battle.getArmyOne().getAllUnits()) {
-            gc.drawImage(walkingSprites.get(walkingCycle), unit.getX(), unit.getY());
+            gc.drawImage(sprite, unit.getX() - (sprite.getWidth() / 2), unit.getY() - (sprite.getHeight() / 2));
         }
         for (Unit unit : battle.getArmyTwo().getAllUnits()) {
-            gc.drawImage(walkingSprites.get(walkingCycle), unit.getX(), unit.getY(), -walkingSprites.get(0).getWidth(),
-                    walkingSprites.get(0).getHeight());
+            gc.drawImage(sprite, unit.getX() + (sprite.getWidth()) / 2, unit.getY() - (sprite.getHeight() / 2),
+                    -sprite.getWidth(), sprite.getHeight());
         }
         if (walkingCycle >= 4) {
             walkingCycle = 0;

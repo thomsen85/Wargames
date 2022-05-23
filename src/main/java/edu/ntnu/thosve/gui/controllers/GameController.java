@@ -1,18 +1,15 @@
 package edu.ntnu.thosve.gui.controllers;
 
 import edu.ntnu.thosve.gui.View;
-import edu.ntnu.thosve.gui.components.CameraMove;
+import edu.ntnu.thosve.gui.utils.CameraMove;
 import edu.ntnu.thosve.gui.components.GameCanvas;
 import edu.ntnu.thosve.gui.modals.*;
-import edu.ntnu.thosve.models.formations.RectangleFormation;
+import edu.ntnu.thosve.models.formation.RectangleFormation;
 import edu.ntnu.thosve.models.Army;
 import edu.ntnu.thosve.models.Battle;
 import edu.ntnu.thosve.models.units.*;
 import edu.ntnu.thosve.gui.Models;
 import javafx.animation.AnimationTimer;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -20,15 +17,15 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.stage.FileChooser;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import javax.tools.Tool;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -72,6 +69,34 @@ public class GameController {
     private Button decreaseSpeedButton;
     @FXML
     private Pane canvasParent;
+    @FXML
+    private Button army1AddUnitsButton;
+    @FXML
+    private Button army1RemoveUnitsButton;
+    @FXML
+    private Button army1ClearUnitsButton;
+    @FXML
+    private Button army1SaveArmyButton;
+    @FXML
+    private Button army1LoadArmyButton;
+    @FXML
+    private Button army1SetFormationButton;
+    @FXML
+    private Button army1DetailsButton;
+    @FXML
+    private Button army2AddUnitsButton;
+    @FXML
+    private Button army2RemoveUnitsButton;
+    @FXML
+    private Button army2ClearUnitsButton;
+    @FXML
+    private Button army2SaveArmyButton;
+    @FXML
+    private Button army2LoadArmyButton;
+    @FXML
+    private Button army2SetFormationButton;
+    @FXML
+    private Button army2DetailsButton;
 
     private boolean simulationRunning = false;
     private boolean pausedSimulation = false;
@@ -151,6 +176,23 @@ public class GameController {
         modal.show();
     }
 
+    private void deactivateButtons(boolean deactivate) {
+        army1AddUnitsButton.setDisable(deactivate);
+        army1RemoveUnitsButton.setDisable(deactivate);
+        army1ClearUnitsButton.setDisable(deactivate);
+        army1SaveArmyButton.setDisable(deactivate);
+        army1LoadArmyButton.setDisable(deactivate);
+        army1SetFormationButton.setDisable(deactivate);
+        army1DetailsButton.setDisable(deactivate);
+        army2AddUnitsButton.setDisable(deactivate);
+        army2RemoveUnitsButton.setDisable(deactivate);
+        army2ClearUnitsButton.setDisable(deactivate);
+        army2SaveArmyButton.setDisable(deactivate);
+        army2LoadArmyButton.setDisable(deactivate);
+        army2SetFormationButton.setDisable(deactivate);
+        army2DetailsButton.setDisable(deactivate);
+    }
+
     private void updateArmyLabels() {
         army1Label.setText(gameCanvas.getBattle().getArmyOne().getName());
         army2Label.setText(gameCanvas.getBattle().getArmyTwo().getName());
@@ -224,6 +266,12 @@ public class GameController {
         army2HealthBar.setProgress(armyTwoHealth);
     }
 
+    private String getArmyDifferentUnits(Army army) {
+        return "Infantry Units: " + army.getInfantryUnits().size() + "\nRanged Units: " + army.getRangedUnits().size()
+                + "\nCavalry Units: " + army.getCavalryUnits().size() + "\nCommander Units: "
+                + army.getCommanderUnits().size();
+    }
+
     private void updateSpeedIndicator() {
         speedIndicator.setText("%.2fx".formatted(speedMultiplier));
     }
@@ -292,6 +340,7 @@ public class GameController {
         simulateButton.setText("Simulate");
         simulationRunning = false;
         simulationDone = false;
+        deactivateButtons(false);
     }
 
     private void startSimulation() {
@@ -308,6 +357,7 @@ public class GameController {
 
         simulateButton.setText("Reset");
         simulationRunning = true;
+        deactivateButtons(true);
 
     }
 
@@ -400,7 +450,9 @@ public class GameController {
         if (file != null) {
             try {
                 models.getCurrentBattle().getArmyOne().writeCSV(file.getAbsolutePath());
-                showMessage("Saved " + models.getCurrentBattle().getArmyTwo().getName() + " to: " + file.getAbsolutePath(), 5);
+                showMessage(
+                        "Saved " + models.getCurrentBattle().getArmyTwo().getName() + " to: " + file.getAbsolutePath(),
+                        5);
             } catch (IOException e) {
                 showMessage("Something went wrong with saving the file", 5);
             }
@@ -414,7 +466,9 @@ public class GameController {
         if (file != null) {
             try {
                 models.getCurrentBattle().getArmyTwo().writeCSV(file.getAbsolutePath());
-                showMessage("Saved " + models.getCurrentBattle().getArmyTwo().getName() + " to: " + file.getAbsolutePath(), 5);
+                showMessage(
+                        "Saved " + models.getCurrentBattle().getArmyTwo().getName() + " to: " + file.getAbsolutePath(),
+                        5);
 
             } catch (IOException e) {
                 showMessage("Something went wrong with saving the file", 5);
@@ -462,5 +516,28 @@ public class GameController {
     private void army2SetFormation() {
         SetFormationModal m = new SetFormationModal(view.getStage(), models.getCurrentBattle().getArmyTwo());
         m.showAndWait();
+    }
+
+    @FXML
+    private void army1Details() {
+        Modal details = getDetailsModal(models.getCurrentBattle().getArmyOne());
+        details.showAndWait();
+    }
+
+    @FXML
+    private void army2Details() {
+        Modal details = getDetailsModal(models.getCurrentBattle().getArmyTwo());
+        details.showAndWait();
+    }
+
+    private Modal getDetailsModal(Army army) {
+        Modal details = new Modal(view.getStage());
+        details.getScene().getStylesheets().add("edu/ntnu/thosve/gui/styles/style.css");
+        details.getScene().getStylesheets().add("edu/ntnu/thosve/gui/styles/modal.css");
+        details.getGridPaneRoot().add(new Label(getArmyDifferentUnits(army)), 0, 0);
+        Button close = new Button("Close");
+        close.setOnAction(actionEvent -> details.close());
+        details.getGridPaneRoot().add(close, 0, 1);
+        return details;
     }
 }

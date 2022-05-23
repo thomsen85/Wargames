@@ -49,10 +49,10 @@ public class TileMap implements Serializable {
      * @return Terrain of the given x and y coordinate.
      */
     public Terrain getTerrainFromCoordinates(int x, int y) {
-        if (x < 0 || x > tileWidth * tilePixelSize) {
+        if (x < 0 || x >= tileWidth * tilePixelSize) {
             throw new IllegalArgumentException(
                     x + " :x coordinate is out of range. Max is " + (tileWidth * tilePixelSize));
-        } else if (y < 0 || y > tileHeight * tilePixelSize) {
+        } else if (y < 0 || y >= tileHeight * tilePixelSize) {
             throw new IllegalArgumentException(
                     y + " :y coordinate is out of range. Max is " + (tileHeight * tilePixelSize));
         }

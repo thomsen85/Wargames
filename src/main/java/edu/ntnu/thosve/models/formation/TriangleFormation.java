@@ -1,4 +1,4 @@
-package edu.ntnu.thosve.models.formations;
+package edu.ntnu.thosve.models.formation;
 
 import edu.ntnu.thosve.models.units.Unit;
 

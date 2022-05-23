@@ -1,6 +1,6 @@
 package edu.ntnu.thosve;
 
-import edu.ntnu.thosve.models.formations.RectangleFormation;
+import edu.ntnu.thosve.models.formation.RectangleFormation;
 import edu.ntnu.thosve.models.map.Terrain;
 import edu.ntnu.thosve.models.map.TileMap;
 import edu.ntnu.thosve.models.map.TileMapFactory;

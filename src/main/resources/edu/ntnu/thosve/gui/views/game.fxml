@@ -47,7 +47,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <FontIcon iconLiteral="cil-caret-top" iconSize="32" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Label fx:id="army1Label" text="ARMY 1 NAME" GridPane.columnSpan="4" GridPane.halignment="CENTER">
                      <font>
                         <Font size="32.0" />
@@ -59,12 +58,17 @@
                         <Label fx:id="army1HealthLabel" />
                      </children>
                   </StackPane>
-                  <Button mnemonicParsing="false" onAction="#army1AddUnits" text="Add units" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#army1RemoveUnit" text="Remove unit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#army1ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#army1SaveArmy" text="Save army" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#army1LoadArmy" text="Load army" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Button onAction="#army1SetFormation" mnemonicParsing="false" text="Set Formation" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="army1AddUnitsButton" mnemonicParsing="false" onAction="#army1AddUnits" text="Add units" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button fx:id="army1RemoveUnitsButton" mnemonicParsing="false" onAction="#army1RemoveUnit" text="Remove unit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button fx:id="army1ClearUnitsButton" mnemonicParsing="false" onAction="#army1ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="army1SaveArmyButton" mnemonicParsing="false" onAction="#army1SaveArmy" text="Save army" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="army1LoadArmyButton" mnemonicParsing="false" onAction="#army1LoadArmy" text="Load army" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="army1SetFormationButton" mnemonicParsing="false" onAction="#army1SetFormation" text="Set Formation" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="army1DetailsButton" mnemonicParsing="false" onAction="#army1Details" style="-fx-background-radius: 50%; -fx-pref-width: 90%; -fx-pref-height: 90%;" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="cil-caret-top" iconSize="20" />
+                     </graphic>
+                  </Button>
                </children>
             </GridPane>
             <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2">
@@ -81,7 +85,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <FontIcon iconLiteral="cil-caret-top" iconSize="32" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Label fx:id="army2Label" text="ARMY 2 NAME" GridPane.columnSpan="4" GridPane.halignment="CENTER">
                      <font>
                         <Font size="32.0" />
@@ -93,12 +96,17 @@
                         <Label fx:id="army2HealthLabel" />
                      </children>
                   </StackPane>
-                  <Button mnemonicParsing="false" onAction="#army2AddUnits" text="Add units" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#army2RemoveUnit" text="Remove unit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#army2ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#army2SaveArmy" text="Save army" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" onAction="#army2LoadArmy" text="Load army" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Button onAction="#army2SetFormation" mnemonicParsing="false" text="Set Formation" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="army2AddUnitsButton" mnemonicParsing="false" onAction="#army2AddUnits" text="Add units" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button fx:id="army2RemoveUnitsButton" mnemonicParsing="false" onAction="#army2RemoveUnit" text="Remove unit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button fx:id="army2ClearUnitsButton" mnemonicParsing="false" onAction="#army2ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="army2SaveArmyButton" mnemonicParsing="false" onAction="#army2SaveArmy" text="Save army" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="army2LoadArmyButton" mnemonicParsing="false" onAction="#army2LoadArmy" text="Load army" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Button fx:id="army2SetFormationButton" mnemonicParsing="false" onAction="#army2SetFormation" text="Set Formation" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="army2DetailsButton" mnemonicParsing="false" onAction="#army2Details" style="-fx-background-radius: 50%; -fx-pref-width: 100%; -fx-pref-height: 100%;" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="cil-caret-top" iconSize="20" />
+                     </graphic>
+                  </Button>
                </children>
             </GridPane>
             <GridPane fx:id="timeControl" GridPane.columnIndex="1">
@@ -129,7 +137,7 @@
                      <children>
                         <Button fx:id="decreaseSpeedButton" disable="true" mnemonicParsing="false" onAction="#onDecreaseSpeed" style="-fx-background-radius: 50%; -fx-border-radius: 50%;">
                            <graphic>
-                              <FontIcon iconLiteral="cil-media-skip-backward" iconSize="32" />
+                              <FontIcon iconColor="WHITE" iconLiteral="cil-media-skip-backward" iconSize="32" />
                            </graphic>
                         </Button>
                         <Label fx:id="speedIndicator" text="1.00x" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -139,7 +147,7 @@
                         </Label>
                         <Button fx:id="increaseSpeedButton" disable="true" mnemonicParsing="false" onAction="#onIncreaseSpeed" style="-fx-background-radius: 50%; -fx-border-radius: 50%;" GridPane.columnIndex="2">
                            <graphic>
-                              <FontIcon iconLiteral="cil-media-skip-forward" iconSize="32" />
+                              <FontIcon iconColor="WHITE" iconLiteral="cil-media-skip-forward" iconSize="32" />
                            </graphic>
                         </Button>
                      </children>
@@ -147,7 +155,7 @@
                   <Button fx:id="simulateButton" mnemonicParsing="false" onAction="#onSimulateButtonPress" text="Simulate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button fx:id="pauseButton" disable="true" mnemonicParsing="false" onAction="#pausePlayButton" style="-fx-background-radius: 50%; -fx-border-radius: 50%" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <graphic>
-                        <FontIcon fx:id="pauseButtonIcon" iconLiteral="cil-media-pause" iconSize="32" />
+                        <FontIcon fx:id="pauseButtonIcon" iconColor="WHITE" iconLiteral="cil-media-pause" iconSize="32" />
                      </graphic>
                   </Button>
                </children>

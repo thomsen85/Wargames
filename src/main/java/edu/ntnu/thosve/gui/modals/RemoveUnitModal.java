@@ -26,7 +26,7 @@ public class RemoveUnitModal extends Modal {
     private void populateScene() {
         setPrefSize(500, 500);
         addStylesheet("edu/ntnu/thosve/gui/styles/style.css");
-        addStylesheet("edu/ntnu/thosve/gui/styles/add-units.css");
+        addStylesheet("edu/ntnu/thosve/gui/styles/modal.css");
 
         GridPane root = getGridPaneRoot();
         ScrollPane scrollPane = new ScrollPane();
