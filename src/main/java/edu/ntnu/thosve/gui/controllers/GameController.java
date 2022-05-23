@@ -3,24 +3,29 @@ package edu.ntnu.thosve.gui.controllers;
 import edu.ntnu.thosve.gui.View;
 import edu.ntnu.thosve.gui.components.CameraMove;
 import edu.ntnu.thosve.gui.components.GameCanvas;
-import edu.ntnu.thosve.gui.modals.AddUnitModal;
-import edu.ntnu.thosve.gui.modals.Modal;
+import edu.ntnu.thosve.gui.modals.*;
 import edu.ntnu.thosve.models.formations.RectangleFormation;
 import edu.ntnu.thosve.models.Army;
 import edu.ntnu.thosve.models.Battle;
 import edu.ntnu.thosve.models.units.*;
 import edu.ntnu.thosve.gui.Models;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.stage.FileChooser;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -101,12 +106,10 @@ public class GameController {
 
         private void updateQueue(long now) {
             Set<Long> remover = new HashSet<>();
-            timeQueue.keySet().stream()
-                    .filter(time -> now > time)
-                    .forEach(time -> {
-                        timeQueue.get(time).run();
-                        remover.add(time);
-                    });
+            timeQueue.keySet().stream().filter(time -> now > time).forEach(time -> {
+                timeQueue.get(time).run();
+                remover.add(time);
+            });
 
             remover.forEach(timeQueue::remove);
         }
@@ -121,15 +124,31 @@ public class GameController {
      * Method that gets called when window is loaded.
      */
     public void initialize() {
-        canvasParent.widthProperty().addListener((observableValue, number, t1) -> canvas.setWidth(observableValue.getValue().doubleValue()));
-        canvasParent.heightProperty().addListener(((observableValue, number, t1) -> canvas.setHeight(observableValue.getValue().doubleValue())));
+        canvasParent.widthProperty().addListener(
+                (observableValue, number, t1) -> canvas.setWidth(observableValue.getValue().doubleValue()));
+        canvasParent.heightProperty().addListener(
+                ((observableValue, number, t1) -> canvas.setHeight(observableValue.getValue().doubleValue())));
         this.gameLoop = new GameLoop();
         this.gameCanvas = new GameCanvas(canvas, models.getCurrentBattle());
 
-        loadTestData();
+        // loadTestData();
         updateArmyLabels();
+        gameCanvas.addOnUnitPress(this::showUnitInformation);
 
         gameLoop.start();
+    }
+
+    private void showUnitInformation(Unit unit) {
+        Point2D canvasPoint = gameCanvas.getCanvasPosition(unit);
+        Modal modal = new UnitInformationModal(view.getStage(), unit);
+        modal.setX(canvasPoint.getX());
+        modal.setY(canvasPoint.getY());
+        modal.getScene().setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ESCAPE) {
+                modal.close();
+            }
+        });
+        modal.show();
     }
 
     private void updateArmyLabels() {
@@ -175,11 +194,10 @@ public class GameController {
 
     private void showWinner(Army winner) {
         Modal modal = new Modal(view.getStage());
-        modal.getGridPaneRoot().add(new Label("Winner is :" + winner.getName()),0,0);
+        modal.getGridPaneRoot().add(new Label("Winner is :" + winner.getName()), 0, 0);
         modal.getScene().getStylesheets().add("edu/ntnu/thosve/gui/styles/message.css");
         modal.show();
         gameLoop.addEventToTimeQueue(modal::close, 5);
-
 
     }
 
@@ -210,19 +228,17 @@ public class GameController {
         speedIndicator.setText("%.2fx".formatted(speedMultiplier));
     }
 
-
     @FXML
     private void onKeyPress(KeyEvent e) {
         switch (e.getCode()) {
-            case E -> gameCanvas.centerCamera();
-            case Q -> gameCanvas.moveCamera(CameraMove.ZOOM, 1.1);
-            case A -> gameCanvas.moveCamera(CameraMove.LEFT, 10);
-            case D -> gameCanvas.moveCamera(CameraMove.RIGHT, 10);
-            case W -> gameCanvas.moveCamera(CameraMove.UP, 10);
-            case S -> gameCanvas.moveCamera(CameraMove.DOWN, 10);
+        case E -> gameCanvas.centerCamera();
+        case Q -> gameCanvas.moveCamera(CameraMove.ZOOM, 1.1);
+        case A -> gameCanvas.moveCamera(CameraMove.LEFT, 10);
+        case D -> gameCanvas.moveCamera(CameraMove.RIGHT, 10);
+        case W -> gameCanvas.moveCamera(CameraMove.UP, 10);
+        case S -> gameCanvas.moveCamera(CameraMove.DOWN, 10);
         }
     }
-
 
     @FXML
     private void pausePlayButton() {
@@ -247,11 +263,14 @@ public class GameController {
         updateSpeedIndicator();
     }
 
-
     @FXML
     private void onSimulateButtonPress() {
         if (!simulationRunning) {
-            startSimulation();
+            try {
+                startSimulation();
+            } catch (IllegalStateException e) {
+                showMessage(e.getMessage(), 3);
+            }
         } else {
             resetSimulation();
         }
@@ -276,6 +295,10 @@ public class GameController {
     }
 
     private void startSimulation() {
+        if (!models.getCurrentBattle().getArmyOne().hasUnits() || !models.getCurrentBattle().getArmyTwo().hasUnits()) {
+            throw new IllegalStateException("Both armies must contain units.");
+        }
+
         models.getCurrentBattle().setResetPoint();
 
         army1StartUnitsNumber = models.getCurrentBattle().getArmyOne().getAllUnits().size();
@@ -285,6 +308,7 @@ public class GameController {
 
         simulateButton.setText("Reset");
         simulationRunning = true;
+
     }
 
     private void setDisableMediaButtons(boolean disabled) {
@@ -292,7 +316,6 @@ public class GameController {
         increaseSpeedButton.setDisable(disabled);
         decreaseSpeedButton.setDisable(disabled);
     }
-
 
     private File openFileSaver() {
         FileChooser fileChooser = new FileChooser();
@@ -316,8 +339,8 @@ public class GameController {
 
     private void showMessage(String text, double duration) {
         Modal modal = new Modal(view.getStage());
-        Label label  = new Label(text);
-        label.setPadding(new Insets(10,10,10,10));
+        Label label = new Label(text);
+        label.setPadding(new Insets(10, 10, 10, 10));
 
         modal.getGridPaneRoot().add(label, 0, 0);
         modal.getScene().getStylesheets().add("edu/ntnu/thosve/gui/styles/message.css");
@@ -329,17 +352,16 @@ public class GameController {
     @FXML
     private void army1AddUnits() {
         Modal modal = new AddUnitModal(view.getStage(), models.getCurrentBattle().getArmyOne(),
-                (unitType, integer) -> addUnits(models.getCurrentBattle().getArmyOne(),  unitType, integer));
+                (unitType, integer) -> addUnits(models.getCurrentBattle().getArmyOne(), unitType, integer));
         modal.getStage().centerOnScreen();
         modal.showAndWait();
 
     }
 
-
     @FXML
     private void army2AddUnits() {
         Modal modal = new AddUnitModal(view.getStage(), models.getCurrentBattle().getArmyTwo(),
-                (unitType, integer) -> addUnits(models.getCurrentBattle().getArmyOne(),  unitType, integer));
+                (unitType, integer) -> addUnits(models.getCurrentBattle().getArmyTwo(), unitType, integer));
         modal.getStage().centerOnScreen();
         modal.showAndWait();
     }
@@ -350,12 +372,15 @@ public class GameController {
 
     @FXML
     private void army1RemoveUnit() {
+        Modal modal = new RemoveUnitModal(view.getStage(), models.getCurrentBattle().getArmyOne());
+        modal.showAndWait();
 
     }
 
     @FXML
     private void army2RemoveUnit() {
-
+        Modal modal = new RemoveUnitModal(view.getStage(), models.getCurrentBattle().getArmyTwo());
+        modal.showAndWait();
     }
 
     @FXML
@@ -375,8 +400,7 @@ public class GameController {
         if (file != null) {
             try {
                 models.getCurrentBattle().getArmyOne().writeCSV(file.getAbsolutePath());
-                showMessage("Saved to: " + file.getAbsolutePath(), 5);
-
+                showMessage("Saved " + models.getCurrentBattle().getArmyTwo().getName() + " to: " + file.getAbsolutePath(), 5);
             } catch (IOException e) {
                 showMessage("Something went wrong with saving the file", 5);
             }
@@ -389,8 +413,8 @@ public class GameController {
         File file = openFileSaver();
         if (file != null) {
             try {
-                models.getCurrentBattle().getArmyOne().writeCSV(file.getAbsolutePath());
-                showMessage("Saved to: " + file.getAbsolutePath(), 5);
+                models.getCurrentBattle().getArmyTwo().writeCSV(file.getAbsolutePath());
+                showMessage("Saved " + models.getCurrentBattle().getArmyTwo().getName() + " to: " + file.getAbsolutePath(), 5);
 
             } catch (IOException e) {
                 showMessage("Something went wrong with saving the file", 5);
@@ -405,8 +429,7 @@ public class GameController {
         if (file != null) {
             try {
                 Army armyOne = Army.readCSV(file.getAbsolutePath(), models.getCurrentBattle().getTileMap());
-                models.getCurrentBattle().setArmyOne(
-                        armyOne);
+                models.getCurrentBattle().setArmyOne(armyOne);
                 showMessage("Load army " + armyOne.getName() + " from: " + file.getAbsolutePath(), 5);
             } catch (IOException e) {
                 showMessage("Something went wrong with loading the file.", 5);
@@ -420,8 +443,7 @@ public class GameController {
         if (file != null) {
             try {
                 Army armyTwo = Army.readCSV(file.getAbsolutePath(), models.getCurrentBattle().getTileMap());
-                models.getCurrentBattle().setArmyTwo(
-                        armyTwo);
+                models.getCurrentBattle().setArmyTwo(armyTwo);
                 showMessage("Load army " + armyTwo.getName() + " from: " + file.getAbsolutePath(), 5);
 
             } catch (IOException e) {
@@ -432,11 +454,13 @@ public class GameController {
 
     @FXML
     private void army1SetFormation() {
-
+        SetFormationModal m = new SetFormationModal(view.getStage(), models.getCurrentBattle().getArmyOne());
+        m.showAndWait();
     }
 
     @FXML
     private void army2SetFormation() {
-
+        SetFormationModal m = new SetFormationModal(view.getStage(), models.getCurrentBattle().getArmyTwo());
+        m.showAndWait();
     }
 }

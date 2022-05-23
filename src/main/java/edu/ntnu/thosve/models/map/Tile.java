@@ -1,7 +1,4 @@
-package edu.ntnu.thosve.map;
-
-import javafx.scene.control.ScrollPane;
-import javafx.scene.paint.Color;
+package edu.ntnu.thosve.models.map;
 
 import java.io.Serializable;
 

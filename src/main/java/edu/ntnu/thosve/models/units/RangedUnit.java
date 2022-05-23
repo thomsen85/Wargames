@@ -1,6 +1,6 @@
 package edu.ntnu.thosve.models.units;
 
-import edu.ntnu.thosve.map.Terrain;
+import edu.ntnu.thosve.models.map.Terrain;
 
 /**
  * Unit that has the ability to attack at range.
@@ -19,16 +19,18 @@ public class RangedUnit extends Unit {
     public static final double HILL_ATTACK_RADIUS_MULTIPLIER = 1.5;
     public static final double FOREST_ATTACK_RADIUS_MULTIPLIER = 0.5;
 
-
-
     /**
      * Constructor for creating an instance of the RangedUnit class.
      * 
-     * @param name of unit.
+     * @param name
+     *            of unit.
      *
-     * @param health of unit
-     * @param attack of unit
-     * @param armor of unit
+     * @param health
+     *            of unit
+     * @param attack
+     *            of unit
+     * @param armor
+     *            of unit
      */
     public RangedUnit(String name, double health, int attack, int armor) {
         super(name, health, attack, armor);
@@ -76,9 +78,10 @@ public class RangedUnit extends Unit {
     }
 
     /**
-     * Returns the attack radius of the unit, if the current terrain of the unit is forest it will get worse range,
-     * and if the terrain is hill it will get better, dictated by HILL_ATTACK_RADIUS_MULTIPLIER,
+     * Returns the attack radius of the unit, if the current terrain of the unit is forest it will get worse range, and
+     * if the terrain is hill it will get better, dictated by HILL_ATTACK_RADIUS_MULTIPLIER,
      * FOREST_ATTACK_RADIUS_MULTIPLIER.
+     * 
      * @return the attack radius
      */
     @Override

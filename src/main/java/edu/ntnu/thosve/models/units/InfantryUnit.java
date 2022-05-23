@@ -1,6 +1,6 @@
 package edu.ntnu.thosve.models.units;
 
-import edu.ntnu.thosve.map.Terrain;
+import edu.ntnu.thosve.models.map.Terrain;
 
 /**
  * Close ranged unit with no special abilities.
@@ -17,7 +17,6 @@ public class InfantryUnit extends Unit {
     public static final int ATTACK_RADIUS = 10;
 
     public static final double FOREST_BONUS_MULTIPLIER = 2;
-
 
     /**
      * Constructor for creating an instance of the InfantryUnit class.

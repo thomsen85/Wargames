@@ -1,7 +1,15 @@
-#title {
+.label {
     -fx-text-fill: black;
 }
 
 .root {
     -fx-background-image: url('../images/paper-background.jpg');
+}
+
+ScrollPane, VBox, HBox {
+    -fx-background-color: transparent;
+}
+
+VBox {
+    -fx-vgap: 10px;
 }

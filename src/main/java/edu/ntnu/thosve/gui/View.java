@@ -26,7 +26,6 @@ public class View {
     public final static String MAIN_MENU_VIEW = "views/main-menu.fxml";
     public final static String NEW_GAME_VIEW = "views/new-game.fxml";
 
-
     private View() {
     }
 
@@ -46,7 +45,6 @@ public class View {
         this.resolutionWidth = resolutionWidth;
         this.resolutionHeight = resolutionHeight;
     }
-
 
     public void setResolution(Rectangle2D visualBounds) {
         this.resolutionWidth = (int) visualBounds.getWidth();

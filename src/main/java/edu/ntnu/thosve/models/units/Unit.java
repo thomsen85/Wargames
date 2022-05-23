@@ -1,6 +1,6 @@
 package edu.ntnu.thosve.models.units;
 
-import edu.ntnu.thosve.map.Terrain;
+import edu.ntnu.thosve.models.map.Terrain;
 
 import java.io.Serializable;
 
@@ -20,6 +20,8 @@ public abstract class Unit implements Serializable {
 
     private Unit currentOpponent;
     private Terrain currentTerrain;
+
+    private final double startHealth;
 
     /**
      * Constructor
@@ -53,6 +55,7 @@ public abstract class Unit implements Serializable {
         this.health = health;
         this.attack = attack;
         this.armor = armor;
+        this.startHealth = health;
 
         this.x = 0;
         this.y = 0;
@@ -209,6 +212,15 @@ public abstract class Unit implements Serializable {
 
     public void setCurrentOpponent(Unit currentOpponent) {
         this.currentOpponent = currentOpponent;
+    }
+
+    /**
+     * Gets the health that the unit was created with.
+     * 
+     * @return the start health
+     */
+    public double getStartHealth() {
+        return startHealth;
     }
 
     /**

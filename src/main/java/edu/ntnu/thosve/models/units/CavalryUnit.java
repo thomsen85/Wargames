@@ -1,6 +1,6 @@
 package edu.ntnu.thosve.models.units;
 
-import edu.ntnu.thosve.map.Terrain;
+import edu.ntnu.thosve.models.map.Terrain;
 
 /**
  * Cavalry Units are slightly stronger units with a charge attack on their first attack, it will deal 4+2 bonus damage,
@@ -10,8 +10,8 @@ import edu.ntnu.thosve.map.Terrain;
  */
 public class CavalryUnit extends Unit {
     public static final int DEFAULT_ATTACK = 20;
-    public static final int DEFAULT_ARMOR = 20;
-    public static final int DEFAULT_HEALTH = 150;
+    public static final int DEFAULT_ARMOR = 5;
+    public static final int DEFAULT_HEALTH = 120;
 
     public static final int BASE_ATTACK_BONUS = 5;
     public static final int RESIST_BONUS = 5;
@@ -19,7 +19,7 @@ public class CavalryUnit extends Unit {
 
     public static final int MAX_SPEED = 20;
     public static final double PLAINS_SPEED_MULTIPLIER = 1.5;
-    public static final int ATTACK_RADIUS = 10;
+    public static final int ATTACK_RADIUS = 5;
     public static final double CHARGE_SPEED_MULTIPLIER = 1.5;
     public static final double PLAINS_ATTACK_BONUS_MULTIPLIER = 1.5;
     public static final int FOREST_RESIST_BONUS = 0;

@@ -34,10 +34,10 @@ public class UnitFactory {
         Faker faker = new Faker();
         String name = faker.name().fullName();
         switch (unitType) {
-            case COMMANDER_UNIT -> unit = new CommanderUnit(name);
-            case RANGED_UNIT -> unit = new RangedUnit(name);
-            case CAVALRY_UNIT -> unit = new CavalryUnit(name);
-            default -> unit = new InfantryUnit(name);
+        case COMMANDER_UNIT -> unit = new CommanderUnit(name);
+        case RANGED_UNIT -> unit = new RangedUnit(name);
+        case CAVALRY_UNIT -> unit = new CavalryUnit(name);
+        default -> unit = new InfantryUnit(name);
         }
         return unit;
     }

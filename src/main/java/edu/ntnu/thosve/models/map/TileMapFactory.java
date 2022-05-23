@@ -1,4 +1,4 @@
-package edu.ntnu.thosve.map;
+package edu.ntnu.thosve.models.map;
 
 import java.util.ArrayList;
 import java.util.Collections;

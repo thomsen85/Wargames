@@ -1,5 +1,6 @@
 package edu.ntnu.thosve.gui.modals;
 
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,8 +24,10 @@ public class Modal {
      * Constructor method for modal class to make a new instance of a modal. To show the modal on the screen, call
      * showAndWait() method.
      *
-     * @param owner owner winow
-     * @param sceneURL from "edu/ntnu/thosve/gui/components/ URL"
+     * @param owner
+     *            owner winow
+     * @param sceneURL
+     *            from "edu/ntnu/thosve/gui/components/ URL"
      */
     public Modal(Stage owner, String sceneURL) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(sceneURL));
@@ -42,7 +45,7 @@ public class Modal {
     }
 
     public void setPrefSize(double width, double height) {
-        ((GridPane)scene.getRoot()).setPrefSize(width, height);
+        getGridPaneRoot().setPrefSize(width, height);
     }
 
     private Stage makeStage(Window owner, Scene scene) {
@@ -66,6 +69,7 @@ public class Modal {
     public GridPane getGridPaneRoot() {
         return (GridPane) scene.getRoot();
     }
+
     /**
      * Shows the window and waits for the window to be closed.
      */
@@ -82,5 +86,13 @@ public class Modal {
 
     public void close() {
         stage.close();
+    }
+
+    public void setX(double x) {
+        getStage().setX(x);
+    }
+
+    public void setY(double y) {
+        getStage().setY(y);
     }
 }

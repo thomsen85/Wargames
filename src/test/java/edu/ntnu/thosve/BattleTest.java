@@ -1,9 +1,9 @@
 package edu.ntnu.thosve;
 
 import edu.ntnu.thosve.models.formations.RectangleFormation;
-import edu.ntnu.thosve.map.Terrain;
-import edu.ntnu.thosve.map.TileMap;
-import edu.ntnu.thosve.map.TileMapFactory;
+import edu.ntnu.thosve.models.map.Terrain;
+import edu.ntnu.thosve.models.map.TileMap;
+import edu.ntnu.thosve.models.map.TileMapFactory;
 import edu.ntnu.thosve.models.Army;
 import edu.ntnu.thosve.models.Battle;
 import edu.ntnu.thosve.models.units.InfantryUnit;

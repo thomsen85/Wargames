@@ -64,7 +64,7 @@
                   <Button mnemonicParsing="false" onAction="#army1ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#army1SaveArmy" text="Save army" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#army1LoadArmy" text="Load army" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Button fx:id="army1SetFormation" mnemonicParsing="false" text="Set Formation" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button onAction="#army1SetFormation" mnemonicParsing="false" text="Set Formation" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2">
@@ -98,7 +98,7 @@
                   <Button mnemonicParsing="false" onAction="#army2ClearArmy" text="Clear army" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#army2SaveArmy" text="Save army" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                   <Button mnemonicParsing="false" onAction="#army2LoadArmy" text="Load army" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Button fx:id="army2SetFormation" mnemonicParsing="false" text="Set Formation" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button onAction="#army2SetFormation" mnemonicParsing="false" text="Set Formation" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <GridPane fx:id="timeControl" GridPane.columnIndex="1">

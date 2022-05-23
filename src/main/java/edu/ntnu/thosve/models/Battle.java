@@ -1,8 +1,11 @@
 package edu.ntnu.thosve.models;
 
-import edu.ntnu.thosve.map.TileMap;
+import edu.ntnu.thosve.models.map.TileMap;
+import edu.ntnu.thosve.models.units.Unit;
 
 import java.io.*;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Class for managing Two armies.
@@ -53,12 +56,15 @@ public class Battle implements Serializable {
      * @return false if on army is empty of units.
      */
     public boolean simulateStep(double deltaTime) {
+        if (!armyTwo.hasUnits()) {
+            return false;
+        }
         armyOne.update(armyTwo, deltaTime);
         if (!armyOne.hasUnits()) {
             return false;
         }
         armyTwo.update(armyOne, deltaTime);
-        return armyOne.hasUnits() && armyTwo.hasUnits();
+        return true;
     }
 
     /**
@@ -103,6 +109,16 @@ public class Battle implements Serializable {
 
     public void setArmyTwo(Army armyTwo) {
         this.armyTwo = armyTwo;
+    }
+
+    /**
+     * Method for getting all units from both armies
+     * 
+     * @return all units
+     */
+    public List<Unit> getAllUnits() {
+        return Stream.concat(armyOne.getAllUnits().stream(), armyTwo.getAllUnits().stream()).toList();
+
     }
 
     public Army getArmyOne() {

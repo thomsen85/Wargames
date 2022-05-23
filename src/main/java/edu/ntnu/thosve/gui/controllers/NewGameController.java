@@ -2,12 +2,13 @@ package edu.ntnu.thosve.gui.controllers;
 
 import edu.ntnu.thosve.gui.Models;
 import edu.ntnu.thosve.gui.View;
-import edu.ntnu.thosve.map.MapSize;
-import edu.ntnu.thosve.map.TileMap;
-import edu.ntnu.thosve.map.TileMapFactory;
+import edu.ntnu.thosve.models.map.MapSize;
+import edu.ntnu.thosve.models.map.TileMap;
+import edu.ntnu.thosve.models.map.TileMapFactory;
 import edu.ntnu.thosve.models.Army;
 import edu.ntnu.thosve.models.Battle;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -69,12 +70,22 @@ public class NewGameController {
             models.setCurrentBattle(battle);
 
             view.setCurrentScene(View.GAME_VIEW);
+        } else {
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setContentText("Army names must be filled.");
+            error.showAndWait();
         }
 
     }
 
     private boolean validateInuput() {
-        // TODO: CODE
+        String armyOneText = armyOneNameField.getText();
+        String armyTwoText = armyTwoNameField.getText();
+
+        if (armyOneText.isBlank() || armyTwoText.isBlank()) {
+            return false;
+        }
+
         return true;
     }
 

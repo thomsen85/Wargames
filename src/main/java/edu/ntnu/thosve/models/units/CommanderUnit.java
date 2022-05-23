@@ -5,7 +5,7 @@ package edu.ntnu.thosve.models.units;
  */
 public class CommanderUnit extends CavalryUnit {
     public static final int DEFAULT_ATTACK = 30;
-    public static final int DEFAULT_ARMOR = 40;
+    public static final int DEFAULT_ARMOR = 10;
     public static final int DEFAULT_HEALTH = 250;
 
     /**

@@ -1,10 +1,8 @@
-package edu.ntnu.thosve.map;
+package edu.ntnu.thosve.models.map;
 
 public enum MapSize {
-    MAP_1000x1000_5(1000/5, 1000/5, 5),
-    MAP_2000x2000_5(2000/5, 2000/5, 5),
-    MAP_2000x1000_5(2000/5, 1000/5, 5),
-    ;
+    MAP_2000x1000_5(2000 / 5, 1000 / 5, 5), MAP_1000x500_5(1000 / 5, 500 / 5, 5), MAP_4000x2000_5(4000 / 5, 2000 / 5,
+            5),;
 
     private final int tileWidth;
     private final int tileHeight;

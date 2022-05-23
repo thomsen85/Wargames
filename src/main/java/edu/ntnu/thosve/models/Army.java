@@ -1,8 +1,8 @@
 package edu.ntnu.thosve.models;
 
 import edu.ntnu.thosve.models.formations.Formation;
-import edu.ntnu.thosve.map.Terrain;
-import edu.ntnu.thosve.map.TileMap;
+import edu.ntnu.thosve.models.map.Terrain;
+import edu.ntnu.thosve.models.map.TileMap;
 import edu.ntnu.thosve.models.units.*;
 
 import java.io.*;
@@ -42,7 +42,7 @@ public class Army implements Serializable {
      * Constructor which creates an instance of the Army class, with prefilled list of units.
      * 
      * @param name
-     *            of the army.
+     *            of the army. Can not be blank.
      * @param tileMap
      *            that the army is on.
      * @param units
@@ -65,10 +65,13 @@ public class Army implements Serializable {
      * Lightweight constructor method for creation of army. tileMap updated later.
      * 
      * @param name
-     *            of army
+     *            of army, can not be blank
      */
     public Army(String name) {
         Objects.requireNonNull(name, "Name cannot be null");
+        if (name.isBlank()) {
+            throw new IllegalArgumentException("Name cannot be blank");
+        }
 
         this.name = name;
         this.units = new ArrayList<>();
@@ -421,7 +424,7 @@ public class Army implements Serializable {
      * 
      * @param path
      *            to read from, must end in .csv
-     * @return
+     * @return the loaded army
      */
     public static Army readCSV(String path, TileMap tileMap) throws IOException {
         if (!path.endsWith(".csv")) {

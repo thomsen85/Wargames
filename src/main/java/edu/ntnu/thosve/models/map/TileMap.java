@@ -1,4 +1,4 @@
-package edu.ntnu.thosve.map;
+package edu.ntnu.thosve.models.map;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
