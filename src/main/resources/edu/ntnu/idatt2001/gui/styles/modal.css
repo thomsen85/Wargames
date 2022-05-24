@@ -1,0 +1,28 @@
+.label {
+    -fx-text-fill: black;
+}
+
+.root {
+    -fx-background-image: url('../images/paper-background.jpg');
+    -fx-padding: 10px;
+}
+
+ScrollPane, VBox, HBox {
+    -fx-background-color: transparent;
+}
+
+VBox {
+    -fx-vgap: 10px;
+}
+
+ScrollPane > * {
+    -fx-background-color: transparent;
+}
+
+VBox {
+    -fx-vgap: 10px;
+}
+
+#title {
+    -fx-font-size: 28px;
+}
