@@ -9,22 +9,22 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TileMapTest {
     @Test
     void testThatIllegalArgumentsThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> new TileMap(-10, 10 , 10));
-        assertThrows(IllegalArgumentException.class, () -> new TileMap(10, -10 , 10));
-        assertThrows(IllegalArgumentException.class, () -> new TileMap(10, 10 , -10));
+        assertThrows(IllegalArgumentException.class, () -> new TileMap(-10, 10, 10));
+        assertThrows(IllegalArgumentException.class, () -> new TileMap(10, -10, 10));
+        assertThrows(IllegalArgumentException.class, () -> new TileMap(10, 10, -10));
 
-        assertThrows(IllegalArgumentException.class, () -> new TileMap(0, 10 , 10));
-        assertThrows(IllegalArgumentException.class, () -> new TileMap(10, 0 , 10));
-        assertThrows(IllegalArgumentException.class, () -> new TileMap(10, 10 , 0));
+        assertThrows(IllegalArgumentException.class, () -> new TileMap(0, 10, 10));
+        assertThrows(IllegalArgumentException.class, () -> new TileMap(10, 0, 10));
+        assertThrows(IllegalArgumentException.class, () -> new TileMap(10, 10, 0));
     }
 
     @Test
     void testThatCorrectTerrainGetsRetrieved() {
-        TileMap map = new TileMap(10,10,10);
+        TileMap map = new TileMap(10, 10, 10);
 
-        map.setTile(0,0, new Tile(Terrain.FOREST, 10));
+        map.setTile(0, 0, new Tile(Terrain.FOREST, 10));
 
-        assertEquals(Terrain.FOREST, map.getTerrainFromCoordinates(1,1));
+        assertEquals(Terrain.FOREST, map.getTerrainFromCoordinates(1, 1));
     }
 
 }

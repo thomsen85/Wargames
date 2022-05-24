@@ -16,7 +16,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -149,8 +148,8 @@ public class GameController {
 
         this.gameLoop = new GameLoop();
         try {
-            this.gameCanvas = new GameCanvas(canvas, models.getCurrentBattle());
-        } catch (FileNotFoundException e){
+            this.gameCanvas = new GameCanvas(canvas, models.getCurrentBattle(), "../images/player-sprites");
+        } catch (FileNotFoundException e) {
             showMessage("Error loading textures. Exiting application", 5);
             gameLoop.addEventToTimeQueue(view.getStage()::close, 5);
         }
@@ -159,6 +158,9 @@ public class GameController {
         gameLoop.start();
     }
 
+    /**
+     * Method for making the canvas bind to the parent.
+     */
     private void bindCanvasSize() {
         canvasParent.widthProperty().addListener(
                 (observableValue, number, t1) -> canvas.setWidth(observableValue.getValue().doubleValue()));
@@ -168,10 +170,12 @@ public class GameController {
 
     /**
      * Shows some information about the unit.
-     * @param unit to show information about
+     * 
+     * @param unit
+     *            to show information about
      */
     private void showUnitInformation(Unit unit) {
-        Point2D canvasPoint = gameCanvas.getCanvasPosition(unit);
+        Point2D canvasPoint = gameCanvas.getCanvasPositionOfUnit(unit);
         Modal modal = new UnitInformationModal(view.getStage(), unit);
         modal.setX(canvasPoint.getX());
         modal.setY(canvasPoint.getY());
@@ -180,7 +184,9 @@ public class GameController {
 
     /**
      * Disables all army buttons, except detailsButton.
-     * @param disable if true the get disabled, if false they activate.
+     * 
+     * @param disable
+     *            if true the get disabled, if false they activate.
      */
     private void setDisableButtons(boolean disable) {
         army1AddUnitsButton.setDisable(disable);
@@ -219,6 +225,12 @@ public class GameController {
         }
     }
 
+    /**
+     * Method that updates the battle or stops the simulation if done.
+     * 
+     * @param deltaTime
+     *            time between frames. In seconds
+     */
     private void simulationStep(double deltaTime) {
         Battle battle = models.getCurrentBattle();
         if (!battle.simulateStep(deltaTime)) {
@@ -228,6 +240,12 @@ public class GameController {
         }
     }
 
+    /**
+     * Method that shows a modal of who won the battle given the winner
+     * 
+     * @param winner
+     *            winner of the battle.
+     */
     private void showWinner(Army winner) {
         Modal modal = new Modal(view.getStage());
         modal.getGridPaneRoot().add(new Label("Winner is :" + winner.getName()), 0, 0);
@@ -260,6 +278,13 @@ public class GameController {
         army2HealthBar.setProgress(armyTwoHealth);
     }
 
+    /**
+     * Method for getting the amount of the different units in the army.
+     * 
+     * @param army
+     *            to analyze
+     * @return string of information
+     */
     private String getArmyDifferentUnits(Army army) {
         return "Infantry Units: " + army.getInfantryUnits().size() + "\nRanged Units: " + army.getRangedUnits().size()
                 + "\nCavalry Units: " + army.getCavalryUnits().size() + "\nCommander Units: "
@@ -319,6 +344,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Method for resetting the simulation
+     */
     private void resetSimulation() {
         models.getCurrentBattle().reset();
 
@@ -338,6 +366,9 @@ public class GameController {
         setDisableButtons(false);
     }
 
+    /**
+     * Method for staring the simulation
+     */
     private void startSimulation() {
         if (!models.getCurrentBattle().getArmyOne().hasUnits() || !models.getCurrentBattle().getArmyTwo().hasUnits()) {
             throw new IllegalStateException("Both armies must contain units.");
@@ -356,12 +387,23 @@ public class GameController {
 
     }
 
+    /**
+     * Method for disabling/enabling the media buttons that control the speed of the simulation.
+     * 
+     * @param disabled
+     *            true if disabled, false if activated.
+     */
     private void setDisableMediaButtons(boolean disabled) {
         pauseButton.setDisable(disabled);
         increaseSpeedButton.setDisable(disabled);
         decreaseSpeedButton.setDisable(disabled);
     }
 
+    /**
+     * Opens a file saving dialog and returns the File it should be saved to
+     * 
+     * @return the file
+     */
     private File openFileSaver() {
         FileChooser fileChooser = new FileChooser();
 
@@ -373,6 +415,11 @@ public class GameController {
         return fileChooser.showSaveDialog(view.getStage());
     }
 
+    /**
+     * Opens a file loading dialog and returns the open File
+     * 
+     * @return the file
+     */
     private File openFileLoader() {
         FileChooser fileChooser = new FileChooser();
 
@@ -382,6 +429,14 @@ public class GameController {
         return fileChooser.showOpenDialog(view.getStage());
     }
 
+    /**
+     * Method for displaying a message to the user with a given duration, this wil block the user from doing anything.
+     * 
+     * @param text
+     *            to display
+     * @param duration
+     *            to display
+     */
     private void showMessage(String text, double duration) {
         Modal modal = new Modal(view.getStage());
         Label label = new Label(text);
@@ -394,6 +449,9 @@ public class GameController {
 
     }
 
+    /**
+     * Shows the escape menu, with the possibilities to go beck to main-menu and other choices
+     */
     private void showEscMenu() {
         Modal menu = new EscapeMenuModal(view.getStage(), view);
         menu.showAndWait();
@@ -416,6 +474,16 @@ public class GameController {
         modal.showAndWait();
     }
 
+    /**
+     * Method for adding units to an army
+     * 
+     * @param army
+     *            to add to
+     * @param unitType
+     *            to be added
+     * @param amount
+     *            of units to add
+     */
     private void addUnits(Army army, UnitType unitType, int amount) {
         army.addAll(UnitFactory.getUnits(unitType, amount));
     }
@@ -487,6 +555,8 @@ public class GameController {
                 showMessage("Load army " + armyOne.getName() + " from: " + file.getAbsolutePath(), 5);
             } catch (IOException e) {
                 showMessage("Something went wrong with loading the file.", 5);
+            } catch (IllegalArgumentException e) {
+                showMessage("Error with loading file, make sure the file is .csv and the correct format", 5);
             }
         }
     }
@@ -502,6 +572,8 @@ public class GameController {
 
             } catch (IOException e) {
                 showMessage("Something went wrong with loading the file.", 5);
+            } catch (IllegalArgumentException e) {
+                showMessage("Error with loading file, make sure the file is .csv and the correct format", 5);
             }
         }
     }
@@ -530,6 +602,13 @@ public class GameController {
         details.showAndWait();
     }
 
+    /**
+     * Method for retrieving a details modal. This is so simple it didn't get its own class
+     * 
+     * @param army
+     *            to get details about
+     * @return the modal
+     */
     private Modal getDetailsModal(Army army) {
         Modal details = new Modal(view.getStage());
         details.getScene().getStylesheets().add("edu/ntnu/idatt2001/gui/styles/style.css");

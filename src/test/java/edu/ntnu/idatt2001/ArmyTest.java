@@ -239,4 +239,5 @@ class ArmyTest {
 
         assertTrue(error <= 0.05);
     }
+
 }

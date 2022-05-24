@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * Singleton class for holding the Scene
  *
- * This class was reused form out INGT1002 Project, it was originally written by me.
+ * This class was reused form out IDATT1002 Project, it was originally written by me.
  */
 public class View {
     private static View instance;

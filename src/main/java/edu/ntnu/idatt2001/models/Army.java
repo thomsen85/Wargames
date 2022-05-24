@@ -452,6 +452,10 @@ public class Army implements Serializable {
 
                 String[] data = unitData.split(",");
 
+                if (data.length != 3) {
+                    throw new IllegalArgumentException("Format of .csv is wrong.");
+                }
+
                 switch (data[0]) {
                 case "InfantryUnit" -> army.add(new InfantryUnit(data[1], Integer.parseInt(data[2])));
                 case "RangedUnit" -> army.add(new RangedUnit(data[1], Integer.parseInt(data[2])));

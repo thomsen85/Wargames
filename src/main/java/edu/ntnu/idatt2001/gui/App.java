@@ -11,7 +11,6 @@ public class App extends Application {
     private static final int MIN_RES_WIDTH = 1280;
     private static final int MIN_RES_HEIGHT = 720;
 
-
     public static void main(String[] args) {
         launch();
     }

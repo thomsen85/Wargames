@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 /**
  * Typical menu that pops-up when pressing esc.
  */
-public class EscapeMenuModal extends Modal{
+public class EscapeMenuModal extends Modal {
 
     private final View view;
 
@@ -38,7 +38,10 @@ public class EscapeMenuModal extends Modal{
         Button mainMenu = new Button("Exit to menu");
         Button exit = new Button("Exit to desktop");
         Button close = new Button("Close");
-        mainMenu.setOnAction(actionEvent -> view.setCurrentScene(View.MAIN_MENU_VIEW));
+        mainMenu.setOnAction(actionEvent -> {
+            view.setCurrentScene(View.MAIN_MENU_VIEW);
+            close();
+        });
         exit.setOnAction(actionEvent -> System.exit(0));
         close.setOnAction(actionEvent -> close());
         root.addRow(0, mainMenu);
@@ -51,7 +54,7 @@ public class EscapeMenuModal extends Modal{
         columnConstraints.setHgrow(Priority.SOMETIMES);
         columnConstraints.setHalignment(HPos.CENTER);
 
-        root.getRowConstraints().addAll(rowConstraints, rowConstraints,rowConstraints);
+        root.getRowConstraints().addAll(rowConstraints, rowConstraints, rowConstraints);
         root.getColumnConstraints().add(columnConstraints);
     }
 }

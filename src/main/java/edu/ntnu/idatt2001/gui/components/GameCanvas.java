@@ -25,6 +25,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+/**
+ * Component that manages a canvas.
+ */
 public class GameCanvas {
 
     private final Canvas canvas;
@@ -39,7 +42,17 @@ public class GameCanvas {
 
     private final List<Consumer<Unit>> onUnitPressEvent = new ArrayList<>();
 
-    public GameCanvas(Canvas canvas, Battle battle) throws FileNotFoundException {
+    /**
+     * Constructor for creating an instance of the GameCanvas class.
+     * 
+     * @param canvas
+     *            to manage
+     * @param battle
+     *            to manage
+     * @throws FileNotFoundException
+     *             if the sprites are not in the correct resource folder
+     */
+    public GameCanvas(Canvas canvas, Battle battle, String pathToSprites) throws FileNotFoundException {
         this.canvas = canvas;
         this.battle = battle;
 
@@ -49,10 +62,16 @@ public class GameCanvas {
         canvas.getGraphicsContext2D().setImageSmoothing(false);
         canvas.setOnMousePressed(this::canvasMousePress);
 
-        loadSprites();
+        loadSprites(pathToSprites);
         centerCamera();
     }
 
+    /**
+     * Manages clicks on the canvas, if a unit is clicked it fires consumers that are added with addOnUnitPress
+     * 
+     * @param mouseEvent
+     *            that got called
+     */
     private void canvasMousePress(MouseEvent mouseEvent) {
         double canvasX = mouseEvent.getX();
         double canvasY = mouseEvent.getY();
@@ -73,10 +92,19 @@ public class GameCanvas {
         pressedUnit.ifPresent(unit -> onUnitPressEvent.forEach(unitConsumer -> unitConsumer.accept(unit)));
     }
 
+    /**
+     * Add Consumers that take a unit when a unit is pressed on the canvas.
+     * 
+     * @param handler
+     *            consumer
+     */
     public void addOnUnitPress(Consumer<Unit> handler) {
         onUnitPressEvent.add(handler);
     }
 
+    /**
+     * Method that updates all the drawings on the canvas
+     */
     public void draw() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -87,11 +115,18 @@ public class GameCanvas {
         drawPlayers(gc);
     }
 
-    private void loadSprites() throws FileNotFoundException {
+    /**
+     * Method for loading the sprites.
+     * 
+     * @param path
+     *            resource path from GameCanvas
+     * @throws FileNotFoundException
+     *             if th path is wrong
+     */
+    private void loadSprites(String path) throws FileNotFoundException {
         File playerSprites = null;
         try {
-            playerSprites = Paths.get(
-                    Objects.requireNonNull(getClass().getResource("../images/player-sprites")).toURI()).toFile();
+            playerSprites = Paths.get(Objects.requireNonNull(getClass().getResource(path)).toURI()).toFile();
         } catch (URISyntaxException e) {
             throw new FileNotFoundException("Sprites could not be loaded.");
         }
@@ -102,6 +137,12 @@ public class GameCanvas {
         }
     }
 
+    /**
+     * Method for drawing the player
+     * 
+     * @param gc
+     *            GraphicsContext
+     */
     private void drawPlayers(GraphicsContext gc) {
         Image sprite = walkingSprites.get(walkingCycle);
         for (Unit unit : battle.getArmyOne().getAllUnits()) {
@@ -118,20 +159,34 @@ public class GameCanvas {
         }
     }
 
+    /**
+     * Method for drawing the map
+     * 
+     * @param gc
+     *            GraphicsContext
+     */
     private void drawMap(GraphicsContext gc) {
         gc.drawImage(mapImage, 0, 0);
     }
 
+    /**
+     * Method for centering the camera so that the whole map fills the canvas.
+     */
     public void centerCamera() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Scale s = new Scale(canvas.getWidth() / map.getPixelWidth(), canvas.getHeight() / map.getPixelHeight());
         gc.setTransform(s.getMxx(), s.getMyx(), s.getMxy(), s.getMyy(), s.getTx(), s.getTy());
     }
 
-    private boolean transformInBounds(Transform transform, Canvas canvas, TileMap map) {
-        return true;
-    }
-
+    /**
+     * Method for moving the camera or the map, which ever way you see it. The method will allow the camera to go
+     * outside of map range.
+     * 
+     * @param cameraMove
+     *            direction
+     * @param amount
+     *            to move by.
+     */
     public void moveCamera(CameraMove cameraMove, double amount) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -164,7 +219,14 @@ public class GameCanvas {
         return battle;
     }
 
-    public Point2D getCanvasPosition(Unit unit) {
+    /**
+     * Gets the position of the unit on the canvas, reason for this is because of the camera transformation.
+     * 
+     * @param unit
+     *            to have the position of
+     * @return the canvas position.
+     */
+    public Point2D getCanvasPositionOfUnit(Unit unit) {
         double unitX = unit.getX();
         double unitY = unit.getY();
 

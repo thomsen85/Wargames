@@ -24,7 +24,7 @@ public class Modal {
      * showAndWait() method.
      *
      * @param owner
-     *            owner winow
+     *            owner window
      * @param sceneURL
      *            from "edu/ntnu/idatt2001/gui/components/ URL"
      */
@@ -41,10 +41,24 @@ public class Modal {
         this.owner = owner;
     }
 
+    /**
+     * Method for adding a stylesheet to the modal
+     * 
+     * @param stylesheet
+     *            to be added
+     */
     public void addStylesheet(String stylesheet) {
         scene.getRoot().getStylesheets().add(stylesheet);
     }
 
+    /**
+     * Method for setting the preferred size of the modal
+     * 
+     * @param width
+     *            to be set
+     * @param height
+     *            to be set
+     */
     public void setPrefSize(double width, double height) {
         getGridPaneRoot().setPrefSize(width, height);
     }

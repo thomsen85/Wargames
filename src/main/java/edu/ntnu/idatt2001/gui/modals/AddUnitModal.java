@@ -11,6 +11,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 import java.util.function.BiConsumer;
+import java.util.regex.Pattern;
 
 /**
  * Modal for adding units to a given army.
@@ -48,12 +49,14 @@ public class AddUnitModal extends Modal {
         unitChoice.getItems().addAll(UnitType.values());
         unitChoice.setValue(UnitType.INFANTRY_UNIT);
         place.setOnAction(actionEvent -> {
-            try {
-                int amountOfUnits = Integer.parseInt(amount.getText());
+            Pattern integer = Pattern.compile("^\\d+$");
+            if (integer.matcher(amount.getText()).matches()) {
+                int amountOfUnits = Integer.parseInt(amount.getText().strip());
                 handler.accept(unitChoice.getValue(), amountOfUnits);
-            } catch (Exception e) {
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText(e.getMessage());
+                alert.setContentText("Invalid number: " + amount.getText()
+                        + "\n\nMake sure you write a positive number E.g. \"10\"");
                 alert.showAndWait();
             }
         });
