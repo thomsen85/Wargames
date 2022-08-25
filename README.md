@@ -1,4 +1,6 @@
 # Wargames
+<img width="1552" alt="Game-screenshot" src="https://user-images.githubusercontent.com/13613544/186648374-716444b5-1a24-4a38-a8fc-b2027acedaf5.png">
+
 ## 🚀 How to run:
 ```
 git clone https://gitlab.stud.idi.ntnu.no/thosve/wargames.git
